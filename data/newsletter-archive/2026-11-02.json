@@ -1,0 +1,30 @@
+{
+  "runDate": "2026-11-01T14:01:00.167Z",
+  "weekOf": "2026-11-02",
+  "sendDate": "2026-11-03",
+  "theme": "Scaling Up",
+  "focusVertical": "topic-themed",
+  "calendarStatus": "Calendar: \"Scaling Up\" for 2026-11-03. 8 issue(s) remain, through 2026-12-29.",
+  "calendarMatched": true,
+  "calendarRemaining": 8,
+  "subject": "Scaling up? Fix these 5 CRM fields first",
+  "previewText": "Five fields, disposition codes that mean something, and why 'no answer' isn't one.",
+  "html": "2026-11-02.html",
+  "sent": false,
+  "priceGuard": {
+    "blocking": [],
+    "warnings": []
+  },
+  "featuredArticle": {
+    "title": "How to Work Aged Leads: The Complete System for Maximum ROI",
+    "slug": "how-to-work-aged-leads-the-complete-system-for-maximum-roi",
+    "spotlight": "If you're trying to scale, this is the piece to revisit. It lays out the full system for working aged leads, from scripts and follow-up sequences to the economics that make a steady, affordable restock more sustainable than occasional expensive buying. Read it with your current process next to it and note where your own cadence has gaps."
+  },
+  "quickTips": [
+    "The five fields that decide whether you can measure anything",
+    "Disposition codes that tell you something useful",
+    "Why 'no answer' is not a disposition"
+  ],
+  "industryInsight": "Consent rules keep moving, so your suppression process has to be steady",
+  "errors": []
+}
