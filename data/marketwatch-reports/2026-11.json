@@ -1,0 +1,628 @@
+{
+  "runDate": "2026-11-01T06:01:31.749Z",
+  "month": "2026-11",
+  "providersScanned": 15,
+  "providersWithChanges": 12,
+  "newBenchmarksGenerated": 0,
+  "staleProviders": [
+    "Aged Lead Store (last verified: 2026-05-20)",
+    "Aged Leads Depot (last verified: 2026-04-28)",
+    "Badass Insurance Leads (last verified: 2026-04-28)",
+    "Brokers Data (last verified: 2026-04-28)",
+    "DataToLeads (last verified: 2026-04-28)",
+    "Lead Heroes (last verified: 2026-04-28)",
+    "Lead Tycoons (last verified: 2026-05-20)",
+    "LeadPoint (last verified: 2026-04-28)",
+    "Need-A-Lead (last verified: 2026-04-28)",
+    "QuoteWizard (last verified: 2026-04-28)",
+    "SmartFinancial (last verified: 2026-04-28)",
+    "Synergy Direct Solution (last verified: 2026-04-28)",
+    "The Leads Warehouse (last verified: 2026-04-28)"
+  ],
+  "providerUpdates": [
+    {
+      "providerSlug": "aged-lead-store",
+      "providerName": "Aged Lead Store",
+      "pricingChanges": [
+        "Volume-tiered pricing: the more leads ordered, the lower the per-lead price (a chart on the filter/dashboard page shows the tiers, but the tier values were not scraped).",
+        "Example from the demo video (auto insurance, 1,000 leads): 31-85 day old leads are about $1.00 per lead, and 86-365 day old leads are about $0.30 per lead. The transcript says '31 to 80' once, but elsewhere says 31-85.",
+        "Pricing is described as 'live pricing' and varies by vertical and lead age. The site says the leads cost a fraction of real-time leads.",
+        "Payment options: PayPal or credit card.",
+        "Instant CSV download after checkout."
+      ],
+      "policyChanges": [
+        "100% satisfaction guarantee: wrong numbers, disconnected numbers, and leads that don't match the selected filters are replaced or refunded.",
+        "Leads already insured by the buyer's own company are also replaced. The video says replacements are added to the account.",
+        "The scraped content does not mention a 20% return cap. The guarantee as described has no stated cap, which differs from the current profile.",
+        "No duplicates: the system tracks previous orders and never resends the same leads to a buyer.",
+        "Leads are shared, not exclusive. The stated use cases are email, direct mail, door knocking, or manual dialing without regulated technologies, to phones not on any DNC lists.",
+        "No minimum order was stated. The video says most new buyers start with about 1,000 leads.",
+        "Account registration requires email, password, and mobile number, with SMS and email verification. The site says contact info is not shared."
+      ],
+      "newVerticals": [
+        "homeowners-insurance",
+        "mortgage-protection",
+        "aca-obamacare",
+        "roofing",
+        "gutter-installation",
+        "window-installation",
+        "bathroom-remodel",
+        "kitchen-remodel",
+        "flooring",
+        "hvac",
+        "health-supplement",
+        "under-65-health-insurance"
+      ],
+      "newLeadTypes": [
+        "intent-data (offered for final expense, life insurance, health insurance, auto insurance, mortgage, and home improvement)",
+        "custom/large orders with white-glove service (call 949-280-2548)"
+      ],
+      "notableChanges": [
+        "Lead age brackets named in the video: 31-85 days and 86-365 days.",
+        "Filters: state, age range, area code (include/exclude), zip code (by city or radius search), carrier (include/exclude), phone type, and how recently the prospect searched for quotes.",
+        "Phone options: phone on every lead (default, about 60% mobile and 40% landline), landline only, cell only, or phone only where available.",
+        "Claims about 75% more callable leads than competitors' similar-age files, based on internal and external phone validation. This is a marketing claim.",
+        "The site says it adds millions of new searchable, validated quote requests each month. The example auto insurance filter showed 40,504 leads available.",
+        "Lead data fields: name, address, phone numbers, email, request date, IP address, DOB, and vertical-specific fields. Auto insurance fields include homeowner status, policy expiration, carrier, vehicle make/model/VIN, coverage, marital status, occupation, and deductible.",
+        "Sales resources: free How to Work Aged Leads playbook, sales playbooks for insurance, mortgage, home services, and solar, scripts, a blog, and a weekly newsletter.",
+        "Blog posts dated Sep 04, 2026 include 'What Mortgage Protection Leads Cost in 2026'. The pricing content was not scraped.",
+        "Contact: (888) 238-9283, 949-280-2548 for custom orders, troy@nextwavemarketingstrategies.com.",
+        "Leads are available in most states.",
+        "The scraped content is truncated at the end ('Rates are even lo...'), likely a mention of volume discounts."
+      ],
+      "rawPricingData": [
+        {
+          "vertical": "auto-insurance",
+          "leadType": "aged",
+          "ageBracket": "31-85-days",
+          "priceRange": "~$1.00 per lead (at 1,000 lead volume)"
+        },
+        {
+          "vertical": "auto-insurance",
+          "leadType": "aged",
+          "ageBracket": "86-365-days",
+          "priceRange": "~$0.30 per lead (at 1,000 lead volume)"
+        }
+      ]
+    },
+    {
+      "providerSlug": "aged-leads-depot",
+      "providerName": "Aged Leads Depot",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [
+        "homeowners-insurance",
+        "medicare",
+        "health-insurance (U65)",
+        "aca-health-insurance",
+        "auto-warranty",
+        "home-warranty",
+        "debt-relief (debt settlement, debt consolidation, student debt, credit card debt, tax debt)",
+        "roofing",
+        "windows",
+        "siding",
+        "home-security",
+        "dme (durable medical equipment)",
+        "diabetic",
+        "mva (motor vehicle accident / auto personal injury)",
+        "travel",
+        "business-opportunity"
+      ],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "Payment options: customers can pay online, over the phone, or by invoice.",
+        "Phone number listed: 813-994-8874.",
+        "Offers a free strategy call (marketed as a way to '2X your sales').",
+        "Markets aged leads as significantly cheaper than fresh/real-time leads, allowing larger volume purchases; mentions a comparison table of advantages (table content not included in the scrape).",
+        "Claims agents report closing rates as high as 15-20% on aged ACA leads (marketing claim, unverified).",
+        "Promotes a video on hiring a virtual assistant or telemarketer who transfers calls for $5 per hour (a side offering or content, not a lead price).",
+        "Leads are described as people who previously requested quotes or inquired online.",
+        "Mortgage leads include refinance leads; MVA leads are described as auto personal injury leads.",
+        "Each vertical has its own dedicated page; the scraped content is cut off at the Home Security section.",
+        "'Legal' from the current profile is not named explicitly. The closest match is MVA/auto personal injury leads.",
+        "No explicit return or credit policy appears in the scraped content, so the current 'Credits for disconnected numbers' entry cannot be confirmed or changed from this page.",
+        "The 'transparent' pricing model cannot be confirmed from this page, because no prices are displayed on it."
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "badass-insurance-leads",
+      "providerName": "Badass Insurance Leads",
+      "pricingChanges": [
+        "Aged English leads: $1.00 per lead (100+ lead package, marked 'Most Popular')",
+        "Aged Spanish leads: $1.85 per lead (100+ lead package)",
+        "Packages are sold in increments of 100 leads, so the minimum order is 100 leads",
+        "Pricing is published per lead. No separate prices were listed for final expense, health (U65), Medicare or IUL, so the two language-based prices appear to be the general aged-lead pricing.",
+        "A 'Buy in Bulk' / wholesale aged leads option is mentioned, but no pricing was shown"
+      ],
+      "policyChanges": [
+        "The FAQ says there are NO refunds or credits: 'These are aged leads and are sold as-is.' This conflicts with the current profile ('Credits for disconnected numbers'). The nav bar still has a 'Refund Policy' link, so the policy page should be checked.",
+        "Leads are exclusive: once sold, the same lead is never resold to another agent. They may already have been called by others, since they are aged.",
+        "Leads are cross-checked against the national DNC list, and the site says it is TCPA compliant (a compliance page is linked).",
+        "Leads are delivered by email in under 24 hours, as a CSV/Excel file.",
+        "Orders can target a city (starting with a 30-mile radius), a county, or a whole state. The target area is noted in the checkout form.",
+        "Past orders can be re-sent by emailing marketing@badassinsuranceleads.com."
+      ],
+      "newVerticals": [
+        "IUL (indexed universal life)",
+        "Turning 65 / U65 health care leads",
+        "Medigap / Medicare supplement (a more specific form of the existing Medicare vertical)"
+      ],
+      "newLeadTypes": [
+        "Live transfers (a 'Final Expense Live Transfers' link appears in the footer; no details or pricing)",
+        "Fresh leads (a 'Get Fresh Leads' nav link; no details or pricing)",
+        "Wholesale / bulk aged leads (a 'Buy in Bulk' link and a 'Looking for wholesale aged leads?' prompt)",
+        "Spanish-language leads (a language variant of aged leads, priced higher)"
+      ],
+      "notableChanges": [
+        "No auto insurance content appears on this page, although auto-insurance is in the current profile. The page covers life, final expense, health (U65), Medicare supplement and IUL.",
+        "Age of leads is inconsistent: the packages say 3-12 months, while the FAQ says 2 weeks to 12 months.",
+        "Phone numbers per lead are inconsistent: the headline says up to 3, the FAQ says at least 3-4 (mobile and landline), and the order contents list says 2-3.",
+        "Data columns are inconsistent: the FAQ says about 12-15 columns in Excel, while the order contents list says up to 39 columns in CSV.",
+        "The Spanish package lists an age range of 40-80 for leads.",
+        "Lead data comes from third-party vendors, who sell fresh leads first. The company then buys the data, validates, verifies and scores it, and appends phone numbers several times.",
+        "Lead info includes name, phone(s), address, DOB and more.",
+        "A custom phone script is included free with orders, along with free marketing materials and sales documents.",
+        "The company claims reduced disconnects, no duplicate leads and high contactability.",
+        "The company says it is a partnership of top-producing insurance agents and online marketers with 22 years of lead generation experience.",
+        "Contact email: marketing@badassinsuranceleads.com",
+        "The page copyright is 2026."
+      ],
+      "rawPricingData": [
+        {
+          "vertical": "life-insurance (also marketed for final expense, health U65, IUL)",
+          "leadType": "aged (English)",
+          "ageBracket": "3-12-months",
+          "priceRange": "$1.00"
+        },
+        {
+          "vertical": "life-insurance (also marketed for final expense, health U65, IUL)",
+          "leadType": "aged (Spanish)",
+          "ageBracket": "3-12-months",
+          "priceRange": "$1.85"
+        }
+      ]
+    },
+    {
+      "providerSlug": "brokers-data",
+      "providerName": "Brokers Data",
+      "pricingChanges": [
+        "Mortgage trigger leads delivered daily start 'as low as 20 cents each' with free set-up and support",
+        "Mortgage Brokers leads (credit bureau pre-screened data) are described as 'low wholesale pricing' (no figures given)",
+        "Generous discounts offered for wholesale and quantity buyers (no specifics)",
+        "Auto Trigger Leads marketed with 'We will not be beat on price' (price match claim; a 'Price Match' page exists in the Special Deals menu)",
+        "Business leads lists described as 'most aggressive pricing available'; business data offered 'at a very affordable cost per record' (no figures)",
+        "Insurance aged internet leads advertised at 'lowest costs' (no figures)",
+        "Many filters/selects on aged Internet leads and business lists are available at no charge",
+        "Summarized Credit Score data positioned as a cheaper alternative to credit bureau data",
+        "Free consultation services; creative help on direct mail pieces is usually at no charge",
+        "Pricing is mostly not published; Quick Quote Request, Schedule a Call and Special Deals pages suggest quote-based pricing"
+      ],
+      "policyChanges": [
+        "No contracts are ever required; business is earned 'from invoice to invoice'",
+        "Aged Internet leads are sold up to 2 times as aged leads; each lead has a date and IP address",
+        "Credit bureau/trigger leads require a 'Firm Offer of Credit' and Permissible Purpose, plus company credentialing and compliance approval before delivery",
+        "Credit bureau data is available only to verifiable mortgage companies/lenders, banks and automotive dealerships; it may not be used as a factor in determining eligibility for credit, insurance, employment or other purposes",
+        "Trigger leads require a vetting process (Trigger Leads CWM form) for mortgage companies before purchase",
+        "A separate 'Refund Policy & T&C' page and a Terms of Service page exist, but their contents were not included in the scraped text, so return terms could not be confirmed"
+      ],
+      "newVerticals": [
+        "automotive (auto sales/dealer leads, including trigger leads, expiring loans/leases, year-make-model)",
+        "real estate (short sale leads, pre-screened new buyers, renters leads)",
+        "business data/lists (US and Canada, new business lists)",
+        "Medicare / Medicare Supplement / Turning 65 leads",
+        "final expense",
+        "reverse mortgage",
+        "specialty lists (bankruptcy, tax lien, new mover, investor, diabetic/ailment lists)",
+        "direct mail / marketing solutions",
+        "ACA"
+      ],
+      "newLeadTypes": [
+        "trigger leads (credit bureau hard-inquiry leads, available the day after the inquiry)",
+        "inbound calls / pay per call (mortgage inbound calls, exclusive, claimed 40-45% conversion)",
+        "credit bureau pre-screened leads (delivered fresh daily)",
+        "direct mail leads/mailing lists",
+        "email lists / email broadcasts",
+        "modeled 'Invitation to Apply' lists",
+        "In Market Alerts (customer retention/cross-sell)",
+        "data hygiene services",
+        "turn-key direct mail and auto lead generation campaigns"
+      ],
+      "notableChanges": [
+        "Mortgage internet leads are delivered in real time to the email inbox as they are generated",
+        "Mortgage trigger leads are filterable by credit score, LTV, home equity, income, lender, FHA, Fannie Mae/Freddie Mac, HARP/DU status, etc.",
+        "Mortgage inbound calls are exclusive and generated from organic search and online ads, with claimed conversion rates of 40-45%",
+        "Year Make Model database is multi-sourced and updated weekly",
+        "Business database is refreshed at least every 30 days; new business lists are updated weekly",
+        "Diabetic and ailment lists are described as opted-in and HIPAA compliant (self-reported data)",
+        "The site mentions Pay Per Call, Direct Mail Solutions, a SAN Number info page, a Price Match page and Special Deals",
+        "The scraped content was truncated mid-sentence at the end (Credit Bureau Leads section)",
+        "The site content appears to include some dated products (HARP, HARP Refi), which may be legacy offerings"
+      ],
+      "rawPricingData": [
+        {
+          "vertical": "mortgage",
+          "leadType": "trigger (credit bureau, daily)",
+          "ageBracket": "1 day",
+          "priceRange": "as low as $0.20 each"
+        }
+      ]
+    },
+    {
+      "providerSlug": "datatoleads",
+      "providerName": "DataToLeads",
+      "pricingChanges": [
+        "Data records (enriched and skip-traced) advertised from $0.01 per record ('Buy Data for $0.01')",
+        "Flat subscription advertised at $299 per month, described as covering 'all your data needs without any hidden costs'",
+        "Offers 100 free leads with a free account signup",
+        "Competitor comparison: ZoomInfo cited at about $15,000/year, Apollo.io at $1,200/year for 2,400 cell phone leads (~$0.50/lead), UpLead Plus at $199/month for 400 cell phone leads. These are competitor prices, not DataToLeads prices."
+      ],
+      "policyChanges": [
+        "Saved aged lead lists can be resold indefinitely, with 'lifelong access to any aged lead lists you save' throughout the subscription",
+        "No return, refund, minimum order or contract terms appear in the scraped content. Terms of Use and Privacy Policy are linked but their content was not scraped."
+      ],
+      "newVerticals": [
+        "real estate (homeowner lists, real estate database, skip tracing, reverse address lookup)",
+        "B2B / business data (business lists, business email, phone and mailing lists, business owner contact database)"
+      ],
+      "newLeadTypes": [
+        "B2B business lists (email, phone, mailing)",
+        "consumer (B2C) lists (email, phone, mailing)",
+        "homeowner lists (email, phone, mailing)",
+        "intent leads / intent data",
+        "skip-traced and enriched records",
+        "white label data marketplace / DaaS (Data as a Service) agency"
+      ],
+      "notableChanges": [
+        "The site positions itself as a data and lead list brokering marketplace and SaaS platform, not a traditional lead generator",
+        "Claims 335 million+ US individuals, with email and cell phone numbers for over 80% of them",
+        "Offers a white label option (AvocaData / Avoca Data Commerce) and positions itself as an Apollo.io alternative",
+        "Users can sell their own data and build custom lists, funnel pages and data storefronts on the marketplace",
+        "Navigation lists Solar Leads, but no solar pricing or details appear in the scraped text",
+        "None of the current profile's verticals (mortgage, auto insurance, life insurance, final expense, health insurance, debt settlement, MCA/business loans) appear in the scraped content. Only solar and home improvement (via homeowner leads) are loosely supported.",
+        "Footer shows copyright 2026, owner MaaS Group Holdings LLC; founder Brian McManus; the testimonial references High Level (GoHighLevel) software",
+        "The pricing model appears to be subscription plus per-record pricing. The $0.01 per record figure is a headline 'starting at' price, and actual prices for specific lead types are not given."
+      ],
+      "rawPricingData": [
+        {
+          "vertical": "general (B2B/B2C data)",
+          "leadType": "data-list (enriched, skip-traced records)",
+          "ageBracket": "not specified",
+          "priceRange": "from $0.01 per record"
+        },
+        {
+          "vertical": "general (all data needs)",
+          "leadType": "subscription",
+          "ageBracket": "not specified",
+          "priceRange": "$299/month"
+        }
+      ]
+    },
+    {
+      "providerSlug": "ileads",
+      "providerName": "iLeads",
+      "pricingChanges": [
+        "LeadsDirect lets individual producers and small teams buy one lead at a time at up to 80% off retail. No actual dollar prices are listed.",
+        "The Top Producers segment can browse live inventory, filter by territory and vertical, and buy on demand. This suggests self-serve purchasing, which differs from the 'sales-required' model on file.",
+        "Free 'Dare to Compare' match-back analysis for mortgage lenders: send a lead file and see which leads funded elsewhere, at no cost.",
+        "Insurance aged leads are described as the 'same consumers and contact information. Only the date and price differ.' No price figures are given."
+      ],
+      "policyChanges": [
+        "Recapture leads are held in segregated custody, never resold, and kept current against new title data. Fundable leads are sent back to the client's team.",
+        "The site says there is 'zero technical friction': no procurement gauntlet, compliance reviews, or integration backlogs, and clients can start by sending a file 'in days, not months.'",
+        "Aged leads are 'sold only if fundable' (mortgage Revive), meaning they are verified against the property record before sale.",
+        "No return or replacement policy is stated on the page."
+      ],
+      "newVerticals": [
+        "solar",
+        "home-services (including home improvement)",
+        "investor leads (any vertical)"
+      ],
+      "newLeadTypes": [
+        "aged leads (Revive, mortgage and insurance)",
+        "single-lead on-demand marketplace (LeadsDirect)",
+        "direct-mail marketing lists (Marketing Lists)",
+        "lookup-generated leads from mail (RealTAG)",
+        "re-engagement or warm-transfer of the client's own leads (Recapture)",
+        "real-time lead scoring and gating API (GateKeeper)",
+        "data append and enrichment services (Data/APIs)"
+      ],
+      "notableChanges": [
+        "Product suite: Revive, Recapture, GateKeeper, Performance, RealTAG, Home Loan Advisor, Marketing Lists, Data, LeadsDirect.",
+        "Revive is described as the top seller. About 1 in 10 Revive leads has funded a loan across the market, and 66% of those fund with a lender other than the original buyer. Figures are based on 126 orders and 1.18M leads, with 60,000+ funded loans worth $20B+.",
+        "GateKeeper is a real-time API that returns a funding verdict in under a second: Fundable, Watchlist, or Won't Fund.",
+        "Data claims: 150M+ US properties, 105M+ consumers in the lead database, and 77,312+ clients served since 1996. Title and liens are checked as often as weekly, listings nightly, value and LTV monthly, and rates up to daily.",
+        "The loan mix of funded Revive leads is 39% conventional, 23% VA, 21% HELOC, and 13% FHA.",
+        "Marketing Lists are built from records of consumers who asked about a loan, solar quote, insurance rate, or home project.",
+        "Data/APIs offers phone and email appends, reverse appends, and property and credit detail by API or batch.",
+        "Insurance messaging focuses on timing outreach to life events such as renewals, moves, and new equity. The page does not mention auto, life, or health insurance specifically, only 'insurance.'",
+        "Corporate history: acquired by First American in 2001, public via the CoreLogic spin-off in 2010, and bought back by management in 2012. 2026 is its 30th year. Headquarters are in Newport Beach, CA, phone 877.245.3237.",
+        "The 'Get a count today' CTA suggests count-based quoting, which is consistent with a sales-assisted process."
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "lead-heroes",
+      "providerName": "Lead Heroes",
+      "pricingChanges": [
+        "Pre-set Medicare appointments for AEP start at $80 (listed as 'Starting at $80 for aep')",
+        "Dental, Vision & Hearing (DVH) leads are $12 each, with a minimum purchase of 30 leads",
+        "Virtual assistants (Hire Heroes) are available for $9 per hour",
+        "Custom calling campaigns (telemarketers for hire) start as low as $10 per hour",
+        "Lead Heroes Pro 3-Month Weekly Lead Flow Program gives a 30% discount on every lead for 3 months",
+        "ESI Premier Agents get 50% off every lead",
+        "Large volume IMO/FMO discounts are available (no specifics given)",
+        "The About section says Lead Heroes charges 30%-70% less than an American-based call center"
+      ],
+      "policyChanges": [
+        "DVH leads require a minimum purchase of 30 leads",
+        "Lead Heroes Pro requires a minimum of 20 leads per week for 12 weeks",
+        "Lead Heroes Pro leads are 100% exclusive to the buyer, never recycled or resold",
+        "ESI Premier leads are 100% exclusive, never shared, recycled, or resold",
+        "Customer service responds within 24 business hours",
+        "Virtual assistants are full-time dedicated staff, ready within 7 days or less after a consultation call",
+        "Leads can be delivered daily or weekly by email, CRM sync, or spreadsheet",
+        "No return or credit policy was found in the scraped content, so the existing 48-hour bad phone number credit policy is unconfirmed"
+      ],
+      "newVerticals": [
+        "Dental, Vision & Hearing (DVH)",
+        "Medicare Supplement (Medigap)",
+        "Turning 65 (T65)"
+      ],
+      "newLeadTypes": [
+        "live-transfer",
+        "pre-set appointments",
+        "custom calling campaigns (telemarketing)",
+        "call-back",
+        "exclusive leads (Lead Heroes Pro subscription)",
+        "Spanish-language calling campaigns (Final Expense and Medicare)"
+      ],
+      "notableChanges": [
+        "Lead Heroes was founded in early 2015 by Glen Shelton (CEO/President) and uses a remote call center team in Manila, Philippines",
+        "Leads are telemarketed by live human callers and described as call-verified",
+        "Lead Heroes Pro includes free access to Seven Figure CRM and Seven Figure University",
+        "Other offerings include virtual assistant staffing, Spanish-speaking telemarketers, sales training book and e-course, IMO/FMO directory, affiliate program with lifetime commissions, and a free strategy call",
+        "Recommends Medicare Supplement lead areas with 30% or less Medicare Advantage penetration, and publishes a 2025 Medicare Marketing Map",
+        "Lists six lead types: Life Insurance (Final Expense), Medicare Supplement, Turning 65, Live Transfer, Pre-set Appointments, and Custom Calling, plus DVH",
+        "Site copyright notice says 2022, but the content references AEP and 2025 data"
+      ],
+      "rawPricingData": [
+        {
+          "vertical": "medicare",
+          "leadType": "pre-set appointments",
+          "ageBracket": "not specified",
+          "priceRange": "starting at $80"
+        },
+        {
+          "vertical": "dental-vision-hearing",
+          "leadType": "not specified (likely telemarketed)",
+          "ageBracket": "not specified",
+          "priceRange": "$12 each (minimum 30 leads)"
+        },
+        {
+          "vertical": "final-expense/medicare",
+          "leadType": "custom calling campaign (telemarketer hire)",
+          "ageBracket": "not specified",
+          "priceRange": "from $10 per hour"
+        },
+        {
+          "vertical": "virtual assistants",
+          "leadType": "staffing",
+          "ageBracket": "not specified",
+          "priceRange": "$9 per hour"
+        }
+      ]
+    },
+    {
+      "providerSlug": "lead-tycoons",
+      "providerName": "Lead Tycoons",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "[Failed to fetch: HTTP 403]"
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "leadpoint",
+      "providerName": "LeadPoint",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "Company describes itself as a 'Performance Advertising Platform'",
+        "Headquarters listed in Plano, TX at 5717 Legacy Dr Ste 250, Plano, TX 75024",
+        "Phone number listed as (310) 209-8600",
+        "Site links to Terms of Use and Privacy Policy pages, but their contents were not included in the scraped text",
+        "Contact form displays an offline message ('We're not around right now') and invites visitors to send an email"
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "leadsdata",
+      "providerName": "LeadsData",
+      "pricingChanges": [
+        "Signals module: $49/month for 10k sessions; scales to 50k, 250k and custom tiers. Unlimited sites and seats, 90-day raw event retention.",
+        "Identity module: $0.18 per activatable resolution. Billed only for Tier A and Tier B identifications; Tier C and conflicts are never billed.",
+        "Hard caps instead of overages: resolution stops at the customer's limit.",
+        "14-day free trial on both modules, no card required. Vendor cost is shown at list rate during the trial."
+      ],
+      "policyChanges": [
+        "Only Tier A and B identifications consume a credit. Tier C (single probabilistic guess) and Conflict records are not billed.",
+        "Hard usage caps are enforced with no surprise overages.",
+        "Privacy: the tag never reads input field values, honors Global Privacy Control and is consent-mode aware.",
+        "Channel gating is enforced in the database: Tier A is allowed on all channels, Tier B on email and ads (SMS only after verification), Tier C on ad audiences only, and Conflicts are blocked from everything."
+      ],
+      "newVerticals": [],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "LeadsData on this page is a behavior analytics and identity resolution (visitor identification) SaaS, not a traditional lead seller. Nothing on the page mentions aged or real-time leads, or auto insurance, life insurance, final expense, health insurance, Medicare, solar or debt settlement. The existing profile (lead types, verticals, return policy) may not match this site, or the scraped domain may belong to a different company.",
+        "No credit or return policy for invalid leads appears on the page. The nearest equivalent is that Tier C and Conflict identifications are not billed.",
+        "Identity verdict categories: Exact, Household, Wrong and Unverifiable, graded against first-party anchors (emails, phones or addresses visitors type into forms).",
+        "Trust tiers in the live sample (one vendor enabled, 7 days): Tier A 0.6%, Tier B 59.9%, Tier C 39.5%, Conflict 0.0%.",
+        "Claims that about 1 in 4 vendor matches typically resolve to a household member rather than the actual visitor, and that most platforms spend $0 verifying an identification before charging.",
+        "Signals features: journeys, funnels, form field abandonment, revenue-ranked recommendations, and rage click, dead click, JS error and load timing detection.",
+        "Installation is one script tag, taking about four minutes.",
+        "Figures on the page come from a live sample and will differ for each customer."
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "need-a-lead",
+      "providerName": "Need-A-Lead",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "[Scrape error: fetch failed]"
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "quotewizard",
+      "providerName": "QuoteWizard",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [
+        "home-insurance",
+        "renters-insurance"
+      ],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "The scraped page is the consumer-facing QuoteWizard site. It has no agent or lead-buyer pricing, return policy, minimums or contract terms, so the current profile's pricing model and return policy can be neither confirmed nor contradicted.",
+        "Consumer-facing verticals listed are Auto, Home, Renters, Health, Life and Medicare. Home and Renters are not in the current profile.",
+        "Consumers are told to call +1 (855) 927-5020 to speak with an agent. Another number, +1 (833) 511-1213, is listed for getting a quote. This suggests inbound call or agent-assisted quoting, but no lead type (such as live-transfer or call leads) is stated.",
+        "There is an 'I'm an Insurance Agent' link, an Agent Portal Login and a 'QuoteWizard Agent Website' link. These point to a separate agent-facing site where pricing and product details would likely be found.",
+        "The footer identifies LendingTree, LLC as a 'Marketing Lead Generator', so QuoteWizard is owned by or affiliated with LendingTree.",
+        "The page says QuoteWizard compares quotes from multiple companies 'from agents who want your business', which points to an agent-matching marketplace model.",
+        "The site is available only to persons in the continental U.S., Alaska and Hawaii.",
+        "The page cites 500+ Trustpilot reviews, and the visible reviews are all 5-star.",
+        "Disclosure pages are listed: Advertising Disclosure, Vulnerability Disclosure Program and Climate Related Financial Risk Report."
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "smartfinancial",
+      "providerName": "SmartFinancial",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [
+        "home-insurance",
+        "renters-insurance",
+        "commercial-insurance",
+        "motorcycle-insurance"
+      ],
+      "newLeadTypes": [],
+      "notableChanges": [
+        "The scraped page is a consumer-facing insurance comparison page. It contains no lead pricing, return policy, minimum order, or contract information for buyers.",
+        "SmartFinancial describes itself as a digital insurance comparison engine that provides real-time rates and insurance services in all 50 states through carrier and agency partners.",
+        "The site lists a 'For Agents' section and an 'Agent Login', which suggests an agent-facing channel. No details on its products or pricing appear in the scraped content.",
+        "Consumer verticals listed in the navigation are Auto, Home, Health, Life, Medicare, Renters, and Commercial. Motorcycle appears in the vertical selector.",
+        "The site claims to compare over 200 insurance companies in the quote flow. Content pages also mention comparing over 400 car insurance companies and over a dozen health insurance companies.",
+        "The site advertises savings of up to 50% on car insurance to consumers. This is a consumer marketing claim, not lead pricing.",
+        "The service is free to consumers. A phone line (855-214-2291) offers a 24/7 free quote, which indicates inbound call and agent-assisted quoting.",
+        "The site features an AI assistant named 'Penny' for quote comparison.",
+        "A privacy section lists a Do Not Sell My Personal Information link, California Privacy Choices, and a Washington MHMDA consumer health data policy. These may be relevant to compliance and data-sharing practices.",
+        "The legal footer states that activity on the site may be monitored, recorded, and retained. The copyright entity is 'SmartFinancial.com Ins LLC DBA SmartFinancial Insurance' and the notice is dated 2026.",
+        "The content has no evidence for or against the current profile's pricing model (sales-required), lead types (real-time, live-transfer), or return policy (credits for leads not matching filters). These fields remain unverified."
+      ],
+      "rawPricingData": []
+    },
+    {
+      "providerSlug": "synergy-direct-solution",
+      "providerName": "Synergy Direct Solution",
+      "pricingChanges": [
+        "Aged business loan leads, UCC leads, and trigger leads are listed at 1-5 cents each.",
+        "Pricing for other lead types (live transfers, MCA leads, business loan leads, appointment leads) is not published. The site says pricing is discussed directly with the sales team to match recommendations to the buyer's goals. This conflicts with the profile's 'transparent' pricing model, which only holds for aged leads."
+      ],
+      "policyChanges": [
+        "No minimum lead order or quantity is required.",
+        "Unqualified leads that do not meet the agreed criteria can be replaced. The site does not mention a credit policy for disconnected live transfers, which is what the current profile says. The replacement policy is stated generally and without detail.",
+        "Synergy says it follows TCPA guidelines, including screening leads against litigator lists. It explicitly does not promise guaranteed TCPA compliance."
+      ],
+      "newVerticals": [
+        "The FAQ mentions SBA loans, term loans, business lines of credit, and other working capital solutions as products broker leads can cover. These are sub-products of business financing, not separate verticals. The core vertical is still MCA/business loans."
+      ],
+      "newLeadTypes": [
+        "appointment (MCA appointment leads: real-time, exclusive call-back leads)",
+        "real-time leads",
+        "web leads / web forms",
+        "UCC leads",
+        "trigger leads",
+        "live takeover",
+        "MCA virtual agents"
+      ],
+      "notableChanges": [
+        "Synergy says it generates leads in-house and does not just resell purchased leads. Channels listed include internet marketing, email, SMS, Google Ads, SEO, paid search, social, and AI.",
+        "Live transfers are pre-qualified by call center teams and phone-verified in real time before handoff.",
+        "MCA leads are marketed as exclusive, double verified, and pre-qualified.",
+        "Business loan leads and live transfers are described as exclusive.",
+        "Testimonials cite a 1-in-3 conversion rate on MCA live transfers (Business One Financial) and applications completed on more than 50% of live transfer calls (Jimenez MCA Loans). These are unverified client claims.",
+        "The site also offers non-lead marketing services: website design, SEO, and PPC management.",
+        "Contact: San Diego, CA; phone (866) 428-0172; kyle@synergydirectsolution.com; Support@synergydirectsolution.com.",
+        "The site lists lead-buyer segments for brokers, lenders, and funders, and distinguishes broker leads from lender leads.",
+        "The copyright notice reads © 2010, which may indicate the company has operated since around 2010."
+      ],
+      "rawPricingData": [
+        {
+          "vertical": "mca-business-loans",
+          "leadType": "aged (aged business loan leads, UCC leads, trigger leads)",
+          "ageBracket": "not specified",
+          "priceRange": "$0.01-$0.05 per lead"
+        }
+      ]
+    },
+    {
+      "providerSlug": "the-leads-warehouse",
+      "providerName": "The Leads Warehouse",
+      "pricingChanges": [],
+      "policyChanges": [],
+      "newVerticals": [
+        "home-warranty",
+        "home-services",
+        "moving-services",
+        "auto-warranty (already listed)",
+        "motor-vehicle-accidents (MVA)",
+        "tort",
+        "consumer-debt",
+        "federal-student-loan-debt",
+        "federal-income-tax-debt",
+        "credit-repair",
+        "precious-metals",
+        "aca-u65-health-insurance",
+        "ssdi",
+        "dme",
+        "addiction",
+        "moving-services",
+        "b2c-marketing-data-lists (consumer data, business data, cell phone data)",
+        "data-append-and-validation-services"
+      ],
+      "newLeadTypes": [
+        "click-to-call",
+        "data-append-and-validation-services"
+      ],
+      "notableChanges": [
+        "No explicit pricing is published. The site says to call 800-884-8371 (Mon-Fri 8:00 a.m.-5:00 p.m. PST) to discuss pricing, which is consistent with the sales-required pricing model.",
+        "Aged leads are defined as 2+ days old opt-in consumers, positioned as the best value for high-volume needs.",
+        "Real-time leads are consumers who opt in to speak with representatives instantly.",
+        "Call transfer leads are contacted and pre-qualified by a call center, then handed off to the client's representatives for closing.",
+        "Direct mail leads are consumers responding to a direct mail piece who initiate inbound calls.",
+        "Click-to-call leads are consumers who click a creative to speak immediately with a representative.",
+        "Marketing data lists are customizable and include cell phone numbers.",
+        "The site claims leads and data in more than 15 verticals.",
+        "Marketing claims: significant volume available, exclusive leads in first position, CPAs lower than industry averages, and next day delivery.",
+        "A Payment Methods page is linked in the footer, but its content was not scraped.",
+        "The site promotes AI agent solutions such as scripting suggestions, call center AI agents, and appointment scheduling.",
+        "Blog posts cover Medicare AEP vs. OEP lead strategies and aged vs. real-time debt relief lead ROI, which mentions pricing but gives no figures in the excerpt.",
+        "No return or replacement policy appears in the scraped content, so the existing profile policy cannot be confirmed or changed from this page.",
+        "The current profile lists mortgage, auto-insurance, life-insurance, health-insurance and legal verticals. The site shows mortgage (refi, loan modification, reverse), auto insurance, final expense, Medicare, ACA/U65 health, and legal as MVA and tort. Life insurance is not explicitly listed apart from final expense under Health/Life."
+      ],
+      "rawPricingData": []
+    }
+  ],
+  "errors": []
+}
