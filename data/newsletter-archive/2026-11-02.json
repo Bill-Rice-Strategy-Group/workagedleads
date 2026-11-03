@@ -10,7 +10,7 @@
   "subject": "Scaling up? Fix these 5 CRM fields first",
   "previewText": "Five fields, disposition codes that mean something, and why 'no answer' isn't one.",
   "html": "2026-11-02.html",
-  "sent": false,
+  "sent": true,
   "priceGuard": {
     "blocking": [],
     "warnings": []
@@ -26,5 +26,8 @@
     "Why 'no answer' is not a disposition"
   ],
   "industryInsight": "Consent rules keep moving, so your suppression process has to be steady",
-  "errors": []
+  "errors": [],
+  "sentAt": "2026-11-03T13:00:25.856Z",
+  "broadcastId": "f3342045-1252-44b6-97fc-7778bf7e9e6a",
+  "sentBy": "cron"
 }
