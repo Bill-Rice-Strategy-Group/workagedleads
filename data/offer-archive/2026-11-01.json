@@ -5,5 +5,9 @@
   "campaign": "restock-offer",
   "edition": "email-first",
   "theme": "Let the list filter itself",
-  "killed": false
+  "killed": false,
+  "sent": true,
+  "sentAt": "2026-11-05T13:00:50.932Z",
+  "broadcastId": "523319b6-8a01-483b-835d-2ab78d66b362",
+  "sentBy": "cron"
 }
