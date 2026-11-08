@@ -1,0 +1,36 @@
+{
+  "runDate": "2026-11-08T14:01:06.465Z",
+  "weekOf": "2026-11-09",
+  "sendDate": "2026-11-10",
+  "theme": "ROI Breakdown",
+  "focusVertical": "topic-themed",
+  "calendarStatus": "Calendar: \"ROI Breakdown\" for 2026-11-10. 7 issue(s) remain, through 2026-12-29.",
+  "calendarMatched": true,
+  "calendarRemaining": 7,
+  "subject": "Your real cost per sale (not per lead)",
+  "previewText": "Lead price is the wrong number. Here's the math that actually matters.",
+  "html": "2026-11-09.html",
+  "sent": false,
+  "priceGuard": {
+    "blocking": [],
+    "warnings": [
+      "$50",
+      "$1"
+    ]
+  },
+  "featuredArticle": {
+    "title": "How to Work Aged Leads: The Complete System for Maximum ROI",
+    "slug": "how-to-work-aged-leads-the-complete-system-for-maximum-roi",
+    "spotlight": "If this issue's math has you looking at your own numbers, this is the piece to revisit. It lays out the full system: the economics of aged leads, the scripts, and the follow-up sequences that turn a low-cost batch into booked appointments. Good CPA math only pays off when the batch actually gets worked, and this is the playbook for that."
+  },
+  "quickTips": [
+    "Put your unbilled hours in the CPA",
+    "Compare aged and real-time on break-even, not price",
+    "The one monthly report: a batch cohort sheet"
+  ],
+  "industryInsight": "Compliance is a recurring cost line, so count it in your CPA",
+  "errors": [
+    "Warning: $50",
+    "Warning: $1"
+  ]
+}
