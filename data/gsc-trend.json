@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-08T12:00:05.518Z",
+  "lastUpdated": "2026-11-09T12:00:06.176Z",
   "snapshots": [
     {
       "date": "2026-07-10",
@@ -31536,6 +31536,316 @@
           "impressions": 1,
           "ctr": 0,
           "position": 65
+        }
+      ]
+    },
+    {
+      "date": "2026-11-09",
+      "property": "agedleadsales",
+      "status": "ok",
+      "rolling7d": {
+        "clicks": 0,
+        "impressions": 237,
+        "ctr": 0,
+        "position": 20.21
+      },
+      "topPages": [
+        {
+          "page": "https://agedleadsales.com/about/bill-rice",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "page": "https://agedleadsales.com/blog/aged-auto-insurance-leads-overlooked-goldmine-pc-agents",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "page": "https://agedleadsales.com/blog/aged-lead-conversion-rates-by-industry-data-benchmarks",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 3
+        },
+        {
+          "page": "https://agedleadsales.com/blog/aged-leads-pricing-2026-complete-industry-guide",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 5.5
+        },
+        {
+          "page": "https://agedleadsales.com/blog/how-to-work-home-services-leads",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "page": "https://agedleadsales.com/blog/how-to-work-iul-leads",
+          "clicks": 0,
+          "impressions": 8,
+          "ctr": 0,
+          "position": 8.75
+        },
+        {
+          "page": "https://agedleadsales.com/blog/lead-fraud-detection-fake-leads",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 8
+        },
+        {
+          "page": "https://agedleadsales.com/blog/lead-qualification-framework-internet-leads",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 9
+        },
+        {
+          "page": "https://agedleadsales.com/blog/lead-vendor-negotiation-guide",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 2
+        },
+        {
+          "page": "https://agedleadsales.com/blog/objection-handling-scripts",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 5.33
+        }
+      ],
+      "topQueries": [
+        {
+          "query": "aged home insurance leads",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 37.5
+        },
+        {
+          "query": "aged insurance leads",
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 49
+        },
+        {
+          "query": "aged internet leads",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 92
+        },
+        {
+          "query": "aged lead",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 3.5
+        },
+        {
+          "query": "aged lead store",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 37.33
+        },
+        {
+          "query": "aged lead store reviews",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 11
+        },
+        {
+          "query": "aged leads",
+          "clicks": 0,
+          "impressions": 11,
+          "ctr": 0,
+          "position": 18.45
+        },
+        {
+          "query": "aged leads marketplace",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 7
+        },
+        {
+          "query": "aged life insurance leads",
+          "clicks": 0,
+          "impressions": 7,
+          "ctr": 0,
+          "position": 21.86
+        },
+        {
+          "query": "aged life leads same day delivery",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 16
+        }
+      ]
+    },
+    {
+      "date": "2026-11-09",
+      "property": "workagedleads",
+      "status": "ok",
+      "rolling7d": {
+        "clicks": 62,
+        "impressions": 7155,
+        "ctr": 0.0087,
+        "position": 22.22
+      },
+      "topPages": [
+        {
+          "page": "https://workagedleads.com/blog/voicemail-scripts-insurance-leads",
+          "clicks": 7,
+          "impressions": 185,
+          "ctr": 0.0378,
+          "position": 4.77
+        },
+        {
+          "page": "https://workagedleads.com/blog/iul-leads-financial-advisors-playbook",
+          "clicks": 4,
+          "impressions": 91,
+          "ctr": 0.044,
+          "position": 9.91
+        },
+        {
+          "page": "https://workagedleads.com/blog/sms-templates-insurance-leads",
+          "clicks": 4,
+          "impressions": 229,
+          "ctr": 0.0175,
+          "position": 19.94
+        },
+        {
+          "page": "https://workagedleads.com/lead-types/iul-leads",
+          "clicks": 4,
+          "impressions": 47,
+          "ctr": 0.0851,
+          "position": 11.87
+        },
+        {
+          "page": "https://workagedleads.com/blog/aged-lead-store-review-2026",
+          "clicks": 3,
+          "impressions": 208,
+          "ctr": 0.0144,
+          "position": 5.95
+        },
+        {
+          "page": "https://workagedleads.com/blog/dnc-scrubbing-on-a-budget",
+          "clicks": 3,
+          "impressions": 283,
+          "ctr": 0.0106,
+          "position": 26.74
+        },
+        {
+          "page": "https://workagedleads.com/blog/how-to-work-iul-leads",
+          "clicks": 3,
+          "impressions": 80,
+          "ctr": 0.0375,
+          "position": 11.01
+        },
+        {
+          "page": "https://workagedleads.com/blog/tcpa-compliance-calling-aged-leads",
+          "clicks": 3,
+          "impressions": 88,
+          "ctr": 0.0341,
+          "position": 12.06
+        },
+        {
+          "page": "https://workagedleads.com/lead-types/insurance-leads",
+          "clicks": 3,
+          "impressions": 468,
+          "ctr": 0.0064,
+          "position": 42.75
+        },
+        {
+          "page": "https://workagedleads.com/lead-types/life-insurance-leads",
+          "clicks": 3,
+          "impressions": 601,
+          "ctr": 0.005,
+          "position": 46.48
+        }
+      ],
+      "topQueries": [
+        {
+          "query": "iul leads",
+          "clicks": 2,
+          "impressions": 83,
+          "ctr": 0.0241,
+          "position": 14.37
+        },
+        {
+          "query": "aged medicare leads",
+          "clicks": 1,
+          "impressions": 12,
+          "ctr": 0.0833,
+          "position": 12.08
+        },
+        {
+          "query": "lead heroes",
+          "clicks": 1,
+          "impressions": 56,
+          "ctr": 0.0179,
+          "position": 6.09
+        },
+        {
+          "query": "lead heroes reviews",
+          "clicks": 1,
+          "impressions": 9,
+          "ctr": 0.1111,
+          "position": 3.89
+        },
+        {
+          "query": "life insurance leads for agents",
+          "clicks": 1,
+          "impressions": 14,
+          "ctr": 0.0714,
+          "position": 63.43
+        },
+        {
+          "query": "10dlc for mortgage lenders",
+          "clicks": 0,
+          "impressions": 3,
+          "ctr": 0,
+          "position": 10.67
+        },
+        {
+          "query": "a medicare supplement basic benefit is",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 64.5
+        },
+        {
+          "query": "ac leads",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 30
+        },
+        {
+          "query": "ac repair leads",
+          "clicks": 0,
+          "impressions": 16,
+          "ctr": 0,
+          "position": 82.75
+        },
+        {
+          "query": "accident leads",
+          "clicks": 0,
+          "impressions": 1,
+          "ctr": 0,
+          "position": 79
         }
       ]
     }
