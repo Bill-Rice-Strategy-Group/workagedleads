@@ -10,7 +10,7 @@
   "subject": "Your real cost per sale (not per lead)",
   "previewText": "Lead price is the wrong number. Here's the math that actually matters.",
   "html": "2026-11-09.html",
-  "sent": false,
+  "sent": true,
   "priceGuard": {
     "blocking": [],
     "warnings": [
@@ -32,5 +32,8 @@
   "errors": [
     "Warning: $50",
     "Warning: $1"
-  ]
+  ],
+  "sentAt": "2026-11-10T13:00:22.655Z",
+  "broadcastId": "376ee978-ec33-480f-ba7c-4e7c66d62854",
+  "sentBy": "cron"
 }
