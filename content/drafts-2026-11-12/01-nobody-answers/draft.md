@@ -65,12 +65,12 @@ Every commercial email has to follow [CAN-SPAM](https://www.ftc.gov/business-gui
 
 **It depends on what they did with your email. Someone who replied or clicked gets up to six calls over two weeks. Someone who never engaged gets two calls, then goes back on the monthly email. Stop at once for anyone who says no or asks not to be called.**
 
-| What the lead did | Calls | Over |
-|---|---|---|
-| Replied or clicked | Up to 6 | Two weeks, starting the same day |
-| Opened only | 2 to 3 | One week |
-| Nothing | 2 | Then monthly email only |
-| Said no, or asked not to be called | 0 | Add to your do-not-call list today |
+| What the lead did | What to do |
+|---|---|
+| Replied or clicked | Up to 6 calls over two weeks, starting the same day |
+| Opened only | 2 or 3 calls over one week |
+| Nothing | 2 calls, then monthly email only |
+| Said no, or asked not to be called | No more calls. Add them to your do-not-call list today |
 
 Voicemail on the fifth call doesn't mean "not interested." It usually means they don't know who you are yet. That's the job email does.
 

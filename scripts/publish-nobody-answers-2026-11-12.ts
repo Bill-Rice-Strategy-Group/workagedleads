@@ -9,7 +9,8 @@
  * so it must be live before the Sunday 2026-11-15 14:00 UTC draft run.
  *
  * Creates a NEW post. Refuses to overwrite an existing document with this _id
- * unless --replace is passed, so a re-run can't silently clobber later edits.
+ * unless --replace is passed. --replace patches title/excerpt/seo/body only,
+ * so the featured image and publishedAt survive.
  *
  * DRY RUN BY DEFAULT.
  *   npx tsx --env-file=.env.local scripts/publish-nobody-answers-2026-11-12.ts
@@ -120,6 +121,16 @@ async function main() {
 
   if (!APPLY) {
     console.log("\nnothing written.");
+    return;
+  }
+  if (existing) {
+    // Patch copy only. createOrReplace would drop mainImage (added afterwards by
+    // generate-featured-images.mjs) and reset publishedAt.
+    await client
+      .patch(DOC_ID)
+      .set({ title: doc.title, excerpt: doc.excerpt, seo: doc.seo, body: doc.body })
+      .commit();
+    console.log(`\npatched ${DOC_ID} — title, excerpt, seo, body only`);
     return;
   }
   await client.createOrReplace(doc);
