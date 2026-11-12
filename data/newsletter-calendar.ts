@@ -208,12 +208,14 @@ export const NEWSLETTER_CALENDAR: NewsletterPlan[] = [
   {
     week: 11,
     sendDate: "2026-11-17",
-    theme: "Scripts That Close",
+    theme: "Channel Deep Dive",
     exclusiveTipTopics: [
-      "The objection library: the eight you will actually hear",
-      "'I already bought' — the highest-value objection there is",
-      "How to end a call so the follow-up is expected rather than intrusive",
+      "Track conversations per 100 dials for each phone number, weekly; a sharp one-week drop on the same kind of leads usually means a carrier spam label, so test the number on Verizon, T-Mobile and AT&T before buying new leads or rewriting the script",
+      "Write emails that ask one short question a reader can answer in a few words ('Did you ever get your burial coverage sorted out?'), with no logo, product list or rate table; a reply is the best reason to call",
+      "Sort Monday's list by what each lead did with your email (replied, clicked, opened only, nothing) and call in that order; opens are unreliable because Apple Mail records many automatically",
     ],
+    specialHook:
+      "Swapped in by Bill on 2026-11-12 (was 'Scripts That Close', moved to 2027-01-05). Built on a real reader letter: a 69-year-old final expense agent who used to reach about 5 people per 10 calls and now sometimes makes 70-80 calls a day and reaches no one; he wants a 2-3 day week. PARAPHRASE him, never quote him, never name him or his town. The argument: most people now ignore unknown numbers, and a number making high-volume unanswered calls gets labeled 'Spam Likely', so dialing harder makes it worse; the fix is email first to find who is still interested, then call those people. FEATURE the post with slug '70-dials-nobody-answers-email-decides-who-you-call'. Industry insight: Hiya's 2026 State of the Call survey (12,000+ consumers, six countries) found only 14% immediately answer unknown numbers; Pew (2020, U.S.) found about 8 in 10 adults don't generally answer unknown cellphone calls. Name Hiya as a call-screening company. Do NOT restate texting or TCPA law in this issue; point to the featured article for that.",
     status: "planned",
   },
   {
@@ -284,6 +286,18 @@ export const NEWSLETTER_CALENDAR: NewsletterPlan[] = [
       "The weekly rhythm to hold yourself to in Q1",
     ],
     specialHook: "Final issue of 2026. Forward-looking; sets up the Q1 calendar.",
+    status: "planned",
+  },
+  {
+    week: 18,
+    sendDate: "2027-01-05",
+    theme: "Scripts That Close",
+    exclusiveTipTopics: [
+      "The objection library: the eight you will actually hear",
+      "'I already bought' — the highest-value objection there is",
+      "How to end a call so the follow-up is expected rather than intrusive",
+    ],
+    specialHook: "Moved here from 2026-11-17 on 2026-11-12 to make room for the reader-letter issue.",
     status: "planned",
   },
 ];
