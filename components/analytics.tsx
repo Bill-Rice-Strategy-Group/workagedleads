@@ -79,9 +79,12 @@ type GtagArgs = [string, ...any[]];
 
 function gtag(...args: GtagArgs) {
   if (typeof window === "undefined") return;
-  const w = window as unknown as { dataLayer?: GtagArgs[] };
+  const w = window as unknown as { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
   w.dataLayer = w.dataLayer || [];
-  w.dataLayer.push(args);
+  if (typeof w.gtag === "function") { w.gtag(...args); return; }
+  // gtag.js only reads Arguments objects from dataLayer, never plain arrays
+  // eslint-disable-next-line prefer-rest-params, @typescript-eslint/no-unused-vars
+  (function (..._a: unknown[]) { w.dataLayer!.push(arguments); })(...args);
 }
 
 export function trackEvent(name: string, params?: Record<string, string>) {
@@ -92,6 +95,15 @@ export function trackNewsletterSignup(location: string, email: string) {
   trackEvent("newsletter_signup", {
     signup_location: location,
     email_domain: email.split("@")[1],
+  });
+}
+
+// GA4 "generate_lead" — fire only after the lead's API call succeeds.
+// The BRSG portfolio report counts this event as a lead.
+export function trackLead(leadType: string, location: string) {
+  trackEvent("generate_lead", {
+    lead_type: leadType,
+    form_location: location,
   });
 }
 

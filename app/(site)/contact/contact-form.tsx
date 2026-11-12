@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { HoneypotInput } from "@/components/honeypot-input";
+import { trackLead } from "@/components/analytics";
 
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -33,6 +34,7 @@ export function ContactForm() {
       const data = await res.json();
 
       if (res.ok) {
+        trackLead("contact", "contact-page");
         setStatus("success");
         setFeedback(
           data.message ||
