@@ -2,25 +2,9 @@
 title: "70 Dials a Day and Nobody Answers: Let Email Decide Who You Call"
 slug: "70-dials-nobody-answers-email-decides-who-you-call"
 excerpt: "When aged leads stop answering, the usual fix is more dials at better times. The real causes are unknown-number fatigue and a spam label on your own phone. Here's how to check your number, let email pick who you call, and work a shorter week."
-category: cat-strategies
-leadType: lt-final-expense
-status: DRAFT — not published. Review open questions at the bottom before publishing.
 ---
 
-## Outline
-
-1. A reader's letter: 70 to 80 dials a day, nobody answers
-2. Why aged leads stopped answering
-3. How to tell if your number is labeled spam
-4. Let email decide who you call
-5. How many times should you call an aged lead?
-6. Stop texting purchased leads
-7. A two- to three-day week that works
-8. What to track
-
----
-
-A final expense agent in Indiana wrote to us last month. He is 69 and has been selling life insurance for a long time. He emails his leads, calls them, and texts them. Most calls still go to voicemail, whatever the time or day.
+A final expense agent in Indiana wrote to us recently. He is 69 and has been selling life insurance for a long time. He emails his leads, calls them, and texts them. Most calls still go to voicemail, whatever the time or day.
 
 Years ago, he used to reach about 5 people for every 10 calls. Now he sometimes makes 70 to 80 calls in a day and reaches no one.
 
@@ -114,6 +98,8 @@ A sample week:
 
 The email works on the days you don't. That's what makes a shorter week possible.
 
+The week only works if the email sequence keeps getting new names. A small batch of leads every week or two, at a price you can keep paying, does more than one big order followed by nothing. If you buy aged final expense leads, [Aged Lead Store's life and final expense inventory](https://agedleadstore.com/life-insurance-leads/?utm_source=workagedleads&utm_medium=affiliate&utm_campaign=blog-70-dials-nobody-answers&utm_content=body-weekly-restock) is one place to start (we earn a commission if you buy).
+
 ## What to track
 
 **Track conversations per 100 dials for each phone number, by week. If that number falls sharply while your leads stay the same, check your number for a spam label before you blame the leads.**
@@ -126,13 +112,3 @@ Keep four counts each week:
 4. Which email signal led to each conversation (reply, click, open or none)
 
 After a month you'll know which signals are worth a same-day call. If you track each batch, our [lead cost calculator](/calculators/lead-cost-calculator) turns those counts into cost per conversation.
-
----
-
-## Open questions for Bill (delete before publishing)
-
-1. **Call caps by signal (6 / 2-3 / 2).** These are recommendations, not sourced numbers. Confirm they match your practice.
-2. **Naming tools.** The article names no specific CRM. The Gmail reply also names none. Want to name one (for example Ringy, about $119/mo per its pricing page) or keep it neutral? I could not verify Ringy's terms on purchased data or that it reports opens and clicks.
-3. **Affiliate CTA.** The standard InlineTextCta and mid-article CTAs will render automatically. No extra store link is written into the body.
-
-Settled 2026-11-12: call caps kept as written; reader's words paraphrased, no quotes; publish after Bill's read, **by Sat 2026-11-14** so the Sunday newsletter cron can feature it.
