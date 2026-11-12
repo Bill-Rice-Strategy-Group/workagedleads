@@ -12,6 +12,9 @@
  *   node scripts/generate-featured-images.mjs --limit 3    # first N
  *   node scripts/generate-featured-images.mjs --replace    # replace existing
  *   node scripts/generate-featured-images.mjs --ids "id1,id2"  # specific docs
+ *   node scripts/generate-featured-images.mjs --ids "id1" --photo-id <unsplashId>
+ *     # use a hand-picked Unsplash photo instead of the title-keyword search,
+ *     # for when the automatic pick doesn't fit the piece. One doc at a time.
  *
  * Requires: UNSPLASH_ACCESS_KEY, SANITY_API_TOKEN in .env.local
  * Dependencies: sharp, @sanity/client, dotenv
@@ -101,6 +104,23 @@ async function searchUnsplash(query) {
   }).catch(() => {});
 
   return best.photo;
+}
+
+/** Fetch one hand-picked Unsplash photo by id (and register the download). */
+async function getUnsplashPhoto(id) {
+  const res = await fetch(`https://api.unsplash.com/photos/${encodeURIComponent(id)}`, {
+    headers: { Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}` },
+  });
+  if (!res.ok) {
+    console.error(`  Unsplash API error: ${res.status} ${res.statusText}`);
+    return null;
+  }
+  const photo = await res.json();
+  console.log(`   Hand-picked photo ${id}: "${photo.alt_description ?? ""}"`);
+  fetch(photo.links.download_location, {
+    headers: { Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}` },
+  }).catch(() => {});
+  return photo;
 }
 
 /**
@@ -359,6 +379,11 @@ async function main() {
   const limit = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : 999;
   const idsIdx = args.indexOf("--ids");
   const idFilter = idsIdx >= 0 ? args[idsIdx + 1].split(",") : null;
+  const photoIdIdx = args.indexOf("--photo-id");
+  const photoId = photoIdIdx >= 0 ? args[photoIdIdx + 1] : null;
+  if (photoId && (!idFilter || idFilter.length !== 1)) {
+    throw new Error("--photo-id needs exactly one document via --ids");
+  }
 
   console.log(`\nGenerating featured images for agedleadsales.com`);
   console.log(`Brand: Blue (#2563eb) gradient overlay + title text`);
@@ -415,7 +440,12 @@ async function main() {
 
     try {
       // Search Unsplash
-      let photo = await searchUnsplash(searchQuery);
+      let photo = photoId ? await getUnsplashPhoto(photoId) : await searchUnsplash(searchQuery);
+      if (photoId && !photo) {
+        console.log(`    FAILED: Unsplash photo ${photoId} not found\n`);
+        failed++;
+        continue;
+      }
       if (!photo) {
         console.log(`    No results, trying fallback "people in an office setting"...`);
         photo = await searchUnsplash("people in an office setting professional");
