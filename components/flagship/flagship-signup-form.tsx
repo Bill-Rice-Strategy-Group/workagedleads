@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { trackNewsletterSignup, trackCtaClick } from "@/components/analytics";
+import { trackNewsletterSignup, trackCtaClick, trackLead } from "@/components/analytics";
 import { HoneypotInput } from "@/components/honeypot-input";
 import type { Vertical } from "@/lib/email-course/types";
 
@@ -46,6 +46,7 @@ export function FlagshipSignupForm({
       if (res.ok) {
         trackNewsletterSignup(context, email);
         trackCtaClick(`flagship-${vertical}`, context);
+        trackLead("flagship_playbook", context);
         router.push(`/playbook/${vertical}/thank-you?e=${encodeURIComponent(email)}`);
       } else {
         const data = (await res.json()) as { error?: string };

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { trackNewsletterSignup, trackCtaClick } from "./analytics";
+import { trackNewsletterSignup, trackCtaClick, trackLead } from "./analytics";
 import { HoneypotInput } from "./honeypot-input";
 
 interface LeadMagnetCtaProps {
@@ -47,6 +47,7 @@ export function LeadMagnetCta({
         setMessage(downloadUrl ? "Your download is ready!" : "Check your email! Your download is on the way.");
         trackNewsletterSignup(context, email);
         trackCtaClick(leadMagnetId, context);
+        trackLead("lead_magnet", context);
         setEmail("");
       } else {
         const data = await res.json();
