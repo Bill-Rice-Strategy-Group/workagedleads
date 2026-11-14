@@ -6,6 +6,31 @@
 
 ---
 
+## 2026-11-14 — Unsourced insurance-commission claims
+<!-- added 2026-11-14 session — Bill asked for the cleanup; CMS figures from the CY2026 Agent and Broker Compensation memo (June 18, 2025) -->
+
+- [x] **Commission rates and "typical" commission dollars stated as fact. RESOLVED 2026-11-14.** Carrier
+  commission schedules are not public and vary by carrier, product and contract level, but 29 published
+  Sanity docs (posts + glossary terms) stated them as norms ("typically 80–110% of target premium",
+  "agent commissions typically run 20–25%", "average first-year commission on a term policy: $300–$600",
+  "most carriers pay 110–120%"). 57 blocks rewritten: each now says the rate depends on carrier, product
+  and contract and to check your own schedule, and where the number drives the math it is kept as an
+  explicit assumption ("if your contract pays 80%…"). Dependent math recomputed in the same doc,
+  including three that were already wrong (direct-mail ROI 872% → 80% at a stated 100% rate; annuity
+  "pays for the purchase 25 times over" → $2,000 against $600–$1,600; captive/independent max-CPL
+  $48 → $4.80 at the stated 10:1 target). Scenario math that already stated its inputs was left alone.
+- [x] **Medicare Advantage / Part D figures now use the CMS caps.** MA and PDP agent compensation is
+  capped by CMS, so those figures were replaced with the CY2026 fair-market-value maximums (MA $694
+  initial / $347 renewal in most states, higher in CA, CT, DC, NJ, PA; PDP $114 / $57), linked to
+  cms.gov's Agent Broker Compensation page. The Medicare playbook table still showed "2024 max" numbers.
+- [x] **Repo:** flagship insurance playbook ARPC column labelled illustrative with a "use your own
+  schedule" note and the CMS cap; Medicare AEP break-even example now uses $694 (max CPL $2.10 → $1.82);
+  insurance playbook PDF rebuilt. ROI calculator help text and the advance-commission glossary
+  definition no longer state carrier norms.
+- [ ] **Not touched (out of scope, flag if wanted):** mortgage LO comp ("$3,500 average commission",
+  bps tables), solar sales commission, and employee pay plans. The "Real Case Study" framing in
+  `life-insurance-aged-lead-roi` presents an illustrative 4-of-17 example as real.
+
 ## 2026-11-14 — Close-to-page-one queries: direct answers, titles, internal links
 <!-- added 2026-11-14 session — positions from Bill's Search Console read; current 7d page data from data/gsc-trend.json (2026-11-14 snapshot) -->
 

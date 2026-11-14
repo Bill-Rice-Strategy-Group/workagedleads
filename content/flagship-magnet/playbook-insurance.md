@@ -12,7 +12,7 @@ This overlay covers aged auto, home, life, final expense, Medicare, and health l
 
 ## Vertical benchmarks (by sub-vertical)
 
-| Sub-vertical | Realistic CPL (60–180d) | Contact rate | Contact-to-close | ARPC |
+| Sub-vertical | Realistic CPL (60–180d) | Contact rate | Contact-to-close | ARPC (illustrative) |
 |---|---|---|---|---|
 | Auto insurance | $0.50–$3.00 | 12–20% | 4–10% | $150–$400 (commission) |
 | Home insurance | $0.75–$4.00 | 10–16% | 5–12% | $200–$500 |
@@ -21,10 +21,12 @@ This overlay covers aged auto, home, life, final expense, Medicare, and health l
 | Medicare | $1.00–$5.00 | 12–18% | 4–10% | $400–$1,200 |
 | Health | $1.00–$4.00 | 10–16% | 3–8% | $150–$500 |
 
+ARPC is what you earn per close, and in insurance that is set by your carrier contracts: commission rates vary by carrier, product and contract level, so replace the ARPC column with figures from your own commission schedule. Medicare Advantage is the one line with a published ceiling. For 2026, [CMS caps](https://www.cms.gov/medicare/health-drug-plans/managed-care-marketing/medicare-marketing-guidelines/agent-broker-compensation) initial MA compensation at $694 per enrollment in most states and renewals at $347; carriers can pay less.
+
 **Break-even math examples:**
 - Final expense — $500 ARPC, 14% contact, 10% close, 4× target: Max CPL = $1.75
 - Auto — $250 ARPC, 15% contact, 7% close, 4× target: Max CPL = $0.66
-- Medicare (AEP) — $800 ARPC, 15% contact, 7% close, 4× target: Max CPL = $2.10
+- Medicare (AEP) — $694 ARPC (the 2026 CMS cap for a new MA enrollment in most states), 15% contact, 7% close, 4× target: Max CPL = $1.82
 
 **Implication.** In most insurance sub-verticals, the economics are tight. The operator wins on cadence and close rate, not on heroic lead-buying negotiations.
 

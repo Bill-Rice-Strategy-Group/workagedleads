@@ -127,7 +127,9 @@ export default function RoiCalculatorPage() {
                 <li>
                   <strong className="text-zinc-900 dark:text-white">Average Deal Value:</strong>{" "}
                   Your average commission or revenue per closed deal. For insurance,
-                  this might be $500-$2,000. For mortgage, $3,000-$5,000.
+                  use the first-year commission from your own carrier schedule, since
+                  rates vary by carrier, product and contract level. For mortgage,
+                  $3,000-$5,000.
                 </li>
                 <li>
                   <strong className="text-zinc-900 dark:text-white">Lead Costs:</strong>{" "}
