@@ -751,6 +751,12 @@ Query → pages, same GSC pull. Every one of these is one query split across mul
   code-owned and already intent-split (`/providers` "Aged Lead Providers: 15+ Rated & Compared",
   hubs "Aged X Leads – …"). What remains is link edits inside Sanity post bodies — proposed in
   the 2026-11-14 P1-sweep PR under "Content edits for Bill to approve"; left open until approved.
+  2026-11-14 progress (Sanity edits from #79 published, verified live): `how-to-work-health-insurance-leads`
+  link `/buying-leads/buy-aged-leads` → `/lead-types/health-insurance-leads`. NOT done: the 7 link
+  fixes in `post-htwl-aged-leads` (`/aged-leads`) — patched, but publish is blocked by schema
+  validation (required `excerpt` is empty on that post, pre-existing); draft discarded, live page
+  unchanged. Needs an approved excerpt, then re-apply. The `/aged-leads` title decision and the
+  remaining canonical-target picks also stay open.
 
 ### Defect — apex/www host split on a ranking page
 
@@ -833,7 +839,9 @@ SERP where **two DR-0 domains hold top-10** — commercial intent, movable posit
   Between OEP", "Aged Medicare Leads – Affordable Medicare Supplement Leads", "Aged Auto Insurance
   Leads – Working the Renewal Clock". `aged life insurance leads` is a declared secondary keyword
   of the life-insurance hub, which deliberately targets the head term. Optional hero-copy edits
-  (Sanity `shortDescription`) are in the sweep PR's content-edit list.
+  (Sanity `shortDescription`) are in the sweep PR's content-edit list. RESOLVED 2026-11-14: Sanity
+  edits published (`shortDescription` on lt-final-expense, lt-medicare, lt-health-insurance,
+  lt-auto-insurance — each now opens "Aged X leads are … 30 to 365 days ago"), verified live.
 
 ### Two corrections to earlier items in this section
 
@@ -985,7 +993,7 @@ Site is healthy and the on-page work is largely done (FAQPage schema present, da
 - [x] **Feature the pipeline calculator more prominently** — it converted **9 of 16 sessions** (`/calculators/pipeline-calculator`), by far the best on-site converter, but barely gets traffic. Surface it in nav/homepage + internal-link from the lead-type and playbook pages. <!-- 2026-06-19 confirmed: still the top converter (pipeline 9/15 key events = 6.7%, ROI calc 4.8%) and still under-fed by organic. Pair the placement work with calculator SEO: add `SoftwareApplication`/`HowTo` JSON-LD + target "aged lead ROI calculator"-type queries so the page also *earns* organic landings, not just receives internal traffic. --> RESOLVED 2026-11-14 (this PR): most of the placement had already shipped — header nav "Calculators", a "Most-used tool" block on the homepage, links from every lead-type guide, blog post, start-here and resources, and `WebApplication` (a `SoftwareApplication` subtype) + FAQPage JSON-LD on the page. The one gap was the flagship playbook path: the thank-you page now links "Run your numbers in the Pipeline Volume Calculator" at step 2 (the Worksheet 1 step it automates). Every calculator now fires GA4 `calculator_use` on first input, so its conversions are measurable. HowTo JSON-LD skipped: Google retired HowTo rich results in 2023. Verify live after merge.
 - [ ] **Lean harder into AEO** — the **AI-Assistant channel drove 10 of 15 key events** (ChatGPT). The comparison/provider content is exactly what assistants cite; keep expanding the `/compare/*` cluster and provider-directory depth. Biggest ROI front and doesn't need authority. (2026-11-14 sweep: net-new content — see the concrete wave at the "Next `/compare/*` AEO wave" item.)
 - [ ] **Attribution (config only — code already correct):** analytics already loads `afterInteractive`, so the 66% "Direct" is GA4/GTM-config + bots, not code. In GA4 Admin enable bot-traffic exclusion + review referral exclusions; confirm the GTM page_view tag isn't dropping `page_referrer`. Fleet-wide BRSG pattern (proinvestorhub shows it too) — worth fixing once at the template/container level. NEEDS BILL 2026-11-14: GA4 property 528489903 → Admin → Data streams → web stream → Configure tag settings → Show more → **List unwanted referrals**: add `agedleadstore.com` (readers returning from the store otherwise start a new "referral" session); then Admin → Data settings → Data filters → confirm the "Internal traffic" filter is **Active** (GA4 excludes known bots automatically; there is no toggle). In GTM, open the GA4 Configuration/Google tag and confirm no field overrides `page_referrer`.
-- [ ] **Stretch:** push "aged lead store reviews" (already pos 8, page 1) toward top-3 / featured snippet — high-intent buyer query that already converts. 2026-11-14: metaTitle is already "Aged Lead Store Review 2026: Pricing, Quality & Verdict". The snippet blocker is the body: the "Quick verdict" H2 is followed by a rating fragment, not a sentence answer. Exact edit proposed in the 2026-11-14 P1-sweep PR ("Content edits for Bill to approve"); open until approved.
+- [ ] **Stretch:** push "aged lead store reviews" (already pos 8, page 1) toward top-3 / featured snippet — high-intent buyer query that already converts. 2026-11-14: metaTitle is already "Aged Lead Store Review 2026: Pricing, Quality & Verdict". The snippet blocker is the body: the "Quick verdict" H2 is followed by a rating fragment, not a sentence answer. Exact edit proposed in the 2026-11-14 P1-sweep PR ("Content edits for Bill to approve"); open until approved. RESOLVED 2026-11-14: Sanity edits published (H2 now "Is Aged Lead Store worth it? Quick verdict", followed by a direct-answer paragraph; affiliate disclosure now says "Work Aged Leads may earn a commission"), verified live. Ranking outcome to re-measure in GSC.
 
 ### /website-audit 2026-06-19 — refresh + new findings <!-- added 2026-06-19 /website-audit -->
 Deep audit (live GA4 528489903 + GSC + PSI + Ahrefs). **28d snapshot (May 22 – Jun 18):** GA4 595 sessions (+8.4%), **43 key events / 2.18% conv** (tracking now firing, was 0); GSC **47 clicks / 6,725 impr (+198%) / 0.70% CTR / avg pos 32.1 (down from 25.4)**; PSI mobile 96–100 / desktop 100 (performance is **not** a lever); DR **3.3**, 164 referring domains. The four 2026-06-13 items above (internal-linking cluster, feature the pipeline calculator, lean into AEO, attribution config, push "aged lead store reviews") are **re-confirmed by this month's data and remain open — not re-listed here.** Report: `~/website-audits/agedleadsales.com-2026-06-19.html`. New, non-duplicate items, ordered by impact on the primary goals (traffic, then conversion):
