@@ -6,6 +6,47 @@
 
 ---
 
+## 2026-11-14 — Close-to-page-one queries: direct answers, titles, internal links
+<!-- added 2026-11-14 session — positions from Bill's Search Console read; current 7d page data from data/gsc-trend.json (2026-11-14 snapshot) -->
+
+Queries in positions 8–20: `aged leads` (12.7), `aged insurance leads` (12.8), `iul leads` (14.7). No GSC
+query→page access in-session, so the target page for each was picked from content and the 2026-11-14
+trend snapshot (`/lead-types/iul-leads` 13.1, `/lead-types/insurance-leads` 46.2 over 7d).
+
+- [x] **`aged leads` → `/`. RESOLVED 2026-11-14.** The homepage H1 is a brand line ("You Bought the
+  Leads. Now Work Them.") and nothing above the fold said what an aged lead *is*. Added a short "What are
+  aged leads?" answer block directly under the stats strip, linking to `/price-index`, `/lead-types` and
+  `/providers` with descriptive anchors. Title left as is — it already carries the term.
+- [x] **`aged insurance leads` → `/lead-types/insurance-leads`. RESOLVED 2026-11-14.** metaTitle now opens
+  with the exact query ("Aged Insurance Leads for Agents: Multi-Line Pricing"), metaDescription opens
+  with a definition, and the hero (Sanity `lt-insurance.shortDescription`) now answers "what are they"
+  in its first sentence. Dropped the unsourced "80–90% less" claim from the hero.
+- [x] **`iul leads` → `/lead-types/iul-leads`. RESOLVED 2026-11-14.** metaTitle "IUL Leads for Agents:
+  Aged Indexed Universal Life Leads"; the old description ("High-value leads at affordable prices")
+  replaced with a definition; hero (Sanity `lt-iul.shortDescription`) now opens "IUL leads are…".
+  Internal links into the hub: `/blog/iul-leads-financial-advisors-playbook` had **zero** links — added a
+  closing paragraph linking the hub and `/blog/how-to-work-iul-leads`; `/blog/iul-leads-cost` and
+  `/blog/how-to-work-iul-leads` linked the hub only through `/buying-leads/*` 308s — repointed straight
+  at `/lead-types/iul-leads`.
+- [x] **Broken link fixed in `/blog/how-to-work-life-insurance-leads`** — "complete guide to working
+  insurance leads" pointed at `/blog/how-to-work-aged-insurance-leads`, a **404**. Now "guide to aged
+  insurance leads" → `/lead-types/insurance-leads`. Same post: "buy IUL leads" (lowercase sentence
+  start, via a 308) → "Add IUL leads" → `/lead-types/iul-leads`; `/tools/aged-lead-roi-calculator` 308s
+  repointed to `/calculators/roi-calculator` in all three posts. The post had no `excerpt` (a required
+  field), which blocked publishing; wrote one from its intro.
+- [x] **P1 life insurance — the backlog's own next step, done. 2026-11-14.** The 2026-08-06 entry said:
+  re-measure after GSC warms up, and if the page is still deep *with* head-term targeting and corrected
+  pricing, "the answer is links, not content." Re-measured from `data/gsc-trend.json`: rolling 7d to
+  2026-11-14, **356 impressions, avg position 47.9** — still page 5. So no content was added. Built the
+  on-site half of "links": a curated `RELATED_LEAD_TYPES` map (`data/lead-type-vertical-map.ts`) and a
+  "Related lead types" block on every lead-type guide, so the insurance family links to itself in body
+  content for the first time. `/lead-types/life-insurance-leads` now gets contextual links from
+  insurance, IUL, final expense, annuity and health insurance. Off-page links remain the open part.
+- [ ] **Not done, noted:** `/blog/iul-leads-financial-advisors-playbook` still quotes a $22,500 401(k)
+  limit in an example script (2023 figure; IRS 2026 limit is $24,500) and commission/income ranges with no
+  source. Worth a sourcing pass; out of scope for an internal-linking change.
+
+
 ## 2026-08-18 — The consolidation is not failing. It is waiting on a crawl.
 
 <!-- added 2026-08-18 — every claim probed live: production HTTP, GSC URL Inspection, GSC trend data, ALS GA4, Ahrefs -->
@@ -796,12 +837,18 @@ Shipped this session:
 
 Still open from this session:
 
-- [ ] **5 Sanity post metaTitles/metaDescriptions still truncated — needs Bill's go-ahead.** A seeding pass clipped values to satisfy the 60/160 caps, shipping **10 metaTitles and 12 metaDescriptions ending in a literal `…`** that Google renders verbatim — including the site's best-ranked page (`aged-lead-store-review-2026`, position 6.25, 251 impr/wk, showing "…Honest Assessment of the L…" and converting at only **1.59% CTR** against a ~5–7% expectation for that position). Rewrites are drafted and dry-run clean for all 17 affected posts; the write was blocked by the permission gate because it mutates live production Sanity. Rollback snapshot of all 76 posts saved. The schema now rejects ellipsis-terminated values so this cannot recur. **Action:** approve the Sanity write. *Effort: S.*
+- [x] **5 Sanity post metaTitles/metaDescriptions still truncated — needs Bill's go-ahead.** A seeding pass clipped values to satisfy the 60/160 caps, shipping **10 metaTitles and 12 metaDescriptions ending in a literal `…`** that Google renders verbatim — including the site's best-ranked page (`aged-lead-store-review-2026`, position 6.25, 251 impr/wk, showing "…Honest Assessment of the L…" and converting at only **1.59% CTR** against a ~5–7% expectation for that position). Rewrites are drafted and dry-run clean for all 17 affected posts; the write was blocked by the permission gate because it mutates live production Sanity. Rollback snapshot of all 76 posts saved. The schema now rejects ellipsis-terminated values so this cannot recur. **Action:** approve the Sanity write. *Effort: S.*
   **CLOSED 2026-08-13 — already done, no approval needed.** Re-measured every published post in
   production Sanity: **154 posts, 0 ellipsis-terminated `metaTitle`, `metaDescription` or `title`.**
   The write went in with `a2b0b1c`; this entry was never updated, so it sat here asking Bill to approve
   something that had already shipped. It was very nearly picked up as a session's focus. When an item
   says "blocked on approval", re-measure before acting on it — the block may have lifted months ago.
+  **RESOLVED 2026-11-14 — re-measured again, nothing to rewrite.** Bill gave the go-ahead today, so the
+  dataset was measured before writing anything: all 163 documents carrying `seo.metaTitle` /
+  `seo.metaDescription` in `p7rbtajg/production`, plus every published `title` and `excerpt` — **0 contain
+  `…`**, 0 published titles over 60, 0 descriptions over 160, 0 descriptions ending mid-sentence. The only
+  over-length values are the three legacy playbook **drafts** (`drafts.pb-*`), which are unpublished on
+  purpose (see CLAUDE.md) and were left alone. Checkbox ticked so the item stops asking for approval.
 
 ## Done
 

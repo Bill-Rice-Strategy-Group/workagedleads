@@ -100,3 +100,43 @@ export function leadTypeForVertical(
 ): string | undefined {
   return VERTICAL_TO_LEAD_TYPE[verticalSlug];
 }
+
+/**
+ * Lead-type guide → sibling guides worth a contextual link. Curated by hand,
+ * same as the maps above, so a guide only links to neighbours a reader of that
+ * vertical would plausibly buy next.
+ *
+ * Added 2026-11-14. Before this the only links between lead-type guides were
+ * the footer and the /lead-types hub, so the insurance family (insurance,
+ * life, IUL, final expense, annuity) never linked to each other in body
+ * content. `/lead-types/life-insurance-leads` — the largest impression base on
+ * the site, still deep on page 3+ — gets a contextual link from five siblings.
+ */
+export const RELATED_LEAD_TYPES: Record<string, string[]> = {
+  "insurance-leads": [
+    "life-insurance-leads",
+    "auto-insurance-leads",
+    "health-insurance-leads",
+    "homeowners-insurance-leads",
+  ],
+  "life-insurance-leads": [
+    "iul-leads",
+    "final-expense-leads",
+    "annuity-leads",
+    "insurance-leads",
+  ],
+  "iul-leads": ["life-insurance-leads", "annuity-leads", "final-expense-leads"],
+  "final-expense-leads": ["life-insurance-leads", "iul-leads", "medicare-leads"],
+  "annuity-leads": ["iul-leads", "life-insurance-leads"],
+  "auto-insurance-leads": ["insurance-leads", "homeowners-insurance-leads"],
+  "homeowners-insurance-leads": [
+    "insurance-leads",
+    "auto-insurance-leads",
+    "mortgage-leads",
+  ],
+  "health-insurance-leads": ["insurance-leads", "medicare-leads", "life-insurance-leads"],
+  "medicare-leads": ["health-insurance-leads", "final-expense-leads"],
+  "legal-leads": ["mva-leads", "ssdi-leads"],
+  "mva-leads": ["legal-leads", "ssdi-leads"],
+  "ssdi-leads": ["legal-leads", "mva-leads"],
+};

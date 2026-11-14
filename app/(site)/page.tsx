@@ -186,6 +186,44 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/*
+        Direct answer for the "aged leads" query (GSC avg position 12.7,
+        2026-11). The H1 is a brand line, so nothing near the top of the
+        homepage actually said what an aged lead is. A short definition, then
+        links to the pages that carry the detail.
+      */}
+      <section className="border-b border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
+            What are aged leads?
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-lg">
+            Aged leads are real consumer inquiries — quote requests, rate
+            checks, form fills — resold after the first buyers have had their
+            turn, usually 30 to 365 days after the person asked. They cost a
+            fraction of a real-time lead because the race to call first is
+            over. The trade-off is that they have to be worked differently:
+            more patience, a longer cadence, and a script that acknowledges the
+            time that has passed.
+          </p>
+          <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
+            See current pricing in the{" "}
+            <Link href="/price-index" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+              aged lead price index
+            </Link>
+            , browse{" "}
+            <Link href="/lead-types" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+              aged leads by industry
+            </Link>
+            , or compare{" "}
+            <Link href="/providers" className="font-medium text-blue-600 hover:underline dark:text-blue-400">
+              aged lead providers
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
       {/* Flagship Magnet Strip */}
       <section className="border-b border-zinc-200 bg-white py-12 dark:border-zinc-800 dark:bg-zinc-950 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">

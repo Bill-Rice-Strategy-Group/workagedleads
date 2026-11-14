@@ -308,10 +308,13 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
     title: "Insurance Leads",
     icon: "🛡️",
     heroDescription:
-      "Aged insurance leads give agents access to consumers who previously requested quotes for auto, home, health, or life insurance — at 80-90% less than real-time leads.",
-    metaTitle: "Insurance Leads for Agents: Aged Multi-Line Pricing",
+      "Aged insurance leads are consumers who requested auto, home, health or life quotes 30 to 365 days ago and are still reachable, at a fraction of real-time prices. The money is in the household, not the single policy.",
+    // Leads with the exact query this hub ranks for ("aged insurance leads",
+    // GSC avg position 12.8, 2026-11). The previous title opened with the
+    // head term and buried "aged" mid-title.
+    metaTitle: "Aged Insurance Leads for Agents: Multi-Line Pricing",
     metaDescription:
-      "Aged insurance leads across auto, home, health and life for pennies on the dollar. The cross-sell math that makes a multi-line household pay.",
+      "Aged insurance leads are past quote requests for auto, home, health and life. What they cost, how to work them, and the cross-sell math that pays off.",
     primaryKeyword: "aged insurance leads",
     // Deliberately does NOT target "life insurance leads" or "auto insurance
     // leads". Both are head terms owned by their own hubs
@@ -760,10 +763,13 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
     title: "IUL Leads",
     icon: "📈",
     heroDescription:
-      "Aged IUL leads connect you with consumers who explored Indexed Universal Life insurance — a high-value product with strong commission potential.",
-    metaTitle: "Aged IUL Leads – Indexed Universal Life Insurance Leads",
+      "IUL leads are consumers who researched indexed universal life insurance: permanent coverage with cash value tied to a market index. Aged IUL leads are those records resold 30 to 365 days later, when many are still deciding.",
+    // Targets "iul leads" (GSC avg position 14.7, 2026-11) as well as the
+    // "aged" modifier. The old description was a sales line ("High-value
+    // leads at affordable prices") that answered nothing.
+    metaTitle: "IUL Leads for Agents: Aged Indexed Universal Life Leads",
     metaDescription:
-      "Buy aged IUL leads from consumers who explored Indexed Universal Life insurance and wealth-building strategies. High-value leads at affordable prices.",
+      "IUL leads are prospects who researched indexed universal life. What aged IUL leads are, what they cost, and how to work a long, education-first sale.",
     primaryKeyword: "aged IUL leads",
     secondaryKeywords: [
       "IUL insurance leads",
