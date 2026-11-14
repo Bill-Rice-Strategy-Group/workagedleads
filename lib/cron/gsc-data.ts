@@ -43,6 +43,13 @@ export interface GSCPeriodData {
   topQueries: GSCQueryData[];
   topPages: GSCPageData[];
   devices: GSCDeviceData[];
+  /**
+   * Pages read by exact URL regardless of rank, one entry per watched URL.
+   * `null` means Search Console returned no row for that page in the window —
+   * it earned no impressions — which is a different fact from "not asked".
+   * Only populated for the seven-day period, and only when watchPages was set.
+   */
+  watchedPages?: { page: string; row: GSCPageData | null }[];
 }
 
 /**
@@ -203,6 +210,42 @@ async function fetchTopPages(
   );
 }
 
+/**
+ * Read one page by exact URL. topPages is the top 15 by clicks, so a page with
+ * many impressions and few clicks (a page stuck on page 3-5) drops in and out
+ * of it day to day. This asks for the page directly so its series is unbroken.
+ */
+async function fetchPageByUrl(
+  siteUrl: string,
+  token: string,
+  days: number,
+  pageUrl: string
+): Promise<GSCPageData | null> {
+  const range = dateRange(days);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: any = await querySearchAnalytics(siteUrl, token, {
+    startDate: range.start,
+    endDate: range.end,
+    dimensions: ["page"],
+    dimensionFilterGroups: [
+      { filters: [{ dimension: "page", operator: "equals", expression: pageUrl }] },
+    ],
+    rowLimit: 1,
+    type: "web",
+  });
+
+  const row = (data.rows || [])[0];
+  if (!row) return null;
+  return {
+    page: row.keys?.[0] || pageUrl,
+    clicks: row.clicks || 0,
+    impressions: row.impressions || 0,
+    ctr: row.ctr || 0,
+    position: row.position || 0,
+  };
+}
+
 async function fetchDeviceBreakdown(
   siteUrl: string,
   token: string,
@@ -248,7 +291,8 @@ function toDailyAverage(metrics: GSCMetrics, days: number): GSCMetrics {
  * made tracking two properties through a domain migration impossible.
  */
 export async function fetchGSCReport(
-  siteUrlArg?: string
+  siteUrlArg?: string,
+  options: { watchPages?: string[] } = {}
 ): Promise<GSCReport> {
   const siteUrl = siteUrlArg ?? process.env.GSC_SITE_URL;
   if (!siteUrl) {
@@ -270,6 +314,7 @@ export async function fetchGSCReport(
       ninetyDayQueries,
       sevenDayPages,
       devices,
+      watchedRows,
     ] = await Promise.all([
       fetchPeriodMetrics(siteUrl, token, 7),
       fetchPeriodMetrics(siteUrl, token, 90),
@@ -277,6 +322,11 @@ export async function fetchGSCReport(
       fetchTopQueries(siteUrl, token, 90),
       fetchTopPages(siteUrl, token, 7),
       fetchDeviceBreakdown(siteUrl, token, 7),
+      Promise.all(
+        (options.watchPages ?? []).map((page) =>
+          fetchPageByUrl(siteUrl, token, 7, page)
+        )
+      ),
     ]);
 
     const zero: GSCMetrics = { clicks: 0, impressions: 0, ctr: 0, position: 0 };
@@ -291,6 +341,14 @@ export async function fetchGSCReport(
         topQueries: sevenDayQueries,
         topPages: sevenDayPages,
         devices,
+        ...(options.watchPages?.length
+          ? {
+              watchedPages: options.watchPages.map((page, i) => ({
+                page,
+                row: watchedRows[i],
+              })),
+            }
+          : {}),
       },
       ninetyDay: {
         hasData: ninetyDayMetrics.hasData,

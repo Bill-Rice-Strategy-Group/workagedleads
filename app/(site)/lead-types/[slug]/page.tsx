@@ -12,7 +12,12 @@ import { CtaBanner } from "@/components/cta-banner";
 import { InlineTextCta } from "@/components/inline-text-cta";
 import { HeroAffiliateDoor } from "@/components/hero-affiliate-door";
 import { storeCategoryPath } from "@/lib/affiliate";
-import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/json-ld";
+import {
+  JsonLd,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  speakableWebPageJsonLd,
+} from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { LEAD_TYPES } from "@/data/lead-types";
@@ -97,6 +102,13 @@ export default async function LeadTypePage({ params }: Props) {
         Found 2026-09-09 while planning the operator-guide tier.
       */}
       {!leadType?.body && data?.faqs && <JsonLd data={faqJsonLd(data.faqs)} />}
+      <JsonLd
+        data={speakableWebPageJsonLd({
+          name: `Aged ${title}`,
+          url: `${baseUrl}/lead-types/${slug}`,
+          cssSelector: [".speakable-answer"],
+        })}
+      />
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-zinc-900 to-blue-950 py-16">
@@ -115,7 +127,7 @@ export default async function LeadTypePage({ params }: Props) {
               <h1 className="mt-4 text-4xl font-bold text-white sm:text-5xl">
                 Aged {title}
               </h1>
-              <p className="mt-4 text-lg text-zinc-300">{description}</p>
+              <p className="speakable-answer mt-4 text-lg text-zinc-300">{description}</p>
               {(leadType?.averageCostPerLead || data?.costRange) && (
                 <p className="mt-3 text-sm text-zinc-400">
                   Average cost:{" "}

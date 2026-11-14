@@ -26,6 +26,13 @@ export interface GscPropertyConfig {
    * genuinely silent week. Knowing when we started asking can.
    */
   verifiedOn?: string;
+  /**
+   * Full page URLs recorded in every snapshot whatever their rank, so a page
+   * whose movement answers a specific question has an unbroken daily series.
+   * topPages alone cannot do this: it keeps the top 10 by clicks, and a page
+   * stuck deep with few clicks falls out of it for days at a time.
+   */
+  watchPages?: string[];
 }
 
 /** Days after verification during which an all-zero week means nothing. */
@@ -69,6 +76,11 @@ export const GSC_PROPERTIES: GscPropertyConfig[] = [
     gscSiteUrl: "sc-domain:workagedleads.com",
     label: "Work Aged Leads",
     verifiedOn: "2026-08-03",
+    // The page whose movement says whether the consolidation moved rankings:
+    // ~36% of the merged site's pre-cutover impressions (BACKLOG 2026-08-05).
+    // Between 2026-10-01 and 11-14 it was missing from topPages on 25 of 45
+    // days, because it ranks ~47 and earns few clicks.
+    watchPages: ["https://workagedleads.com/lead-types/life-insurance-leads"],
   },
 ];
 

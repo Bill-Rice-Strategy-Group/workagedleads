@@ -141,6 +141,16 @@ export default async function FlagshipThankYouPage({ params }: PageProps) {
                   <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
                     About 30 minutes. Tells you whether aged-lead economics work for your specific product.
                   </p>
+                  {/* The pipeline calculator is the site's best on-site
+                      converter (BACKLOG P1, 2026-06-13/19) and does the same
+                      work as Worksheet 1 in seconds — so it belongs here, at
+                      the moment a new subscriber is about to run the numbers. */}
+                  <Link
+                    href="/calculators/pipeline-calculator"
+                    className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                  >
+                    Run your numbers in the Pipeline Volume Calculator →
+                  </Link>
                 </div>
               </li>
               <li className="flex items-start gap-4">

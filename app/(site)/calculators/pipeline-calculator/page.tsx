@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CalculatorUseTracker } from "@/components/calculators/calculator-use-tracker";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PipelineCalculator } from "@/components/calculators/pipeline-calculator";
@@ -45,9 +46,11 @@ export default function PipelineCalculatorPage() {
             Work backwards from your revenue goal. Enter your target monthly revenue, average deal value, and conversion metrics to see exactly how many leads you need to buy, how many dials you need to make, and what it will cost.
           </p>
 
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800" />}>
-            <PipelineCalculator />
-          </Suspense>
+          <CalculatorUseTracker calculator="pipeline-calculator">
+            <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800" />}>
+              <PipelineCalculator />
+            </Suspense>
+          </CalculatorUseTracker>
 
           <div className="mt-16 space-y-8">
             <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">How to Use This Calculator</h2>

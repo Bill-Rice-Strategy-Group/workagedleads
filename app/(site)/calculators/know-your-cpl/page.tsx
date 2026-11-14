@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CalculatorUseTracker } from "@/components/calculators/calculator-use-tracker";
 import { Suspense } from "react";
 import { KnowYourCplCalculator } from "@/components/calculators/know-your-cpl-calculator";
 import { CtaBanner } from "@/components/cta-banner";
@@ -76,15 +77,17 @@ export default function KnowYourCplPage() {
             </p>
           </div>
 
-          <Suspense
-            fallback={
-              <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-12 text-center dark:border-zinc-800 dark:bg-zinc-900">
-                <p className="text-zinc-500">Loading calculator...</p>
-              </div>
-            }
-          >
-            <KnowYourCplCalculator />
-          </Suspense>
+          <CalculatorUseTracker calculator="know-your-cpl">
+            <Suspense
+              fallback={
+                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-12 text-center dark:border-zinc-800 dark:bg-zinc-900">
+                  <p className="text-zinc-500">Loading calculator...</p>
+                </div>
+              }
+            >
+              <KnowYourCplCalculator />
+            </Suspense>
+          </CalculatorUseTracker>
         </div>
       </section>
 

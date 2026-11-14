@@ -225,3 +225,31 @@ test("trimming retains N dates, keeping every property's row for them", () => {
     "2026-08-10",
   ]);
 });
+
+test("watched pages are recorded even when absent from topPages", () => {
+  const base = reportWithData(5, 500);
+  const report: GSCReport = {
+    ...base,
+    sevenDay: {
+      ...base.sevenDay,
+      watchedPages: [
+        {
+          page: "https://x/watched",
+          row: { page: "https://x/watched", clicks: 1, impressions: 300, ctr: 0.00333, position: 47.871 },
+        },
+        { page: "https://x/silent", row: null },
+      ],
+    },
+  };
+  const { trend } = appendGscSnapshot(null, report, "2026-11-15", "workagedleads");
+  const row = trend.snapshots[0];
+  assert.deepEqual(row.watchedPages, [
+    { page: "https://x/watched", row: { clicks: 1, impressions: 300, ctr: 0.0033, position: 47.87 } },
+    { page: "https://x/silent", row: null },
+  ]);
+});
+
+test("a property without watchPages writes no watchedPages key", () => {
+  const { trend } = appendGscSnapshot(null, reportWithData(5, 500), "2026-11-15", "workagedleads");
+  assert.equal("watchedPages" in trend.snapshots[0], false);
+});
