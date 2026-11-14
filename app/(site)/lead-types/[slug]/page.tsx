@@ -16,7 +16,8 @@ import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/json-ld";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { LEAD_TYPES } from "@/data/lead-types";
-import { verticalForLeadType } from "@/data/lead-type-vertical-map";
+import { verticalForLeadType, RELATED_LEAD_TYPES } from "@/data/lead-type-vertical-map";
+import { RelatedLinks } from "@/components/related-links";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://workagedleads.com";
 
@@ -403,6 +404,21 @@ export default async function LeadTypePage({ params }: Props) {
           </section>
         </>
       )}
+
+      {/* Sibling lead-type guides — crawlable contextual links within a vertical family */}
+      <RelatedLinks
+        title="Related lead types"
+        links={(RELATED_LEAD_TYPES[slug] || []).map((s) => {
+          const sibling = LEAD_TYPES[s];
+          if (!sibling) return null;
+          return {
+            href: `/lead-types/${s}`,
+            label: `Aged ${sibling.title}`,
+            // First sentence only: a complete thought, never a mid-word cut.
+            description: sibling.heroDescription.split(/(?<=[.!?])\s/)[0],
+          };
+        })}
+      />
 
       {/* Related Posts */}
       {leadType?.relatedPosts && leadType.relatedPosts.length > 0 && (
