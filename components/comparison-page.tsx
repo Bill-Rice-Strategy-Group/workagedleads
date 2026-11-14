@@ -4,7 +4,12 @@ import { CiteThisButton } from "@/components/cite-this-button";
 import { KeyTakeawayBox } from "@/components/key-takeaway-box";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { RelatedLinks, type RelatedLink } from "@/components/related-links";
-import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/json-ld";
+import {
+  JsonLd,
+  breadcrumbJsonLd,
+  faqJsonLd,
+  speakableWebPageJsonLd,
+} from "@/components/json-ld";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://workagedleads.com";
 
@@ -76,6 +81,13 @@ export function ComparisonPage({
         data={breadcrumbJsonLd([{ name: "Home", url: baseUrl }, ...breadcrumb])}
       />
       {faqs.length > 0 && <JsonLd data={faqJsonLd(faqs)} />}
+      <JsonLd
+        data={speakableWebPageJsonLd({
+          name: title,
+          url: breadcrumb[breadcrumb.length - 1]?.url ?? baseUrl,
+          cssSelector: [".prose-wrapper", ".key-takeaway-box"],
+        })}
+      />
 
       <section className="bg-white py-12 dark:bg-zinc-950">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

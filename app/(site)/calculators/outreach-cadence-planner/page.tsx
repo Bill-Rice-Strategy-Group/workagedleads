@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { CalculatorUseTracker } from "@/components/calculators/calculator-use-tracker";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { OutreachCadencePlanner } from "@/components/calculators/outreach-cadence-planner";
@@ -45,9 +46,11 @@ export default function OutreachCadencePlannerPage() {
             Map out your multi-channel follow-up sequence for aged leads. Choose your channels, set your capacity, and get a day-by-day activity plan with time estimates so you know exactly what your daily workload looks like.
           </p>
 
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800" />}>
-            <OutreachCadencePlanner />
-          </Suspense>
+          <CalculatorUseTracker calculator="outreach-cadence-planner">
+            <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800" />}>
+              <OutreachCadencePlanner />
+            </Suspense>
+          </CalculatorUseTracker>
 
           <div className="mt-16 space-y-8">
             <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">How to Use This Calculator</h2>

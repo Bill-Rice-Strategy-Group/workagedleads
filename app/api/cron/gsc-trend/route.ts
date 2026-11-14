@@ -52,7 +52,9 @@ export async function GET(request: Request) {
       warmup: inWarmup(prop, reportDate),
     };
     try {
-      const gsc = await fetchGSCReport(prop.gscSiteUrl);
+      const gsc = await fetchGSCReport(prop.gscSiteUrl, {
+        watchPages: prop.watchPages,
+      });
       if (gsc.available) {
         results.push({ ...base, gsc });
       } else {

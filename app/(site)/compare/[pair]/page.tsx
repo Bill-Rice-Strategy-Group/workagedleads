@@ -5,7 +5,11 @@ import { ComparisonTable } from "@/components/comparison-table";
 import { CtaBanner } from "@/components/cta-banner";
 import { HeroAffiliateDoor } from "@/components/hero-affiliate-door";
 import { CiteThisButton } from "@/components/cite-this-button";
-import { JsonLd, breadcrumbJsonLd } from "@/components/json-ld";
+import {
+  JsonLd,
+  breadcrumbJsonLd,
+  speakableWebPageJsonLd,
+} from "@/components/json-ld";
 import { getProvider, getProviderPairs } from "@/data/providers";
 
 /**
@@ -143,6 +147,13 @@ export default async function ComparePage({
           },
         ])}
       />
+      <JsonLd
+        data={speakableWebPageJsonLd({
+          name: `${providerA.name} vs ${providerB.name}`,
+          url: `${baseUrl}/compare/${slugA}-vs-${slugB}`,
+          cssSelector: [".speakable-answer"],
+        })}
+      />
 
       <section className="bg-white py-12 dark:bg-zinc-950">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -176,7 +187,7 @@ export default async function ComparePage({
           <ComparisonTable providerA={providerA} providerB={providerB} />
 
           {/* Recommendation */}
-          <div className="mt-10 rounded-xl border border-blue-200 bg-blue-50 p-6 dark:border-blue-800 dark:bg-blue-950/30">
+          <div className="speakable-answer mt-10 rounded-xl border border-blue-200 bg-blue-50 p-6 dark:border-blue-800 dark:bg-blue-950/30">
             <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
               Our Recommendation
             </h3>

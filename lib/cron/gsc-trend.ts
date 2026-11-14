@@ -36,6 +36,15 @@ export interface GscTrendQuery {
   position: number;
 }
 
+/**
+ * A page recorded by exact URL. `row: null` means Search Console had no row
+ * for it in the window (no impressions) — measured, not missing.
+ */
+export interface GscTrendWatchedPage {
+  page: string;
+  row: Omit<GscTrendPage, "page"> | null;
+}
+
 /** Stable join key for a property, so a row survives the site URL changing. */
 export type GscPropertyKey = "agedleadsales" | "workagedleads" | "howtoworkleads";
 
@@ -63,6 +72,8 @@ export interface GscTrendSnapshot {
   rolling7d: GscTrendMetrics | null;
   topPages: GscTrendPage[];
   topQueries: GscTrendQuery[];
+  /** Present only for properties configured with watchPages. */
+  watchedPages?: GscTrendWatchedPage[];
 }
 
 export interface GscTrend {
@@ -161,6 +172,21 @@ function buildSnapshot(
       ctr: round(q.ctr),
       position: round(q.position, 2),
     })),
+    ...(gsc.sevenDay.watchedPages
+      ? {
+          watchedPages: gsc.sevenDay.watchedPages.map((w) => ({
+            page: w.page,
+            row: w.row
+              ? {
+                  clicks: w.row.clicks || 0,
+                  impressions: w.row.impressions || 0,
+                  ctr: round(w.row.ctr),
+                  position: round(w.row.position, 2),
+                }
+              : null,
+          })),
+        }
+      : {}),
   };
 }
 

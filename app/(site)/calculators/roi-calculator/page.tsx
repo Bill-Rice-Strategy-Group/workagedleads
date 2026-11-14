@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CalculatorUseTracker } from "@/components/calculators/calculator-use-tracker";
 import { Suspense } from "react";
 import Link from "next/link";
 import { RoiCalculator } from "@/components/calculators/roi-calculator";
@@ -100,9 +101,11 @@ export default function RoiCalculatorPage() {
           </p>
 
           {/* The Calculator */}
-          <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800" />}>
-            <RoiCalculator />
-          </Suspense>
+          <CalculatorUseTracker calculator="roi-calculator">
+            <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800" />}>
+              <RoiCalculator />
+            </Suspense>
+          </CalculatorUseTracker>
 
           {/* Educational Content */}
           <div className="mt-16 space-y-8">

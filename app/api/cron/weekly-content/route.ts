@@ -9,6 +9,7 @@ import {
   publishArticle,
 } from "@/lib/cron/sanity-publish";
 import { generateAndAttachFeaturedImage } from "@/lib/cron/featured-image";
+import { dedupeBriefs, fetchOpenPrTitles } from "@/lib/cron/content-dedupe";
 import { commitFilesToGitHub } from "@/lib/cron/git-commit";
 import { recordCronRun } from "@/lib/cron/heartbeat";
 import { sendWeeklyReport } from "@/lib/cron/notify";
@@ -128,6 +129,28 @@ export async function GET(request: Request) {
     } catch (err) {
       fatalError = `Content planning failed: ${err instanceof Error ? err.message : String(err)}`;
       console.error(fatalError);
+    }
+
+    // Dedupe gate — BEFORE anything is written. Fails closed: if open PRs
+    // cannot be read, nothing is drafted this run. See lib/cron/content-dedupe.ts.
+    if (briefs.length > 0) {
+      try {
+        const openPrTitles = await fetchOpenPrTitles();
+        const { kept, rejected } = dedupeBriefs(briefs, existingPosts, openPrTitles);
+        for (const r of rejected) {
+          articlesSkipped.push({
+            title: r.brief.title,
+            slug: r.brief.slug,
+            reason: `Dedupe gate: ${r.reason}`,
+          });
+          console.warn(`[Dedupe] Rejected "${r.brief.title}": ${r.reason}`);
+        }
+        briefs = kept;
+      } catch (err) {
+        fatalError = `Dedupe gate could not run: ${err instanceof Error ? err.message : String(err)}`;
+        console.error(fatalError);
+        briefs = [];
+      }
     }
 
     if (briefs.length > 0) {
