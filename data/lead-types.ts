@@ -1428,9 +1428,9 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
     icon: "🏥",
     heroDescription:
       "Aged Medicare leads connect you with seniors exploring Medicare supplement plans, Medicare Advantage, and Part D options — a growing market with high demand.",
-    metaTitle: "Aged Medicare Leads – Affordable Medicare Supplement Leads",
+    metaTitle: "Aged Medicare Leads: What They Cost and How to Work Them",
     metaDescription:
-      "Buy aged Medicare leads \u2014 seniors exploring Supplement, Advantage and Part D. A fraction of real-time cost, with the CMS rules that apply.",
+      "Aged Medicare leads are seniors who asked about Medigap, Medicare Advantage or Part D 30 to 365 days ago. What they cost, when to work them, and the CMS rules.",
     primaryKeyword: "aged Medicare leads",
     secondaryKeywords: [
       "buy Medicare leads",
@@ -1456,9 +1456,9 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
     ],
     sections: {
       whatAre:
-        "Aged Medicare leads are consumer records from seniors who previously requested information about Medicare supplement plans (Medigap), Medicare Advantage plans, or Part D prescription drug coverage. These individuals are either approaching Medicare eligibility (turning 65), already on Medicare and looking for better coverage options, or in a special enrollment period due to a qualifying life event. Medicare is a high-demand, recurring market — with 10,000+ Americans turning 65 every day, the pipeline is constantly refreshing.",
+        "Aged Medicare leads are records of seniors who asked about Medicare Supplement (Medigap), Medicare Advantage or Part D drug coverage 30 to 365 days ago and are now sold at a fraction of the real-time price. These individuals are either approaching Medicare eligibility (turning 65), already on Medicare and looking for better coverage options, or in a special enrollment period due to a qualifying life event. Because most of them can only switch plans during an enrollment window, you work them as a year-round relationship rather than a one-call close. The pipeline keeps refreshing: the U.S. Census Bureau reports that about 10,000 baby boomers a day have been turning 65 since 2011, and all of them will be 65 or older by 2030.",
       whyUse:
-        "Medicare enrollment isn't a one-time event. Open Enrollment happens every year (October 15 - December 7), and Special Enrollment Periods occur throughout the year due to life changes. A senior who inquired about Medicare coverage 60-180 days ago may now be in an enrollment period, dissatisfied with their current plan, or experiencing new health needs that require different coverage. Real-time Medicare leads cost $15-$40+ each during enrollment season. Aged leads cost $0.50-$3, allowing you to build relationships year-round and be their agent when enrollment opens.",
+        "Medicare enrollment isn't a one-time event. The Annual Enrollment Period runs every year from October 15 to December 7, and Special Enrollment Periods occur throughout the year due to life changes. A senior who inquired about Medicare coverage 60-180 days ago may now be in an enrollment period, dissatisfied with their current plan, or experiencing new health needs that require different coverage. Real-time Medicare leads cost $15-$40+ each during enrollment season. Aged leads cost $0.50-$3, allowing you to build relationships year-round and be their agent when enrollment opens.",
       howToWork:
         "Medicare leads require product knowledge and trust. Seniors are bombarded with Medicare mailers and calls — your differentiator is being helpful, knowledgeable, and patient. Focus on understanding their current coverage, medications, and doctors before recommending a plan. Use the Annual Enrollment Period (AEP) and Open Enrollment Period (OEP) as natural conversation starters. Work your aged leads year-round to build relationships, then convert during enrollment windows when they can actually switch plans.",
       script: {
@@ -1491,7 +1491,7 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
     deepDive: [
       {
         heading: "Medicare's Enrollment Calendar: Why Aged Leads Are a Year-Round Relationship Play",
-        body: "Medicare is unlike any other aged vertical because conversion is gated by a calendar. A senior can want to switch plans in July, but in most cases they can't actually enroll until a qualifying window opens. That single fact reframes how you work aged Medicare leads: the goal is not to close on the first call, it's to be the trusted agent already in the relationship when the senior's enrollment window arrives.\n\nThe windows that matter: the Annual Enrollment Period (October 15 to December 7), when anyone can change Medicare Advantage and Part D coverage; the Medicare Advantage Open Enrollment Period (January 1 to March 31) for those already in an MA plan; Special Enrollment Periods triggered by life events like a move, a loss of employer coverage, or a plan leaving the market; and the Initial Enrollment Period around a person's 65th birthday. Roughly 10,000 Americans age into Medicare every day, so the aging-in pipeline never stops refreshing.\n\nThis is why aged Medicare inventory is a relationship asset rather than a one-call-close list. You buy cheap, stay in helpful contact year-round, and convert in volume when a window opens. An agent who has been quietly useful to a senior for six months wins the AEP conversation against the wall of mailers and cold calls every other agent unleashes in October.",
+        body: "Medicare is unlike any other aged vertical because conversion is gated by a calendar. A senior can want to switch plans in July, but in most cases they can't actually enroll until a qualifying window opens. That single fact reframes how you work aged Medicare leads: the goal is not to close on the first call, it's to be the trusted agent already in the relationship when the senior's enrollment window arrives.\n\nThe windows that matter: the Annual Enrollment Period (October 15 to December 7), when anyone can change Medicare Advantage and Part D coverage; the Medicare Advantage Open Enrollment Period (January 1 to March 31) for those already in an MA plan; Special Enrollment Periods triggered by life events like a move, a loss of employer coverage, or a plan leaving the market; and the Initial Enrollment Period around a person's 65th birthday. With about 10,000 baby boomers a day turning 65 through 2030 (U.S. Census Bureau), the aging-in pipeline keeps refreshing.\n\nThis is why aged Medicare inventory is a relationship asset rather than a one-call-close list. You buy cheap, stay in helpful contact year-round, and convert in volume when a window opens. An agent who has been quietly useful to a senior for six months wins the AEP conversation against the wall of mailers and cold calls every other agent unleashes in October.",
       },
       {
         heading: "The Real Math: Cost Per Enrolled Member and the Renewal Annuity",
@@ -1518,7 +1518,7 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
       {
         question: "What is an aged Medicare lead?",
         answer:
-          "An aged Medicare lead is a consumer record from a senior who previously requested information about Medicare supplement (Medigap), Medicare Advantage, or Part D prescription drug plans. These leads are 30-180+ days old.",
+          "An aged Medicare lead is a consumer record from a senior who previously requested information about Medicare supplement (Medigap), Medicare Advantage, or Part D prescription drug plans, typically 30 to 365 days ago. Because the original inquiry is old, its permission to contact may have lapsed under CMS rules, so verify consent before you call.",
       },
       {
         question: "When is the best time to work aged Medicare leads?",

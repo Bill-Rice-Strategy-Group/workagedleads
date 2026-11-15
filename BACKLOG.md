@@ -31,6 +31,27 @@
   bps tables), solar sales commission, and employee pay plans. The "Real Case Study" framing in
   `life-insurance-aged-lead-roi` presents an illustrative 4-of-17 example as real.
 
+## 2026-11-15 — "aged medicare leads" (pos 16.6) → `/lead-types/medicare-leads`
+<!-- added 2026-11-15 session -->
+- [x] **Title/meta broadened from "Medicare Supplement" to what the page covers.** RESOLVED 2026-11-15.
+  `metaTitle` "Aged Medicare Leads – Affordable Medicare Supplement Leads" → "Aged Medicare Leads: What They
+  Cost and How to Work Them"; `metaDescription` now opens with the definition (Medigap, MA or Part D,
+  30 to 365 days ago). H1 unchanged ("Aged Medicare Leads"); Sanity `seo.metaTitle` is null so the code
+  title is live.
+- [x] **Direct answer + consistency.** RESOLVED 2026-11-15. "What Are" section opens with a one-sentence
+  definition and the year-round point; FAQ "What is an aged Medicare lead?" said 30-180+ days while the
+  hero says 30 to 365 (aligned, plus the stale-consent caveat). "Open Enrollment (Oct 15 - Dec 7)" renamed
+  to the Annual Enrollment Period. The unsourced "10,000+ turning 65 every day" is now attributed to the
+  U.S. Census Bureau (about 10,000 boomers a day since 2011, all 65+ by 2030). No commission figures
+  touched; the CMS-cap figures from 2026-11-14 stand.
+- [x] **Internal links to the hub.** RESOLVED 2026-11-15 (Sanity): in-text links from
+  `/blog/medicare-aep-aged-lead-strategy`, `/blog/medicare-compliance-aged-leads-cms-rules`,
+  `/blog/year-round-medicare-prospecting-aged-leads-beyond-aep`; `/blog/how-to-work-medicare-leads`
+  repointed from the folded `/buying-leads/buy-medicare-leads` to the hub (one redirect hop fewer).
+- [ ] **`/blog/how-to-work-medicare-leads` still opens "Ten thousand Americans turn 65 every single day"
+  and cites contact-rate ranges (18-30% vs 30-50%) with no source.** Attribute the first to the Census
+  Bureau; source or cut the second. **S**
+
 ## 2026-11-14 — Close-to-page-one queries: direct answers, titles, internal links
 <!-- added 2026-11-14 session — positions from Bill's Search Console read; current 7d page data from data/gsc-trend.json (2026-11-14 snapshot) -->
 
