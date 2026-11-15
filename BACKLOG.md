@@ -67,9 +67,15 @@ trend snapshot (`/lead-types/iul-leads` 13.1, `/lead-types/insurance-leads` 46.2
   "Related lead types" block on every lead-type guide, so the insurance family links to itself in body
   content for the first time. `/lead-types/life-insurance-leads` now gets contextual links from
   insurance, IUL, final expense, annuity and health insurance. Off-page links remain the open part.
-- [ ] **Not done, noted:** `/blog/iul-leads-financial-advisors-playbook` still quotes a $22,500 401(k)
+- [x] **Not done, noted:** `/blog/iul-leads-financial-advisors-playbook` still quotes a $22,500 401(k)
   limit in an example script (2023 figure; IRS 2026 limit is $24,500) and commission/income ranges with no
   source. Worth a sourcing pass; out of scope for an internal-linking change.
+  RESOLVED 2026-11-15 (already done, closing): the published post now reads "$24,500/year", which
+  matches irs.gov ("401(k) limit increases to $24,500 for 2026"), and the commission block was
+  rewritten in the 2026-11-14 commission cleanup as an explicit assumption ("if your contract paid even
+  50%… run the same math with your own contract rate"). The remaining income/age ranges are a
+  prospect-profile heuristic, not a statistic. Heads-up: IRS has announced $25,500 for 2027, so the
+  script figure goes stale on 2027-01-01.
 
 
 ## 2026-08-18 — The consolidation is not failing. It is waiting on a crawl.
@@ -283,10 +289,15 @@ the cron. Fixed in *"fix(health-check): stop blaming the marketwatch cron"*: ret
 renamed to "Lead Price Index study", and the message now says plainly that a stale index is a
 publishing task. Verified against production Sanity — **all four checks pass, where one failed daily.**
 
-- [ ] **P2 [reliability] — `upsertPriceBenchmarks` and `getExistingBenchmarks` are unreachable.** Left
+- [x] **P2 [reliability] — `upsertPriceBenchmarks` and `getExistingBenchmarks` are unreachable.** Left
   in place rather than deleted, because removing the only benchmark-writing path is Bill's call. They
   are a footgun: wiring either back up republishes the LLM estimates that were removed on purpose.
   Either delete them or leave a refusal-guard at the top. Effort: S.
+  RESOLVED 2026-11-15: refusal-guard added (not deleted) in `lib/cron/marketwatch-publish.ts` — both
+  functions now throw "marketwatch benchmark synthesis is retired…" unless called with
+  `{ allowRetiredPath: true }`, and are marked `@deprecated`. Pinned by
+  `lib/cron/marketwatch-publish.test.ts` (refuses before touching Sanity). Verified: typecheck, 506/506
+  tests, `next build` green.
 - [ ] **P2 [content] — the Lead Price Index is due.** Last study 2026-06-01, covering 2026-03 → 2026-06
   (106 docs). Q3 has not been published. The new check goes red ~2026-09-09 if it still hasn't. This is
   the *real* version of the alert that has been firing all along, and it is a writing task, not a code
@@ -504,7 +515,7 @@ Result across all 329 pages: **0 broken destinations**, and deep links now land 
 pages also gained their first in-body affiliate CTA; their mid-page banner passes `buttonHref`, which
 sets `useAffiliate` false, so the only affiliate link had been the sitewide footer one.
 
-- [ ] **P2 [affiliate] — 47 of 154 posts have no `leadTypes` set** and therefore cannot deep-link;
+- [x] **P2 [affiliate] — 47 of 154 posts have no `leadTypes` set** and therefore cannot deep-link;
   they fall back to the catalogue. Tagging them is pure upside: no new writing, and it converts a
   generic landing into a buy page for the matching vertical. Effort: S.
   <!-- was 52; re-counted in Sanity 2026-08-13: 154 published posts, 107 tagged, 47 untagged. The 5
@@ -512,6 +523,13 @@ sets `useAffiliate` false, so the only affiliate link had been the sitewide foot
   untagged by decision). Note the remaining 47 are not all tag-able — a large share are
   vertical-agnostic (scripts, compliance, CRM, deliverability) with no correct buy page to point at.
   Count the genuinely-mappable subset before sizing this. -->
+  RESOLVED 2026-11-15 (no tagging needed): counted the mappable subset as asked. Of the 47 untagged
+  published posts, scanning each body for vertical terms, **none is single-vertical**: 43 are
+  vertical-agnostic (CRM reviews, compliance/TCPA, scoring, vendor management, scripts, provider
+  comparisons) or spread across mortgage/solar/insurance examples, and the 2 debt posts plus the debt
+  settlement post have no partner buy page (untagged by the 2026-08-13 decision). Tagging any of them
+  would route a multi-vertical reader to one vertical's buy page — the conversion leak
+  `lib/affiliate.ts` warns about. `/all-lead-types/` is the correct destination for all 47.
 
 **Destination set reviewed and confirmed correct by Bill, 2026-08-06.** Medicare and solar route to
 `/all-lead-types/` **by decision, not by gap** — Troy is not selling either vertical at the moment.
@@ -585,6 +603,17 @@ live — 0 of 329 pages now ship truncated metadata.
   to display limits, so whatever wrote them was "optimizing" length and cutting mid-word instead of
   writing to fit. Worth checking what else that generator emitted (H1s, excerpts, OG tags, schema
   fields) for the same pattern before trusting any of it. Effort: S.
+  RESOLVED 2026-11-15: audited all 155 published posts in Sanity (title/H1, excerpt, main-image alt,
+  `seo.metaTitle`, `seo.metaDescription`) for trailing ellipses, unterminated descriptions and missing
+  values. Zero truncations remain. The one defect found: **7 imported `how-to-work-*` posts had no
+  `excerpt`** (a required field — bank-statement-loan, DSCR, HELOC, home-improvement, Medicare, non-QM,
+  refinance), so their listing cards and Article JSON-LD `description` were empty. Wrote each excerpt
+  (<200 chars) from the post's own intro, no new claims; published. Verified live on
+  `/blog/how-to-work-heloc-leads` (excerpt text renders, HTTP 200). OG/Twitter tags derive from
+  `seo.metaDescription` via `fitMetaDescription`, so they were already capped. Side note, not acted
+  on: 46 posts carry a legacy `openInNewTab` key on link annotations that the `link` schema does not
+  declare (Studio shows it as an unknown field; rendering ignores it — external links already open in
+  a new tab).
 
 ---
 
