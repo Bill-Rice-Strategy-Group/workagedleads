@@ -52,13 +52,30 @@ export async function getProviderProfiles(): Promise<
 }
 
 /**
+ * Retired write path. The Lead Price Index is a hand-published quarterly study
+ * (`npm run price-index:import`), and marketwatch stopped synthesizing
+ * benchmarks in 2026-06 because single-provider LLM estimates were polluting the
+ * public index. Nothing calls this or `getExistingBenchmarks`. They are kept, not
+ * deleted, because removing the only automated benchmark writer is Bill's call
+ * (BACKLOG 2026-08-13). The guard makes a careless re-wire fail loudly instead of
+ * quietly republishing the estimates that were removed on purpose.
+ */
+const RETIRED_BENCHMARK_PATH =
+  "marketwatch benchmark synthesis is retired: the Lead Price Index is hand-published " +
+  "(npm run price-index:import). Re-enabling this path needs Bill's sign-off; see BACKLOG.md 2026-08-13.";
+
+/**
  * Upsert price benchmark documents into Sanity.
  * Creates new documents for the current month.
+ *
+ * @deprecated Retired. Throws unless `allowRetiredPath` is set deliberately.
  */
 export async function upsertPriceBenchmarks(
   benchmarks: BenchmarkEstimate[],
-  month: string
+  month: string,
+  { allowRetiredPath = false }: { allowRetiredPath?: boolean } = {}
 ): Promise<number> {
+  if (!allowRetiredPath) throw new Error(RETIRED_BENCHMARK_PATH);
   if (benchmarks.length === 0) return 0;
 
   const client = getSanityWriteClient();
@@ -185,8 +202,13 @@ export async function updateProviderVerifiedDate(
 
 /**
  * Get existing benchmark data for comparison.
+ *
+ * @deprecated Retired with `upsertPriceBenchmarks`; it only existed to feed it.
  */
-export async function getExistingBenchmarks(): Promise<BenchmarkEstimate[]> {
+export async function getExistingBenchmarks({
+  allowRetiredPath = false,
+}: { allowRetiredPath?: boolean } = {}): Promise<BenchmarkEstimate[]> {
+  if (!allowRetiredPath) throw new Error(RETIRED_BENCHMARK_PATH);
   const client = getSanityWriteClient();
 
   const data: {
