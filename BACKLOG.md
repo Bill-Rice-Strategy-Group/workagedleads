@@ -757,6 +757,10 @@ Query → pages, same GSC pull. Every one of these is one query split across mul
   validation (required `excerpt` is empty on that post, pre-existing); draft discarded, live page
   unchanged. Needs an approved excerpt, then re-apply. The `/aged-leads` title decision and the
   remaining canonical-target picks also stay open.
+  2026-11-15: Bill approved an excerpt; it and the 7 link fixes in block `kgrmz1m3d` are published
+  and verified live (life, final expense ×2, Medicare, auto, annuity → `/lead-types/*`; "aged
+  insurance leads" guide link → `/lead-types/insurance-leads`). Mortgage-protection link left as-is
+  (not in the approved list). Still open: the `/aged-leads` title decision and remaining canonical picks.
 
 ### Defect — apex/www host split on a ranking page
 
