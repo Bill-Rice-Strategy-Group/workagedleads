@@ -100,7 +100,7 @@ leads, the store is a partner not us.
 
 Blog posts live in Sanity, which works in Safari.
 
-1. Go to **workagedleads.com/studio** and sign in with Google as **bill@billrice.com**.
+1. Go to **workagedleads.com/studio** and sign in with Google as **bill@billricestrategy.com**.
 2. Open the post, make the change, tap **Publish**.
 3. Wait five minutes, then load the page **twice**. The first load after an edit can still show the
    old copy while the cache refreshes; the second shows the new one.
