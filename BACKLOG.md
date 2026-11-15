@@ -761,6 +761,10 @@ Query → pages, same GSC pull. Every one of these is one query split across mul
   and verified live (life, final expense ×2, Medicare, auto, annuity → `/lead-types/*`; "aged
   insurance leads" guide link → `/lead-types/insurance-leads`). Mortgage-protection link left as-is
   (not in the approved list). Still open: the `/aged-leads` title decision and remaining canonical picks.
+  2026-11-15: retitled toward the how-to intent so it stops competing with `/` for `aged leads`:
+  title "How to Buy, Work, and Convert Aged Leads: A Complete Guide", metaTitle "How to Buy and Work
+  Aged Leads: A Complete Guide" (slug unchanged). Re-check in GSC ~2026-12-01 that `aged leads`
+  consolidates on `/` and this page picks up how-to queries. Still open: remaining canonical picks.
 
 ### Defect — apex/www host split on a ranking page
 
