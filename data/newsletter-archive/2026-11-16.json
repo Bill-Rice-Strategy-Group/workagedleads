@@ -1,0 +1,30 @@
+{
+  "runDate": "2026-11-15T14:01:05.971Z",
+  "weekOf": "2026-11-16",
+  "sendDate": "2026-11-17",
+  "theme": "Channel Deep Dive",
+  "focusVertical": "topic-themed",
+  "calendarStatus": "Calendar: \"Channel Deep Dive\" for 2026-11-17. 7 issue(s) remain, through 2027-01-05.",
+  "calendarMatched": true,
+  "calendarRemaining": 7,
+  "subject": "70 dials, zero answers? Let email pick who you call",
+  "previewText": "Unknown-number fatigue and spam labels are hurting your connect rate. Here's the fix.",
+  "html": "2026-11-16.html",
+  "sent": false,
+  "priceGuard": {
+    "blocking": [],
+    "warnings": []
+  },
+  "featuredArticle": {
+    "title": "70 Dials a Day and Nobody Answers: Let Email Decide Who You Call",
+    "slug": "70-dials-nobody-answers-email-decides-who-you-call",
+    "spotlight": "When aged leads stop picking up, the usual advice is more dials at better times. The real culprits are unknown-number fatigue and a spam label on your own phone. This piece shows you how to check your number, how to let email decide who deserves a call, and how to build a shorter, calmer work week around it. It also covers the texting and compliance questions, so you don't have to guess."
+  },
+  "quickTips": [
+    "Track conversations per 100 dials, per number, every week",
+    "Send an email that asks one question a reader can answer in a few words",
+    "Sort Monday's list by what each lead did with your email"
+  ],
+  "industryInsight": "Most people no longer answer a number they don't know",
+  "errors": []
+}
