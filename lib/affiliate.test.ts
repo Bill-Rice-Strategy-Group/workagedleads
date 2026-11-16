@@ -5,6 +5,7 @@ import {
   storeCategoryPath,
   agedLeadLabel,
   isAffiliateDomain,
+  tagAffiliateHref,
 } from "./affiliate";
 
 describe("isAffiliateDomain", () => {
@@ -152,5 +153,47 @@ describe("affiliateUrl", () => {
     );
     assert.equal(u.pathname, "/health-insurance-leads/");
     assert.equal(u.searchParams.get("utm_source"), "workagedleads");
+  });
+});
+
+describe("tagAffiliateHref", () => {
+  test("tags a bare partner link pasted into a post body", () => {
+    const out = new URL(tagAffiliateHref("https://www.agedleadstore.com/", "blog-post", "body-link"));
+    assert.equal(out.hostname, "www.agedleadstore.com");
+    assert.equal(out.searchParams.get("utm_source"), "workagedleads");
+    assert.equal(out.searchParams.get("utm_medium"), "affiliate");
+    assert.equal(out.searchParams.get("utm_campaign"), "blog-post");
+    assert.equal(out.searchParams.get("utm_content"), "body-link");
+  });
+
+  test("overwrites another site's source but keeps the editor's campaign", () => {
+    const out = new URL(
+      tagAffiliateHref(
+        "https://agedleadstore.com/all-lead-types/?utm_source=howtoworkleads&utm_medium=blog&utm_campaign=close-crm-review",
+        "blog-post",
+        "body-link"
+      )
+    );
+    assert.equal(out.searchParams.get("utm_source"), "workagedleads");
+    assert.equal(out.searchParams.get("utm_medium"), "affiliate");
+    assert.equal(out.searchParams.get("utm_campaign"), "close-crm-review");
+    assert.equal(out.searchParams.get("utm_content"), "body-link");
+  });
+
+  test("leaves a fully tagged link's campaign and content alone", () => {
+    const href =
+      "https://agedleadstore.com/life-insurance-leads/?utm_source=workagedleads&utm_medium=affiliate&utm_campaign=blog-70-dials-nobody-answers&utm_content=body-weekly-restock";
+    assert.equal(tagAffiliateHref(href, "blog-post", "body-link"), href);
+  });
+
+  test("tags the storefront subdomain too", () => {
+    const out = new URL(tagAffiliateHref("https://store.agedleadstore.com/mortgage/leads", "blog-post", "body-link"));
+    assert.equal(out.searchParams.get("utm_source"), "workagedleads");
+  });
+
+  test("does not touch other hosts, relative links or junk", () => {
+    for (const h of ["https://datatoleads.com/", "/providers", "mailto:a@b.co", "not a url", "https://notagedleadstore.com/"]) {
+      assert.equal(tagAffiliateHref(h, "blog-post", "body-link"), h, h);
+    }
   });
 });

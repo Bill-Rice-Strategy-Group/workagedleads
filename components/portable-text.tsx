@@ -10,6 +10,7 @@ import {
   injectGlossaryLinks,
   type GlossaryEntry,
 } from "@/lib/glossary-linker";
+import { isAffiliateDomain, tagAffiliateHref } from "@/lib/affiliate";
 
 const MID_ARTICLE_CTAS = [
   {
@@ -154,7 +155,37 @@ export function buildHeadingIdMap(
   return map;
 }
 
-function buildComponents(headingIds?: Map<string, string>): PortableTextComponents {
+/**
+ * An editor-authored body link. Links to the affiliate partner get this site's
+ * UTM tags (see `tagAffiliateHref`) and `rel="nofollow sponsored"`, matching
+ * every component-built affiliate link. Every other link renders as before.
+ */
+function bodyLinkAttrs(href: string | undefined, campaign: string) {
+  if (!href) return { href };
+  const external = href.startsWith("http");
+  let affiliate = false;
+  if (external) {
+    try {
+      affiliate = isAffiliateDomain(new URL(href).hostname.toLowerCase());
+    } catch {
+      affiliate = false;
+    }
+  }
+  if (affiliate) {
+    return {
+      href: tagAffiliateHref(href, campaign, "body-link"),
+      target: "_blank",
+      rel: "nofollow sponsored noopener noreferrer",
+    };
+  }
+  return {
+    href,
+    target: external ? "_blank" : undefined,
+    rel: external ? "noopener noreferrer" : undefined,
+  };
+}
+
+function buildComponents(campaign: string, headingIds?: Map<string, string>): PortableTextComponents {
   return {
     block: {
       h1: ({ children }) => (
@@ -224,9 +255,7 @@ function buildComponents(headingIds?: Map<string, string>): PortableTextComponen
       ),
       link: ({ children, value }) => (
         <a
-          href={value?.href}
-          target={value?.href?.startsWith("http") ? "_blank" : undefined}
-          rel={value?.href?.startsWith("http") ? "noopener noreferrer" : undefined}
+          {...bodyLinkAttrs(value?.href, campaign)}
           className="text-blue-600 underline decoration-blue-600/30 transition-colors hover:text-blue-700 hover:decoration-blue-700/50 dark:text-blue-400 dark:decoration-blue-400/30"
         >
           {children}
@@ -393,7 +422,7 @@ export function PortableText({ value, campaign = "article", glossary, headingIds
       ? injectGlossaryLinks(value, glossary)
       : value;
 
-  const ptComponents = headingIds ? buildComponents(headingIds) : buildComponents();
+  const ptComponents = buildComponents(campaign, headingIds);
 
   if (!processedValue || processedValue.length < MIN_BLOCKS_FOR_CTAS) {
     return <PortableTextComponent components={ptComponents} value={processedValue} />;
