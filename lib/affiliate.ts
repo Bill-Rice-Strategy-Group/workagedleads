@@ -160,3 +160,38 @@ export function agedLeadLabel(leadType?: string | null): string {
     .join(" ");
   return `aged ${words} leads`;
 }
+
+/**
+ * Tag an editor-authored link to the partner with this site's UTM parameters.
+ *
+ * Added 2026-11-16. Sanity post bodies carried 72 hand-pasted links to
+ * agedleadstore.com across 74 posts, and 61 of them had no `utm_source` of ours:
+ * bare `https://www.agedleadstore.com/`, or parameters copied over from the
+ * retired howtoworkleads.com site. Affiliate credit is UTM-based (D16 in
+ * lib/utm.ts), so on the partner's side those clicks arrived as untagged and
+ * could not be attributed to this site or to the in-body placement.
+ *
+ * Rules:
+ *  - Not the partner's host → returned unchanged.
+ *  - `utm_source` and `utm_medium` are always set to ours, overwriting a legacy
+ *    or foreign source. A link that carries another site's source is the bug.
+ *  - `utm_campaign` and `utm_content` are kept when the editor set them (they
+ *    are deliberate, e.g. `blog-70-dials-nobody-answers` / `body-weekly-restock`)
+ *    and filled from the arguments when absent.
+ *  - Anything unparseable is returned unchanged rather than guessed at.
+ */
+export function tagAffiliateHref(href: string, campaign: string, content: string): string {
+  let url: URL;
+  try {
+    url = new URL(href);
+  } catch {
+    return href;
+  }
+  if (url.protocol !== "https:" && url.protocol !== "http:") return href;
+  if (!isAffiliateDomain(url.hostname.toLowerCase())) return href;
+  url.searchParams.set("utm_source", UTM_SOURCE);
+  url.searchParams.set("utm_medium", UTM_MEDIUM);
+  if (!url.searchParams.get("utm_campaign")) url.searchParams.set("utm_campaign", campaign);
+  if (!url.searchParams.get("utm_content")) url.searchParams.set("utm_content", content);
+  return url.toString();
+}

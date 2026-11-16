@@ -6,6 +6,40 @@
 
 ---
 
+## 2026-11-16 — "Affiliate clicks 11 vs 0.9" (portfolio report, 3.0 SD) and in-body link tagging
+<!-- added 2026-11-16 session — asked to find the source of the jump and extend the winning placement -->
+
+- [x] **Source of the jump: the tracking fix, not a new placement. RESOLVED 2026-11-16.** The portfolio
+  report counts the custom events `affiliate_click` + `partner_click` + `outbound_click` (basis "custom").
+  Those were silently dropped until PR #77 (2026-11-12). The report's 90-day total is 11 events
+  (0.856/week × 90/7), the same 11 as the current week (11-09 → 11-15), so every one arrived after
+  #77 shipped and the 90-day "baseline" is the period when the event could not fire. `generate_lead`
+  shows the identical shape (1 vs 0.08). No affiliate placement was added or changed after
+  2026-10-07 (git log over components/, the blog, lead-type, provider and home templates, and
+  `lib/affiliate.ts` / `lib/store-front.ts`), so there is no recent placement to credit. The 11 also
+  includes partner and non-affiliate outbound clicks, so it is not all paid clicks. Per-page attribution
+  was not available to this session (`/api/reports/outbound-clicks` needs the site's CRON_SECRET).
+  `affiliate_click` carries `link_location` = page path, so after ~2 weeks of clean data GA4 can answer
+  "which page" directly. Treat the report's affiliate figure as non-comparable until 2027-02-10
+  (90 days after #77).
+- [x] **The top landing pages already carry every affiliate placement type.** Live on
+  `/blog/how-to-work-aged-leads-the-complete-system-for-maximum-roi` (Firecrawl, 2026-11-16): header
+  store door, top `InlineTextCta` (storefront deep-link, life insurance), an in-body editor link, and the
+  bottom compact `CtaBanner`. The blog template renders the inline CTA and banner on every post; 74 posts
+  also have in-body partner links. `/lead-types/*` have hero door + inline CTA, `/providers` has the hero
+  door, and the homepage door was killed on measured revenue (ledger iteration 6). No new door was added:
+  the ledger has killed the add-a-door pattern on low-intent surfaces three times, and nothing here is new
+  evidence against that.
+- [x] **In-body partner links were untagged — fixed in code.** 61 of 72 hand-pasted agedleadstore.com
+  links in post bodies had no `utm_source=workagedleads` (bare URLs, or howtoworkleads.com parameters), so
+  the partner could not credit them to this site, and they lacked `rel="sponsored"`. `PortableText` now runs
+  partner links through `tagAffiliateHref` (`lib/affiliate.ts`): source/medium forced to ours, the
+  editor's campaign/content kept, otherwise `utm_campaign=<page campaign>` (`blog-post` on posts) and
+  `utm_content=body-link`; `rel="nofollow sponsored noopener noreferrer"`. Covers every post at render
+  time, with no Sanity edits. Store-side reads can now split `body-link` from `inline-text*` and `primary`.
+- [ ] **Follow-up (not done):** the top post links to the retired `howtoworkleads.com/lead-order` in its
+  body. Point it at a first-party page if Bill wants.
+
 ## 2026-11-14 — Unsourced insurance-commission claims
 <!-- added 2026-11-14 session — Bill asked for the cleanup; CMS figures from the CY2026 Agent and Broker Compensation memo (June 18, 2025) -->
 
