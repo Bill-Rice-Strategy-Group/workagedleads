@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { activeProperties } from "./gsc-properties";
 
 import {
   appendGscSnapshot,
@@ -252,4 +253,16 @@ test("watched pages are recorded even when absent from topPages", () => {
 test("a property without watchPages writes no watchedPages key", () => {
   const { trend } = appendGscSnapshot(null, reportWithData(5, 500), "2026-11-15", "workagedleads");
   assert.equal("watchedPages" in trend.snapshots[0], false);
+});
+
+test("only workagedleads.com is read after the 2026-11-16 retirement", () => {
+  assert.deepEqual(
+    activeProperties("2026-11-16").map((p) => p.key).sort(),
+    ["agedleadsales", "howtoworkleads", "workagedleads"],
+    "still read on the retirement day itself"
+  );
+  assert.deepEqual(
+    activeProperties("2026-11-17").map((p) => p.key),
+    ["workagedleads"]
+  );
 });
