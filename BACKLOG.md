@@ -370,8 +370,8 @@ publishing task. Verified against production Sanity — **all four checks pass, 
   `lib/price-trend-series.test.ts`) and both the page and the script call it; the brief's "What to
   re-price" section now names the aged cell per vertical instead of the latest month's (mostly
   real-time) cells. Also fixed: the no-trend panel always said "currently has none" because the page
-  passed it the emptied point list — it now shows the real trusted-month count. The "nine verticals"
-  figure is still repeated in `CLICK-LOOP.md`, `CONTENT-STRATEGY.md` and `WORK-PLAN.md`; treat
+  passed it the emptied point list — it now shows the real trusted-month count. `CLICK-LOOP.md` and
+  `WORK-PLAN.md` are corrected in place; `CONTENT-STRATEGY.md` still says "9 of 11" — treat
   `data/loop/price-index-q3-gap.md` as the current number.
 
 **What was already fixed, and got closed today rather than re-worked:** the truncated-metadata sweep
