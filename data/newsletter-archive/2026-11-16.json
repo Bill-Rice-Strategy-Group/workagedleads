@@ -10,7 +10,7 @@
   "subject": "70 dials, zero answers? Let email pick who you call",
   "previewText": "Unknown-number fatigue and spam labels are hurting your connect rate. Here's the fix.",
   "html": "2026-11-16.html",
-  "sent": false,
+  "sent": true,
   "priceGuard": {
     "blocking": [],
     "warnings": []
@@ -26,5 +26,8 @@
     "Sort Monday's list by what each lead did with your email"
   ],
   "industryInsight": "Most people no longer answer a number they don't know",
-  "errors": []
+  "errors": [],
+  "sentAt": "2026-11-17T13:00:22.585Z",
+  "broadcastId": "cbb53f49-664e-49a7-96eb-414c0b596f3d",
+  "sentBy": "cron"
 }
