@@ -358,6 +358,21 @@ publishing task. Verified against production Sanity — **all four checks pass, 
   the *real* version of the alert that has been firing all along, and it is a writing task, not a code
   one. Note `components/price-trend-chart` needs 3+ real months per vertical, so the longer this slips
   the more verticals silently drop their trend chart. Effort: M (human research).
+- [x] **P2 [data-integrity] — "9 verticals one month from a trend chart" was a counting error.**
+  (2026-11-17) `scripts/price-index-gap.ts` counted distinct months across *any* trust-passing cell,
+  real-time included. The page charts one aged series only (`31-85-days`/`86-180-days`, one
+  exclusivity + lead type, 3+ months with `providersSampled >= 2`). Caught when a 2-provider
+  `health-insurance / real-time / exclusive / 2026-11` benchmark made the brief say "has chart: yes"
+  while the live page still showed the no-trend panel (health's only trusted aged month is 2026-03).
+  Re-counted on the page's rule: **1 of 11 verticals charts (mca-business-loans), 7 are one aged month
+  away, 3 (auto, health, life) need two.** `life-insurance` was also wrongly listed as charting. The
+  rule now lives in `lib/price-trend-series.ts` (`selectTrendSeries`, pinned by
+  `lib/price-trend-series.test.ts`) and both the page and the script call it; the brief's "What to
+  re-price" section now names the aged cell per vertical instead of the latest month's (mostly
+  real-time) cells. Also fixed: the no-trend panel always said "currently has none" because the page
+  passed it the emptied point list — it now shows the real trusted-month count. `CLICK-LOOP.md` and
+  `WORK-PLAN.md` are corrected in place; `CONTENT-STRATEGY.md` still says "9 of 11" — treat
+  `data/loop/price-index-q3-gap.md` as the current number.
 
 **What was already fixed, and got closed today rather than re-worked:** the truncated-metadata sweep
 (re-counted: **0** of 154 published posts carry an ellipsis — closed by `a2b0b1c`, the backlog just

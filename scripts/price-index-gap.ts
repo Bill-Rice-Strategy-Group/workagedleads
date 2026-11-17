@@ -6,8 +6,12 @@
  * Nothing auto-publishes benchmarks and nothing in this script does either —
  * it produces the *research brief* that makes the human study tractable:
  * exactly which cells need re-pricing, which providers already showed a
- * pricing signal this cycle, and which verticals are one month away from
- * turning their trend chart back on.
+ * pricing signal this cycle, and how far each vertical is from a trend chart.
+ *
+ * "Has chart" / "months needed" come from `selectTrendSeries` in
+ * `lib/price-trend-series.ts` — the same function the page renders from. An
+ * earlier version counted months across ANY trust-passing cell (real-time
+ * included) and overstated how close verticals were; see BACKLOG.md.
  *
  * Why this exists: `data/loop/README.md` — a derived artifact assembled by
  * hand goes stale with no signal. Regenerate with `npm run price-index:gap`.
@@ -18,12 +22,22 @@
 
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
+import {
+  PRICE_BENCHMARKS,
+  isTrustworthyBenchmark,
+} from "../data/price-benchmarks";
+import {
+  buildAgedTrendSeries,
+  isAgedTrendBracket,
+  selectTrendSeries,
+  trendSeriesKey,
+  TREND_CHART_MIN_MONTHS,
+  type TrendSeries,
+} from "../lib/price-trend-series";
 
 const PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "p7rbtajg";
 const DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 
-/** `components/price-trend-chart.tsx:53` returns null below this. */
-const TREND_CHART_MIN_MONTHS = 3;
 /** `lib/benchmark-coverage.ts` trust gate — single-provider rows are junk. */
 const MIN_PROVIDERS = 2;
 
@@ -58,7 +72,9 @@ interface ProviderUpdate {
 }
 
 async function fetchBenchmarks(): Promise<Benchmark[]> {
-  const query = `*[_type=="priceBenchmark"]{
+  // Same ordering as the page's query, so "first benchmark per month wins"
+  // in buildAgedTrendSeries resolves duplicates identically.
+  const query = `*[_type=="priceBenchmark"] | order(month desc) {
     month, leadAgeBracket, exclusivity, leadType,
     priceLow, priceMedian, priceHigh, providersSampled, confidence,
     "vertical": vertical->slug.current
@@ -90,25 +106,94 @@ function loadProviderSignals(): Map<string, ProviderUpdate[]> {
   return byMonth;
 }
 
-const cellKey = (b: Benchmark) =>
-  `${b.leadAgeBracket} | ${b.exclusivity} | ${b.leadType}`;
+const trusted = (b: { providersSampled: number | null }) =>
+  isTrustworthyBenchmark({ providersSampled: b.providersSampled ?? undefined });
+
+/**
+ * Mirror `loadTrustworthyBenchmarks`: a vertical's Sanity benchmarks when it
+ * has any, else the static seed. (The trust gate is applied downstream.)
+ */
+function benchmarksByVertical(sanity: Benchmark[]): Map<string, Benchmark[]> {
+  const out = new Map<string, Benchmark[]>();
+  for (const b of sanity) {
+    if (!out.has(b.vertical)) out.set(b.vertical, []);
+    out.get(b.vertical)!.push(b);
+  }
+  for (const v of new Set(PRICE_BENCHMARKS.map((b) => b.vertical))) {
+    if (out.has(v)) continue;
+    out.set(
+      v,
+      PRICE_BENCHMARKS.filter((b) => b.vertical === v).sort((a, b) =>
+        b.month.localeCompare(a.month)
+      )
+    );
+  }
+  return out;
+}
+
+const seriesLabel = (s: { leadAgeBracket: string; exclusivity: string; leadType: string }) =>
+  `${s.leadAgeBracket} / ${s.exclusivity} / ${s.leadType}`;
+
+/**
+ * Every aged cell observed for a vertical, trusted or not, so the researcher
+ * sees both the series already accruing months and the single-provider
+ * observations that did not count.
+ */
+function agedCellTable(all: Benchmark[], candidates: TrendSeries[]): string[] {
+  const order = new Map(candidates.map((c, i) => [c.key, i]));
+  const cells = new Map<string, Benchmark[]>();
+  for (const b of all) {
+    if (!isAgedTrendBracket(b.leadAgeBracket)) continue;
+    const k = trendSeriesKey(b);
+    if (!cells.has(k)) cells.set(k, []);
+    cells.get(k)!.push(b);
+  }
+  if (cells.size === 0) return ["_No aged cell has ever been observed for this vertical._"];
+  const rows = [...cells.entries()].sort(
+    ([a], [b]) =>
+      (order.get(a) ?? Number.MAX_SAFE_INTEGER) - (order.get(b) ?? Number.MAX_SAFE_INTEGER) ||
+      a.localeCompare(b)
+  );
+  const lines = [
+    "| aged cell | trusted months | single-provider months (don't count) | latest trusted median |",
+    "|---|---|---|---:|",
+  ];
+  for (const [key, obs] of rows) {
+    const series = candidates.find((c) => c.key === key);
+    const trustedMonths = series?.points.map((p) => p.month) ?? [];
+    const untrusted = [
+      ...new Set(
+        obs
+          .filter((b) => !trusted(b))
+          .map((b) => b.month)
+          .filter((m) => !trustedMonths.includes(m))
+      ),
+    ].sort();
+    const latest = series?.points.at(-1);
+    lines.push(
+      `| ${key.split("|").join(" / ")} | ${trustedMonths.join(", ") || "—"} | ` +
+        `${untrusted.join(", ") || "—"} | ${latest ? `$${latest.median} (${latest.month})` : "—"} |`
+    );
+  }
+  return lines;
+}
 
 function main(benchmarks: Benchmark[], signals: Map<string, ProviderUpdate[]>) {
   const reliable = benchmarks.filter(
     (b) => (b.providersSampled ?? 0) >= MIN_PROVIDERS
   );
-
-  const monthsByVertical = new Map<string, Set<string>>();
-  for (const b of reliable) {
-    if (!monthsByVertical.has(b.vertical)) monthsByVertical.set(b.vertical, new Set());
-    monthsByVertical.get(b.vertical)!.add(b.month);
-  }
+  const byVertical = benchmarksByVertical(benchmarks);
+  const verticals = [...byVertical.keys()]
+    .filter((v) => byVertical.get(v)!.some(trusted))
+    .sort();
+  const selection = new Map(
+    verticals.map((v) => [v, selectTrendSeries(byVertical.get(v)!)] as const)
+  );
 
   const latestMonth = reliable.length
     ? reliable.map((b) => b.month).sort().at(-1)!
     : "(none)";
 
-  const verticals = [...monthsByVertical.keys()].sort();
   const out: string[] = [];
 
   out.push("# Lead Price Index — Q3 research brief");
@@ -134,49 +219,76 @@ function main(benchmarks: Benchmark[], signals: Map<string, ProviderUpdate[]>) {
   out.push("## The unlock: trend charts");
   out.push("");
   out.push(
-    `\`components/price-trend-chart.tsx\` renders nothing below **${TREND_CHART_MIN_MONTHS} reliable months**. ` +
-      "One more verified month per vertical is the difference between a price page with a chart and one without."
+    "A `/price-index/{vertical}` page draws `PriceTrendChart` from **one aged series** — a single " +
+      "`31-85-days` or `86-180-days` cell (one exclusivity + lead type) tracked across months — and " +
+      `only once that series has **${TREND_CHART_MIN_MONTHS} trust-passing months** ` +
+      `(\`providersSampled >= ${MIN_PROVIDERS}\`). Real-time cells never produce a chart, and months ` +
+      "from different cells do not add up. The rule is `selectTrendSeries` in " +
+      "`lib/price-trend-series.ts`, the same function the page renders from."
   );
   out.push("");
-  out.push("| vertical | reliable months | has chart | months needed |");
-  out.push("|---|---:|:---:|---:|");
-  let unlockCount = 0;
+  out.push("| vertical | best aged series | trusted months | has chart | months needed |");
+  out.push("|---|---|---:|:---:|---:|");
+  const byNeeded = new Map<number, number>();
   for (const v of verticals) {
-    const n = monthsByVertical.get(v)!.size;
-    const has = n >= TREND_CHART_MIN_MONTHS;
-    const needed = Math.max(0, TREND_CHART_MIN_MONTHS - n);
-    if (needed === 1) unlockCount++;
-    out.push(`| \`${v}\` | ${n} | ${has ? "yes" : "**no**"} | ${needed || "—"} |`);
+    const sel = selection.get(v)!;
+    byNeeded.set(sel.monthsNeeded, (byNeeded.get(sel.monthsNeeded) ?? 0) + 1);
+    out.push(
+      `| \`${v}\` | ${sel.series ? seriesLabel(sel.series) : "_none_"} | ${sel.months} | ` +
+        `${sel.hasChart ? "yes" : "**no**"} | ${sel.monthsNeeded || "—"} |`
+    );
   }
   out.push("");
+  const charted = byNeeded.get(0) ?? 0;
+  const oneAway = byNeeded.get(1) ?? 0;
+  const further = [...byNeeded.entries()]
+    .filter(([n]) => n > 1)
+    .sort(([a], [b]) => a - b)
+    .map(([n, c]) => `${c} need ${n} more months`);
   out.push(
-    `**${unlockCount} vertical(s) are exactly one verified month away from a trend chart.**`
+    `**${charted} of ${verticals.length} vertical(s) render a trend chart; ` +
+      `${oneAway} are exactly one verified month away` +
+      (further.length ? `; ${further.join("; ")}` : "") +
+      ".**"
   );
   out.push("");
 
-  // ── Per-vertical cell checklist ───────────────────────────────────
+  // ── Per-vertical aged-cell checklist ──────────────────────────────
   out.push("## What to re-price, by vertical");
   out.push("");
   out.push(
-    "Each vertical's most recent reliable month, broken into the cells that month covered. " +
-      "Re-observing the same cells keeps the trend series comparable — a chart built from " +
-      "different cells month to month is measuring the cell mix, not the market."
+    "For each vertical without a chart, the **aged cell to re-observe** — the series the page would " +
+      `chart once it reaches ${TREND_CHART_MIN_MONTHS} trusted months. Price exactly that bracket + ` +
+      `exclusivity + lead type, from at least ${MIN_PROVIDERS} providers, or the month does not count. ` +
+      "Real-time cells are deliberately omitted: they feed the price tables, never the trend chart."
   );
   out.push("");
   for (const v of verticals) {
-    const rows = reliable.filter((b) => b.vertical === v);
-    const newest = rows.map((b) => b.month).sort().at(-1)!;
-    const cells = rows.filter((b) => b.month === newest);
-    out.push(`### \`${v}\` — last verified ${newest}`);
+    const sel = selection.get(v)!;
+    const all = byVertical.get(v)!;
+    out.push(`### \`${v}\``);
     out.push("");
-    out.push("| age bracket | exclusivity | lead type | low | median | high | providers |");
-    out.push("|---|---|---|---:|---:|---:|---:|");
-    for (const c of cells.sort((a, b) => cellKey(a).localeCompare(cellKey(b)))) {
+    if (sel.hasChart && sel.series) {
       out.push(
-        `| ${c.leadAgeBracket} | ${c.exclusivity} | ${c.leadType} | ` +
-          `$${c.priceLow} | $${c.priceMedian} | $${c.priceHigh} | ${c.providersSampled ?? "?"} |`
+        `Has a chart (${seriesLabel(sel.series)}, ${sel.months} months). ` +
+          "Re-pricing this cell keeps it current; no unlock at stake."
+      );
+      out.push("");
+      continue;
+    }
+    if (sel.series) {
+      out.push(
+        `**Target: ${seriesLabel(sel.series)}** — ${sel.months} trusted month(s), ` +
+          `needs **${sel.monthsNeeded}** more.`
+      );
+    } else {
+      out.push(
+        "**Target: 31-85-days / shared / internet-form** (the page's preferred series) — " +
+          `no trust-passing aged cell yet, needs **${TREND_CHART_MIN_MONTHS}** months.`
       );
     }
+    out.push("");
+    out.push(...agedCellTable(all, buildAgedTrendSeries(all)));
     out.push("");
   }
 
@@ -217,7 +329,7 @@ function main(benchmarks: Benchmark[], signals: Map<string, ProviderUpdate[]>) {
   console.log(`Wrote ${OUT_PATH}`);
   console.log(
     `${reliable.length}/${benchmarks.length} reliable benchmarks; ` +
-      `${unlockCount} vertical(s) one month from a trend chart.`
+      `${charted} vertical(s) with a trend chart, ${oneAway} one month away.`
   );
 }
 

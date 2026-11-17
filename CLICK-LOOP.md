@@ -113,17 +113,25 @@ That decision was right, and a trigger does exist — `checkMarketwatch` in `hea
 was re-thresholded to 100 days and renamed "Lead Price Index study", so it goes red around
 **2026-09-09**. The study is due, not yet alarming. It is a writing task, not a code one.
 
-What was not visible until now is the size of the prize. `components/price-trend-chart.tsx:53`
-renders nothing below **3 reliable months**, and reliable-month counts per vertical are:
+What was not visible until now is the size of the prize. A price page draws its trend chart
+from **one aged series** — a single `31-85-days` or `86-180-days` cell (one exclusivity + lead
+type) — and only once that series has **3 trust-passing months** (`selectTrendSeries` in
+`lib/price-trend-series.ts`). Counted that way (2026-11-17):
 
-| reliable months | verticals |
+| trusted months in best aged series | verticals |
 |---|---|
-| 3 (chart renders) | `life-insurance`, `mca-business-loans` |
-| 2 (**no chart**) | `auto-insurance`, `debt-settlement`, `final-expense`, `health-insurance`, `home-improvement`, `legal`, `medicare`, `mortgage`, `solar` |
+| 3 (chart renders) | `mca-business-loans` |
+| 2 (**no chart**, one month away) | `debt-settlement`, `final-expense`, `home-improvement`, `legal`, `medicare`, `mortgage`, `solar` |
+| 1 (**no chart**, two months away) | `auto-insurance`, `health-insurance`, `life-insurance` |
 
-**Nine of eleven verticals are exactly one verified month away from a trend chart.** The
+**Seven of eleven verticals are exactly one verified aged month away from a trend chart.** The
 Q3 study is not maintenance — it is the single action that turns on a differentiated visual
-across nine price pages at once, aimed squarely at the price-shopping query cluster.
+across seven price pages at once, aimed squarely at the price-shopping query cluster.
+
+> Correction (2026-11-17): this section originally said *nine* verticals were one month away and
+> that `life-insurance` had a chart. That came from `npm run price-index:gap` counting months
+> across any trust-passing cell, real-time included — not the single aged series the page plots.
+> Fixed in the gap script; see BACKLOG.md.
 
 The Aged Lead Price Index is the one asset on this site no competitor publishes, and the
 natural thing for an LLM to cite. It is one quarter of research away from being twice the
@@ -252,7 +260,7 @@ Four items. Each is a prerequisite, not an improvement.
 
 | # | Item | Why it blocks the loop |
 |---|---|---|
-| 1 | **Q3 Lead Price Index study.** Scoped by `npm run price-index:gap` → `data/loop/price-index-q3-gap.md`: which cells to re-price per vertical, and the pricing signals already collected. The study itself is **human research** — the collected signals do not clear the 2-provider trust gate on their own, and synthesizing from them would recreate exactly the junk removed in 2026-06. Publishing one verified month unlocks trend charts on 9 verticals. | Engine B's flagship asset is stale, and 9 price pages are rendering without their differentiating visual. |
+| 1 | **Q3 Lead Price Index study.** Scoped by `npm run price-index:gap` → `data/loop/price-index-q3-gap.md`: which cells to re-price per vertical, and the pricing signals already collected. The study itself is **human research** — the collected signals do not clear the 2-provider trust gate on their own, and synthesizing from them would recreate exactly the junk removed in 2026-06. Publishing one verified month of each vertical's target aged cell unlocks trend charts on 7 verticals (3 more need two months). | Engine B's flagship asset is stale, and 10 of 11 price pages are rendering without their differentiating visual. |
 | 2 | **Add `pagePath` to the outbound-clicks report.** One dimension added to an existing GA4 query — read-side only, no tracking changes. | Step 2's `C` term and step 6's kill rule are both unmeasurable without knowing which page sent each click. |
 | 3 | ~~**Restart the newsletter.**~~ **Already done and running.** The cron is preview-only and archives to `data/newsletter-archive/`, `scripts/send-newsletter.ts` is the explicit send path with dry-run/seed/confirm and a double-send refusal, `newsletter:migrate` reconciles the audience, and the Sunday cron is back in `vercel.json`. The 2026-08-10 issue shipped 2026-08-12 (broadcast `a830c99a`). | — |
 | 4 | **Create `data/loop/ledger.json`** — one row per iteration: date, asset shipped, engine, expected clicks, measured clicks at +2 and +8 weeks, verdict. | Without a ledger the monthly review has no input and the loop drifts. |

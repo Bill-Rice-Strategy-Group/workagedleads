@@ -4,122 +4,125 @@
 
 The Price Index is a **quarterly human-verified study**. This brief does not estimate prices and no script publishes benchmarks; it scopes the research so the study is a checklist instead of an open-ended dig.
 
-- Benchmark documents in Sanity: **106**
-- Clearing the 2-provider trust gate: **81**
-- Latest reliable month: **2026-06**
+- Benchmark documents in Sanity: **107**
+- Clearing the 2-provider trust gate: **82**
+- Latest reliable month: **2026-11**
 
 ## The unlock: trend charts
 
-`components/price-trend-chart.tsx` renders nothing below **3 reliable months**. One more verified month per vertical is the difference between a price page with a chart and one without.
+A `/price-index/{vertical}` page draws `PriceTrendChart` from **one aged series** — a single `31-85-days` or `86-180-days` cell (one exclusivity + lead type) tracked across months — and only once that series has **3 trust-passing months** (`providersSampled >= 2`). Real-time cells never produce a chart, and months from different cells do not add up. The rule is `selectTrendSeries` in `lib/price-trend-series.ts`, the same function the page renders from.
 
-| vertical | reliable months | has chart | months needed |
-|---|---:|:---:|---:|
-| `auto-insurance` | 2 | **no** | 1 |
-| `debt-settlement` | 2 | **no** | 1 |
-| `final-expense` | 2 | **no** | 1 |
-| `health-insurance` | 2 | **no** | 1 |
-| `home-improvement` | 2 | **no** | 1 |
-| `legal` | 2 | **no** | 1 |
-| `life-insurance` | 3 | yes | — |
-| `mca-business-loans` | 3 | yes | — |
-| `medicare` | 2 | **no** | 1 |
-| `mortgage` | 2 | **no** | 1 |
-| `solar` | 2 | **no** | 1 |
+| vertical | best aged series | trusted months | has chart | months needed |
+|---|---|---:|:---:|---:|
+| `auto-insurance` | 31-85-days / shared / internet-form | 1 | **no** | 2 |
+| `debt-settlement` | 31-85-days / shared / internet-form | 2 | **no** | 1 |
+| `final-expense` | 31-85-days / exclusive / direct-mail | 2 | **no** | 1 |
+| `health-insurance` | 31-85-days / shared / internet-form | 1 | **no** | 2 |
+| `home-improvement` | 31-85-days / shared / internet-form | 2 | **no** | 1 |
+| `legal` | 31-85-days / shared / internet-form | 2 | **no** | 1 |
+| `life-insurance` | 31-85-days / shared / internet-form | 1 | **no** | 2 |
+| `mca-business-loans` | 31-85-days / shared / data-list | 3 | yes | — |
+| `medicare` | 31-85-days / shared / internet-form | 2 | **no** | 1 |
+| `mortgage` | 31-85-days / shared / internet-form | 2 | **no** | 1 |
+| `solar` | 31-85-days / shared / internet-form | 2 | **no** | 1 |
 
-**9 vertical(s) are exactly one verified month away from a trend chart.**
+**1 of 11 vertical(s) render a trend chart; 7 are exactly one verified month away; 3 need 2 more months.**
 
 ## What to re-price, by vertical
 
-Each vertical's most recent reliable month, broken into the cells that month covered. Re-observing the same cells keeps the trend series comparable — a chart built from different cells month to month is measuring the cell mix, not the market.
+For each vertical without a chart, the **aged cell to re-observe** — the series the page would chart once it reaches 3 trusted months. Price exactly that bracket + exclusivity + lead type, from at least 2 providers, or the month does not count. Real-time cells are deliberately omitted: they feed the price tables, never the trend chart.
 
-### `auto-insurance` — last verified 2026-04
+### `auto-insurance`
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| real-time | exclusive | internet-form | $50 | $75 | $100 | 4 |
-| real-time | shared | internet-form | $20 | $32 | $45 | 5 |
+**Target: 31-85-days / shared / internet-form** — 1 trusted month(s), needs **2** more.
 
-### `debt-settlement` — last verified 2026-04
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03 | 2026-04, 2026-05, 2026-06 | $0.38 (2026-03) |
+| 86-180-days / shared / internet-form | 2026-03 | 2026-04, 2026-05, 2026-06 | $0.35 (2026-03) |
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | shared | internet-form | $1 | $4 | $8 | 3 |
-| real-time | shared | internet-form | $20 | $35 | $50 | 3 |
+### `debt-settlement`
 
-### `final-expense` — last verified 2026-04
+**Target: 31-85-days / shared / internet-form** — 2 trusted month(s), needs **1** more.
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | exclusive | direct-mail | $8 | $15 | $25 | 3 |
-| real-time | exclusive | internet-form | $30 | $40 | $50 | 4 |
-| real-time | exclusive | live-transfer | $50 | $65 | $80 | 3 |
-| real-time | shared | internet-form | $15 | $22 | $30 | 5 |
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03, 2026-04 | — | $4 (2026-04) |
 
-### `health-insurance` — last verified 2026-04
+### `final-expense`
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| real-time | exclusive | internet-form | $50 | $75 | $100 | 3 |
-| real-time | shared | internet-form | $20 | $30 | $40 | 4 |
+**Target: 31-85-days / exclusive / direct-mail** — 2 trusted month(s), needs **1** more.
 
-### `home-improvement` — last verified 2026-04
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / exclusive / direct-mail | 2026-03, 2026-04 | — | $15 (2026-04) |
+| 31-85-days / shared / internet-form | 2026-03 | 2026-04 | $1.25 (2026-03) |
+| 86-180-days / shared / internet-form | — | 2026-05, 2026-06 | — |
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | shared | internet-form | $0.6 | $1.05 | $1.5 | 3 |
-| real-time | shared | internet-form | $15 | $25 | $40 | 3 |
+### `health-insurance`
 
-### `legal` — last verified 2026-04
+**Target: 31-85-days / shared / internet-form** — 1 trusted month(s), needs **2** more.
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | shared | internet-form | $15 | $50 | $100 | 2 |
-| real-time | exclusive | internet-form | $300 | $550 | $800 | 3 |
-| real-time | exclusive | live-transfer | $100 | $150 | $200 | 2 |
-| real-time | shared | internet-form | $150 | $275 | $400 | 3 |
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03 | 2026-04 | $0.72 (2026-03) |
+| 86-180-days / shared / internet-form | — | 2026-05, 2026-06 | — |
 
-### `life-insurance` — last verified 2026-06
+### `home-improvement`
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 86-180-days | shared | internet-form | $1 | $1 | $1 | 2 |
+**Target: 31-85-days / shared / internet-form** — 2 trusted month(s), needs **1** more.
 
-### `mca-business-loans` — last verified 2026-05
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03, 2026-04 | — | $1.05 (2026-04) |
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | shared | data-list | $0.01 | $0.03 | $0.05 | 2 |
+### `legal`
 
-### `medicare` — last verified 2026-04
+**Target: 31-85-days / shared / internet-form** — 2 trusted month(s), needs **1** more.
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | shared | internet-form | $1.5 | $4 | $8 | 3 |
-| real-time | exclusive | internet-form | $75 | $110 | $150 | 3 |
-| real-time | exclusive | live-transfer | $50 | $75 | $100 | 3 |
-| real-time | shared | internet-form | $30 | $45 | $60 | 4 |
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03, 2026-04 | — | $50 (2026-04) |
 
-### `mortgage` — last verified 2026-04
+### `life-insurance`
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 181-365-days | shared | internet-form | $0.25 | $1 | $3 | 3 |
-| 31-85-days | shared | internet-form | $2 | $4 | $8 | 5 |
-| 31-85-days | shared | trigger-credit | $0.15 | $0.35 | $0.5 | 3 |
-| 8-30-days | shared | internet-form | $3 | $7 | $15 | 4 |
-| 86-180-days | shared | internet-form | $0.5 | $2 | $5 | 4 |
-| real-time | exclusive | internet-form | $50 | $100 | $200 | 5 |
-| real-time | exclusive | live-transfer | $75 | $120 | $175 | 4 |
-| real-time | shared | internet-form | $20 | $45 | $100 | 6 |
+**Target: 31-85-days / shared / internet-form** — 1 trusted month(s), needs **2** more.
 
-### `solar` — last verified 2026-04
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03 | 2026-04 | $1.25 (2026-03) |
+| 86-180-days / shared / internet-form | 2026-06 | 2026-04, 2026-05 | $1 (2026-06) |
 
-| age bracket | exclusivity | lead type | low | median | high | providers |
-|---|---|---|---:|---:|---:|---:|
-| 31-85-days | shared | internet-form | $3 | $8 | $15 | 3 |
-| real-time | exclusive | internet-form | $120 | $200 | $300 | 3 |
-| real-time | exclusive | live-transfer | $80 | $100 | $120 | 3 |
-| real-time | shared | internet-form | $60 | $100 | $150 | 4 |
+### `mca-business-loans`
+
+Has a chart (31-85-days / shared / data-list, 3 months). Re-pricing this cell keeps it current; no unlock at stake.
+
+### `medicare`
+
+**Target: 31-85-days / shared / internet-form** — 2 trusted month(s), needs **1** more.
+
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03, 2026-04 | — | $4 (2026-04) |
+| 86-180-days / shared / internet-form | — | 2026-05 | — |
+
+### `mortgage`
+
+**Target: 31-85-days / shared / internet-form** — 2 trusted month(s), needs **1** more.
+
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03, 2026-04 | — | $4 (2026-04) |
+| 31-85-days / shared / trigger-credit | 2026-03, 2026-04 | — | $0.35 (2026-04) |
+| 86-180-days / shared / internet-form | 2026-03, 2026-04 | — | $2 (2026-04) |
+
+### `solar`
+
+**Target: 31-85-days / shared / internet-form** — 2 trusted month(s), needs **1** more.
+
+| aged cell | trusted months | single-provider months (don't count) | latest trusted median |
+|---|---|---|---:|
+| 31-85-days / shared / internet-form | 2026-03, 2026-04 | — | $8 (2026-04) |
 
 ## Pricing signals already collected
 
@@ -251,3 +254,99 @@ _No signals collected. (2026-07 was the retired-model crash.)_
 
 **Synergy Direct Solution**
 - mca-business-loans / not specified / aged — **$0.01-$0.05 each**
+
+### 2026-09 — 7 provider(s) with signals
+
+**Aged Lead Store**
+- auto-insurance / 31-85-days / aged — **$1.00**
+- auto-insurance / 86-365-days / aged — **$0.40-0.75**
+- life-insurance / unspecified / aged — **$1.00 (incomplete data)**
+
+**Badass Insurance Leads**
+- life-insurance / 3-12 months / aged — **$1.00 per lead (English)**
+- life-insurance / 3-12 months / aged — **$1.85 per lead (Spanish)**
+
+**Brokers Data**
+- mortgage / real-time (day after inquiry) / trigger — **as low as $0.20 each**
+
+**DataToLeads**
+- general/b2b-data / N/A / enriched-skip-traced-records — **$0.01 per record**
+- general/b2b-data / N/A / platform-subscription — **$299/month**
+
+**Lead Heroes**
+- dental-vision-hearing / real-time — **$12 per lead (minimum 30 leads)**
+- final-expense / pre-set-appointments — **15% off (limited time promotion)**
+- life-insurance / aged, real-time — **30% savings per lead for 3 months (Lead Heroes Pro)**
+- medicare / aged, real-time — **50% off leads for ESI Premier agents**
+
+**LeadsData**
+- general/SaaS (behavior analytics) / N/A / N/A - session-based analytics — **$49/mo for 10k sessions (scales to 50k, 250k, custom)**
+- general/SaaS (identity resolution) / N/A / real-time (activatable resolution) — **$0.18 per activatable resolution (Tier A/B only)**
+
+**Synergy Direct Solution**
+- mca-business-loans / not specified / aged — **$0.01-$0.05**
+
+### 2026-10 — 8 provider(s) with signals
+
+**Aged Lead Store**
+- auto-insurance / 31-85-days / aged — **$1.00 per lead (at 1000 lead quantity)**
+- auto-insurance / 86-365-days / aged — **$0.30 per lead (at 1000 lead quantity)**
+
+**Badass Insurance Leads**
+- life-insurance / 3-12 months / aged — **$1.00 per lead (English)**
+- life-insurance / 3-12 months / aged — **$1.85 per lead (Spanish)**
+
+**Brokers Data**
+- mortgage / real-time (daily) / trigger — **as low as $0.20 each**
+
+**DataToLeads**
+- general/data-marketplace / N/A / data-list — **$0.01 per record**
+- general/data-marketplace / N/A / subscription/platform-access — **$299/month**
+
+**iLeads**
+- mortgage / not specified / single lead (LeadsDirect) — **up to 80% off retail**
+
+**Lead Heroes**
+- medicare / AEP campaign leads — **starting at $80**
+- dental-vision-hearing / real-time — **$12 per lead (minimum 30 leads)**
+- general/staffing / virtual assistant services — **$9 per hour**
+- final-expense, medicare / custom calling campaigns — **as low as $10 per hour**
+- life-insurance, medicare, final-expense / Lead Heroes Pro weekly exclusive leads — **30% discount for 3 months, minimum 20 leads/week**
+- life-insurance, medicare, final-expense / exclusive leads for ESI Premier agents — **50% off standard lead price**
+
+**LeadsData**
+- not-applicable / not-applicable / identity-resolution — **$0.18 per activatable resolution (Tier A and B only)**
+- not-applicable / not-applicable / behavior-analytics — **$49/mo for 10k sessions (scales to 50k, 250k, custom)**
+
+**Synergy Direct Solution**
+- mca-business-loans / not specified / aged — **$0.01-$0.05**
+
+### 2026-11 — 8 provider(s) with signals
+
+**Aged Lead Store**
+- auto-insurance / 31-85-days / aged — **~$1.00 per lead (at 1,000 lead volume)**
+- auto-insurance / 86-365-days / aged — **~$0.30 per lead (at 1,000 lead volume)**
+
+**Badass Insurance Leads**
+- life-insurance (also marketed for final expense, health U65, IUL) / 3-12-months / aged (English) — **$1.00**
+- life-insurance (also marketed for final expense, health U65, IUL) / 3-12-months / aged (Spanish) — **$1.85**
+
+**Brokers Data**
+- mortgage / 1 day / trigger (credit bureau, daily) — **as low as $0.20 each**
+
+**DataToLeads**
+- general (B2B/B2C data) / not specified / data-list (enriched, skip-traced records) — **from $0.01 per record**
+- general (all data needs) / not specified / subscription — **$299/month**
+
+**iLeads**
+
+**Lead Heroes**
+- medicare / not specified / pre-set appointments — **starting at $80**
+- dental-vision-hearing / not specified / not specified (likely telemarketed) — **$12 each (minimum 30 leads)**
+- final-expense/medicare / not specified / custom calling campaign (telemarketer hire) — **from $10 per hour**
+- virtual assistants / not specified / staffing — **$9 per hour**
+
+**LeadsData**
+
+**Synergy Direct Solution**
+- mca-business-loans / not specified / aged (aged business loan leads, UCC leads, trigger leads) — **$0.01-$0.05 per lead**
