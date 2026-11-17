@@ -33,6 +33,18 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
 
+      // FINISH2026 (Nov 2026): a clean, branded short link for Bill's personal
+      // notes to top buyers. A raw agedleadstore.com URL with four UTM params
+      // reads as spammy in a 1:1 email; workagedleads.com/finish2026 is the
+      // sender's own domain and still lands fully tagged. Not permanent, same
+      // reasoning as /lead-order. `?ref=` variants are not needed: every note
+      // shares one utm_content so personal-note revenue reads as one line.
+      {
+        source: "/finish2026",
+        destination: affiliateUrl({ campaign: "finish2026", content: "personal-note" }),
+        permanent: false,
+      },
+
       // The home-improvement vertical had two lead-type pages: the canonical
       // slug and a legacy one carrying all the content. The content moved to
       // the canonical slug, so the legacy page has to stop resolving or the
