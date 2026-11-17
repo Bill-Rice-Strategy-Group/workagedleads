@@ -16,10 +16,10 @@
  * site signups. Same From as the restock offer (RESEND_FROM_EMAIL).
  *
  * --apply REFUSES unless
- * - data/campaigns/finish2026.json records `partnerConfirmed` with the end date
- *   Troy confirmed, and it equals FINISH2026_ENDS. An email that tells 6,000
- *   people a code works through the 30th, when it dies on the 25th, is not
- *   recoverable — so the code's terms are written down before anything mails;
+ * - data/campaigns/finish2026.json records `partnerConfirmed` with
+ *   `creditsAffiliate: true` and `codeExpires`. The copy promises the code
+ *   keeps working (no deadline), so if the partner ever sets an expiry the
+ *   record must say so and the copy must be revisited before anything mails;
  * - the audience holds at least 500 mailable contacts (wrong-id guard);
  * - every email passes the issue gate;
  * - broadcasts are not already recorded for this campaign.
@@ -74,7 +74,7 @@ async function main() {
     throw new Error(`Site URL resolved to ${m.SITE_URL}, not https://${CANONICAL_HOST} — refusing to render links to the wrong host.`);
   }
   console.log(`site       ${m.SITE_URL}`);
-  console.log(`code       ${m.FINISH2026_CODE} — ${m.FINISH2026_DISCOUNT} off through ${m.FINISH2026_ENDS}`);
+  console.log(`code       ${m.FINISH2026_CODE} — ${m.FINISH2026_DISCOUNT} off, no expiry`);
 
   const rendered = m.FINISH2026_EMAILS.map((email) => {
     const html = m.buildFinish2026Html(email, m.SITE_URL);
@@ -94,9 +94,11 @@ async function main() {
   if (rendered.some((r) => !r.gate.ok)) throw new Error("An email failed the issue gate — nothing sent or scheduled.");
 
   const record = readRecord();
-  const confirmed = record.partnerConfirmed as { endsOn?: string; by?: string; at?: string } | undefined;
+  const confirmed = record.partnerConfirmed as
+    | { codeExpires?: string | null; creditsAffiliate?: boolean; by?: string; at?: string }
+    | undefined;
   console.log(
-    `\npartner    ${confirmed ? `confirmed by ${confirmed.by ?? "?"} on ${confirmed.at ?? "?"}, ends ${confirmed.endsOn}` : "NOT CONFIRMED — see data/campaigns/finish2026.json"}`,
+    `\npartner    ${confirmed ? `confirmed by ${confirmed.by ?? "?"} on ${confirmed.at ?? "?"}, expires: ${confirmed.codeExpires ?? "never"}, credits us: ${confirmed.creditsAffiliate}` : "NOT CONFIRMED — see data/campaigns/finish2026.json"}`,
   );
 
   if (MODE === "dry") {
@@ -131,11 +133,12 @@ async function main() {
   }
 
   // ─── apply ───
-  if (!confirmed || confirmed.endsOn !== m.FINISH2026_ENDS) {
+  if (!confirmed || confirmed.creditsAffiliate !== true || (confirmed.codeExpires ?? null) !== null) {
     throw new Error(
-      `Partner terms not confirmed. Ask Troy (1) the code's last valid day, (2) that FINISH2026 orders credit our ` +
-        `affiliate account, then set partnerConfirmed: { "endsOn": "${m.FINISH2026_ENDS}", "by": "Bill", "at": "<date>" } ` +
-        `in ${RECORD}. If the end date differs, change FINISH2026_ENDS and the copy first.`,
+      `Partner terms not confirmed as the copy assumes. The emails say nothing about expiry and rely on ` +
+        `FINISH2026 orders crediting our affiliate account. Record partnerConfirmed: ` +
+        `{ "codeExpires": null, "creditsAffiliate": true, "by": "Bill", "at": "<date>" } in ${RECORD}. ` +
+        `If the code now has an end date, revisit the copy before scheduling.`,
     );
   }
   if (!AUDIENCE) throw new Error("RESEND_AUDIENCE_ID missing");

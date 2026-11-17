@@ -6,8 +6,6 @@ import {
   FINISH2026_CAMPAIGN,
   FINISH2026_CODE,
   FINISH2026_EMAILS,
-  FINISH2026_ENDS,
-  FINISH2026_ENDS_TEXT,
 } from "./finish2026";
 import { checkIssueHtml } from "./issue-gate";
 import { SENDER_POSTAL_ADDRESS } from "@/lib/sender";
@@ -40,21 +38,31 @@ describe("FINISH2026 campaign emails", () => {
     }
   });
 
-  test("every email shows the code and the real end date", () => {
+  test("every email shows the code, in the subject or preview too", () => {
     for (const [key, email] of ALL) {
-      const body = text(buildFinish2026Html(email, SITE));
-      assert.ok(body.includes(FINISH2026_CODE), `${key}: code missing`);
+      assert.ok(text(buildFinish2026Html(email, SITE)).includes(FINISH2026_CODE), `${key}: code missing from body`);
       assert.ok(
-        body.includes(FINISH2026_ENDS_TEXT) || /\btoday\b/i.test(body),
-        `${key}: no end date`,
+        `${email.subject} ${email.previewText}`.includes(FINISH2026_CODE),
+        `${key}: code missing from subject and preview`,
       );
     }
   });
 
-  test("the copy's end date agrees with FINISH2026_ENDS", () => {
-    const d = new Date(`${FINISH2026_ENDS}T12:00:00Z`);
-    const human = d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: "UTC" });
-    assert.equal(FINISH2026_ENDS_TEXT, human);
+  test("none says or implies the code expires — it does not (confirmed 2026-11-17)", () => {
+    const expiry = [
+      /ends?/i,
+      /expir/i,
+      /last (?:day|chance)/i,
+      /through (?:monday|november|nov\b)/i,
+      /stops? working/i,
+      /deadline/i,
+      /only until/i,
+      /while it lasts/i,
+    ];
+    for (const [key, email] of ALL) {
+      const all = `${email.subject} ${email.previewText} ${text(buildFinish2026Html(email, SITE))}`;
+      for (const re of expiry) assert.equal(re.test(all), false, `${key} matched ${re}`);
+    }
   });
 
   test("every store link is tagged with this campaign and a distinct utm_content", () => {
@@ -76,11 +84,10 @@ describe("FINISH2026 campaign emails", () => {
     assert.equal(new Set(all).size, all.length, "duplicate utm_content across the campaign");
   });
 
-  test("sends fall inside the promotion, in order, never on the Tuesday newsletter slot", () => {
+  test("sends are in order and never on the Tuesday newsletter slot", () => {
     let prev = "";
     for (const [key, email] of ALL) {
       assert.ok(email.label > prev, `${key} out of order`);
-      assert.ok(email.label <= FINISH2026_ENDS, `${key} sends after the code expires`);
       assert.notEqual(new Date(`${email.label}T00:00:00Z`).getUTCDay(), 2, `${key} lands on a Tuesday`);
       prev = email.label;
     }
@@ -143,9 +150,9 @@ describe("FINISH2026 campaign emails", () => {
 });
 
 describe("finish2026Active", () => {
-  test("live through the last day in US Eastern, off after", () => {
+  test("site bar shows through Dec 31 in US Eastern, off after", () => {
     assert.equal(finish2026Active(new Date("2026-11-18T12:00:00Z")), true);
-    assert.equal(finish2026Active(new Date("2026-12-01T04:30:00Z")), true, "still Nov 30 in New York");
-    assert.equal(finish2026Active(new Date("2026-12-01T05:00:00Z")), false);
+    assert.equal(finish2026Active(new Date("2027-01-01T04:30:00Z")), true, "still Dec 31 in New York");
+    assert.equal(finish2026Active(new Date("2027-01-01T05:00:00Z")), false);
   });
 });

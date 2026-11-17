@@ -5,20 +5,15 @@ At 16% effective (20% rev share × 80% realisation), that means about **$10,750 
 attributed revenue**. Returning buyers earn about $114 per session, compared with
 about $5 for cold traffic, so most of this campaign goes to people who already buy.
 
-**Code:** `FINISH2026`, 30% off, through **Mon Nov 30** (end date still to be confirmed with Troy).
+**Code:** `FINISH2026`, 30% off. **It does not expire**, and orders using it credit our affiliate account (both confirmed by Bill, 2026-11-17). Nov 30 is our revenue target, not the reader's deadline, so no copy anywhere may give the code an end date. The tests enforce this for the emails.
 
 All links are tagged `utm_campaign=finish2026`. The daily commission email reports the pace.
 
-## Confirm with Troy before anything mails
+## Partner terms
 
-1. The last day the code works. If it isn't Nov 30, change `FINISH2026_ENDS` and
-   `FINISH2026_ENDS_TEXT` in `lib/newsletter/finish2026.ts`. The tests check that
-   the two agree.
-2. That orders using the code **credit our affiliate account**, and whether that
-   happens through the UTM click or the code itself.
-3. Whether commission is paid on the discounted total.
-
-Then add `partnerConfirmed` to `data/campaigns/finish2026.json`. `--apply` refuses to run without it.
+Recorded in `data/campaigns/finish2026.json` as `partnerConfirmed`. `--apply` refuses
+to run unless it says the code doesn't expire and that orders credit us. Still open:
+whether commission is paid on the discounted total.
 
 ## Calendar
 
@@ -26,10 +21,10 @@ Then add `partnerConfirmed` to `data/campaigns/finish2026.json`. `--apply` refus
 |---|---|---|
 | Wed 11/18, 8am ET | Launch email to the main list | `scripts/finish2026-schedule.ts` |
 | Wed 11/18 to Fri 11/20 | Personal notes to top buyers (below) | Bill, by hand |
-| Once merged | Site-wide promo bar, hides itself after Nov 30 | `components/promo-bar.tsx` |
+| Once merged | Site-wide promo bar, hides itself after Dec 31 (`FINISH2026_PROMO_UNTIL`) | `components/promo-bar.tsx` |
 | Tue 11/24 | Code mentioned in the newsletter | `data/newsletter-calendar.ts` specialHook |
-| Fri 11/27 (Black Friday) | "Ends Monday" email | `scripts/finish2026-schedule.ts` |
-| Mon 11/30 | Last-day email | `scripts/finish2026-schedule.ts` |
+| Fri 11/27 (Black Friday) | "The one Black Friday buy that pays you back in January" | `scripts/finish2026-schedule.ts` |
+| Mon 11/30 | "December goes fast. January's leads don't have to wait." | `scripts/finish2026-schedule.ts` |
 
 ## Running the sends
 
@@ -67,8 +62,7 @@ https://agedleadstore.com/all-lead-types/?utm_source=workagedleads&utm_medium=em
 >
 > Hi {first name},
 >
-> Quick one. Aged Lead Store is taking 30% off with code FINISH2026 through
-> Monday, November 30.
+> Quick one. Aged Lead Store is taking 30% off with code FINISH2026.
 >
 > Since you already buy from them, this is a good chance to load up your January
 > leads now, before everyone else rebuilds their pipeline in the first week of
@@ -90,7 +84,7 @@ https://agedleadstore.com/all-lead-types/?utm_source=workagedleads&utm_medium=em
 >
 > Have you planned your lead buy for January yet?
 >
-> I ask because Aged Lead Store has a 30% off code running through Nov 30
+> I ask because Aged Lead Store has a 30% off code running right now
 > (FINISH2026). If you were going to restock after the holidays anyway, buying
 > now gets you the same leads for 30% less, and you can start dialing on day one.
 >
@@ -103,12 +97,12 @@ https://agedleadstore.com/all-lead-types/?utm_source=workagedleads&utm_medium=em
 > Bill Rice · Aged Leads Insights · 750 E. Hurd Rd., Monroe, MI 48162
 > Affiliate link: I may earn a commission. Reply "stop" and I won't email you about offers again.
 
-### Version C: the last-day follow-up (only to people who replied or clicked)
+### Version C: the follow-up (only to people who replied or clicked)
 
 > **Subject:** Re: 30% off for your January restock
 >
-> Hi {first name}, just a heads-up that FINISH2026 stops working at the end of
-> today. {link}
+> Hi {first name}, if it helps to have January's leads in your CRM before the
+> holidays, FINISH2026 still takes 30% off. {link}
 >
 > Bill
 
@@ -120,4 +114,4 @@ https://agedleadstore.com/all-lead-types/?utm_source=workagedleads&utm_medium=em
   than any other placement we have. Put the same one-line promo there, tagged
   `utm_campaign=finish2026&utm_content=htwl-header`.
 - **LinkedIn post (11/18 or 11/19).** "Agents: stock your January pipeline before
-  the year closes. Aged Lead Store is 30% off with FINISH2026 through Nov 30." Tag the link `utm_medium=social&utm_content=linkedin`.
+  the year closes. Aged Lead Store is 30% off with FINISH2026." Tag the link `utm_medium=social&utm_content=linkedin`.

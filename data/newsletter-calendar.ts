@@ -227,7 +227,7 @@ export const NEWSLETTER_CALENDAR: NewsletterPlan[] = [
       "Why the days either side of a holiday have unusually high contact rates",
       "Setting up December before you take time off",
     ],
-    specialHook: "Thanksgiving is Nov 26. Keep this issue short — people are travelling. ALSO (Bill, 2026-11-17): Aged Lead Store is running a partner discount — code FINISH2026 takes 30% off through Monday, November 30. Mention it ONCE, near the top, in one or two plain sentences framed as stocking the January pipeline before the year closes, and point readers at the store links. State the code and the end date exactly as written here. No per-lead prices, no countdown, no scarcity language, no claim that Bill buys leads.",
+    specialHook: "Thanksgiving is Nov 26. Keep this issue short — people are travelling. ALSO (Bill, 2026-11-17): Aged Lead Store is running a partner discount — code FINISH2026 takes 30% off. Mention it ONCE, near the top, in one or two plain sentences framed as stocking the January pipeline before the year closes, and point readers at the store links. State the code exactly as written here. The code does NOT expire: never give or imply an end date, deadline or \"last chance\". No per-lead prices, no countdown, no scarcity language, no claim that Bill buys leads.",
     status: "planned",
   },
   {

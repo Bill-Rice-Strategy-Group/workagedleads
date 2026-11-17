@@ -22,14 +22,15 @@ import { STORE_VERTICALS, storeUrl, catalogueUrl } from "./store-links";
  * "it's cheaper" — it is "January is when every pipeline gets rebuilt; buy the
  * January restock now, at 30% off, and start the year with it in hand."
  *
- * URGENCY — WHY THIS ONE IS ALLOWED A DEADLINE
+ * NO DEADLINE — THE CODE DOES NOT EXPIRE
  *
- * The other offer templates refuse urgency devices because there was nothing
- * real to point at: invented scarcity on inventory we don't control. A partner
- * discount code with an end date is a real deadline, so the emails state it,
- * plainly, once. Still no countdown timer, no "almost gone", no inventory
- * claim. `FINISH2026_ENDS` must match what Troy confirmed — the scheduler
- * refuses to run until that confirmation is recorded.
+ * Bill confirmed with Aged Lead Store on 2026-11-17 that FINISH2026 has no end
+ * date and that orders using it credit our affiliate account. So no email may
+ * say or imply the code expires: no "ends Monday", no "last day", no "through
+ * November 30". The month-end deadline is OUR target, not the reader's, and
+ * borrowing it as theirs would be invented urgency. The pull is the real one:
+ * January restarts every pipeline, and leads bought now are in hand for it.
+ * Tests enforce this.
  *
  * DELIBERATELY ABSENT — same rules as every other send
  *
@@ -43,12 +44,14 @@ import { STORE_VERTICALS, storeUrl, catalogueUrl } from "./store-links";
 export const FINISH2026_CAMPAIGN = "finish2026";
 export const FINISH2026_CODE = "FINISH2026";
 export const FINISH2026_DISCOUNT = "30%";
-/** Last day the code works, inclusive. CONFIRM WITH TROY before scheduling. */
-export const FINISH2026_ENDS = "2026-11-30";
-/** Human form of the end date, for copy. Keep in step with FINISH2026_ENDS. */
-export const FINISH2026_ENDS_TEXT = "Monday, November 30";
+/**
+ * Last day the SITE promo bar shows (inclusive). This is a campaign window we
+ * chose, not a code expiry — the code itself does not expire. Extend or
+ * shorten freely; nothing in the copy depends on it.
+ */
+export const FINISH2026_PROMO_UNTIL = "2026-12-31";
 
-export type Finish2026Key = "launch" | "black-friday" | "last-day";
+export type Finish2026Key = "launch" | "black-friday" | "december";
 
 export interface Finish2026Email {
   /** Send date, YYYY-MM-DD. Rides in every utm_content. */
@@ -64,13 +67,13 @@ export interface Finish2026Email {
 export const FINISH2026_LAUNCH: Finish2026Email = {
   label: "2026-11-18",
   key: "launch",
-  subject: "30% off aged leads through November 30",
-  previewText: `Code ${FINISH2026_CODE}. Stock your January pipeline now.`,
-  headline: "30% off aged leads, through November 30",
+  subject: `${FINISH2026_DISCOUNT} off aged leads with code ${FINISH2026_CODE}`,
+  previewText: "Stock your January pipeline now, for less.",
+  headline: `${FINISH2026_DISCOUNT} off aged leads`,
   subhead: "Stock your January pipeline now, for less.",
   body: [
     "January is when every sales team resets its goals. The agents and loan officers who hit theirs walk into the first week of the year with a pipeline already loaded, not one they start ordering in week two.",
-    `Aged Lead Store is taking ${FINISH2026_DISCOUNT} off with the code above, through ${FINISH2026_ENDS_TEXT}. That is the leads you were going to work in January anyway, bought for less.`,
+    `Aged Lead Store is taking ${FINISH2026_DISCOUNT} off with the code above. That is the leads you were going to work in January anyway, bought for less.`,
     `Aged leads earn their keep when you buy them consistently, not once. At ${FINISH2026_DISCOUNT} off, two months of leads costs less than a month and a half usually would.`,
   ],
 };
@@ -78,33 +81,33 @@ export const FINISH2026_LAUNCH: Finish2026Email = {
 export const FINISH2026_BLACK_FRIDAY: Finish2026Email = {
   label: "2026-11-27",
   key: "black-friday",
-  subject: `${FINISH2026_DISCOUNT} off aged leads ends Monday`,
-  previewText: `Code ${FINISH2026_CODE} works through ${FINISH2026_ENDS_TEXT}.`,
-  headline: `${FINISH2026_DISCOUNT} off ends Monday`,
+  subject: "The one Black Friday buy that pays you back in January",
+  previewText: `${FINISH2026_DISCOUNT} off aged leads with code ${FINISH2026_CODE}.`,
+  headline: "A Black Friday buy that pays you back",
   subhead: "Your January restock, bought before the year closes.",
   body: [
     "Most of what is on sale this weekend will be forgotten by Christmas. A pipeline you can start calling on January 2 will not.",
-    `The code ${FINISH2026_CODE} takes ${FINISH2026_DISCOUNT} off at Aged Lead Store through ${FINISH2026_ENDS_TEXT}. Pick your vertical below and the storefront shows what is in stock and the live price.`,
+    `The code ${FINISH2026_CODE} takes ${FINISH2026_DISCOUNT} off at Aged Lead Store. Pick your vertical below and the storefront shows what is in stock and the live price.`,
   ],
 };
 
-export const FINISH2026_LAST_DAY: Finish2026Email = {
+export const FINISH2026_DECEMBER: Finish2026Email = {
   label: "2026-11-30",
-  key: "last-day",
-  subject: `Last day: ${FINISH2026_DISCOUNT} off aged leads`,
-  previewText: `${FINISH2026_CODE} stops working at the end of today.`,
-  headline: `Last day for ${FINISH2026_DISCOUNT} off`,
-  subhead: `${FINISH2026_CODE} stops working at the end of today.`,
+  key: "december",
+  subject: "December goes fast. January's leads don't have to wait.",
+  previewText: `Order now, start calling January 2. ${FINISH2026_DISCOUNT} off with ${FINISH2026_CODE}.`,
+  headline: "Have January's leads waiting for you",
+  subhead: "December disappears into the holidays. Your pipeline doesn't have to.",
   body: [
-    `Today is the last day the code ${FINISH2026_CODE} takes ${FINISH2026_DISCOUNT} off at Aged Lead Store.`,
-    "If you were planning to restock for January, today is the last day to do it at this discount.",
+    "December is short. Between the holidays and the end-of-year scramble, most people put off ordering leads until they are back in January, and then lose the first week or two waiting on them.",
+    `Order now and they are in your CRM when you get back. The code ${FINISH2026_CODE} still takes ${FINISH2026_DISCOUNT} off at Aged Lead Store.`,
   ],
 };
 
 export const FINISH2026_EMAILS: Finish2026Email[] = [
   FINISH2026_LAUNCH,
   FINISH2026_BLACK_FRIDAY,
-  FINISH2026_LAST_DAY,
+  FINISH2026_DECEMBER,
 ];
 
 function codeBlock(): string {
@@ -113,7 +116,7 @@ function codeBlock(): string {
                   <td align="center" style="border: 2px dashed #2563eb; border-radius: 10px; background-color: #eff6ff; padding: 18px 16px;">
                     <p style="margin: 0 0 4px 0; color: #1e3a5f; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;">Use code at checkout</p>
                     <p style="margin: 0 0 4px 0; color: #111827; font-size: 28px; font-weight: 800; letter-spacing: 0.08em; font-family: 'SFMono-Regular', Menlo, Consolas, monospace;">${FINISH2026_CODE}</p>
-                    <p style="margin: 0; color: #374151; font-size: 14px;">${FINISH2026_DISCOUNT} off, through ${FINISH2026_ENDS_TEXT}</p>
+                    <p style="margin: 0; color: #374151; font-size: 14px;">${FINISH2026_DISCOUNT} off at Aged Lead Store</p>
                   </td>
                 </tr>
               </table>`;
@@ -213,12 +216,12 @@ export function buildFinish2026Html(email: Finish2026Email, siteUrl: string): st
 }
 
 /**
- * Is the promotion live at this instant? Used by the site promo bar so it
- * removes itself after the code expires, without a deploy. The window closes
- * at the end of FINISH2026_ENDS in US Eastern (05:00 UTC the next day).
+ * Should the site promo bar show at this instant? Closes at the end of
+ * FINISH2026_PROMO_UNTIL in US Eastern (05:00 UTC the next day). The bar then
+ * removes itself without a deploy.
  */
 export function finish2026Active(now: Date = new Date()): boolean {
-  const end = new Date(`${FINISH2026_ENDS}T00:00:00Z`);
+  const end = new Date(`${FINISH2026_PROMO_UNTIL}T00:00:00Z`);
   end.setUTCDate(end.getUTCDate() + 1);
   end.setUTCHours(5);
   return now.getTime() < end.getTime();
