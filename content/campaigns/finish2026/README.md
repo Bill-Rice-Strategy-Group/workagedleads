@@ -132,6 +132,15 @@ using version A. Recipients were the top 40 store buyers by spend from Oct 1 to
 Nov 9, from the store's order summaries. Excluded: anyone unsubscribed from our
 list, anyone who ordered Nov 10 or later, and rows with no usable first name.
 The recipient list is not committed because it contains customer contact data.
+
+**The drafts contain no link, on purpose.** The Gmail connector rewrites every URL
+in a draft (even `workagedleads.com/finish2026`, even inside an `<a>` tag) into a
+`google.com/url?q=…` wrapper that looks spammy and expires. FINISH2026 orders
+credit our account without a click, so the notes just say "enter the code at
+checkout." If Bill wants a link in a note, he should type
+`workagedleads.com/finish2026` into it himself in Gmail; links typed by hand
+are not wrapped. That short link 302s to the store, tagged
+`utm_content=personal-note`.
 Send these from Thursday 11/19 on, so they don't land the same morning as the
 11/18 broadcast.
 
