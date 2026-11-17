@@ -25,6 +25,10 @@ import {
   loadTrustworthyBenchmarks,
   hasTrustworthyBenchmarks,
 } from "@/lib/benchmark-coverage";
+import {
+  selectTrendSeries,
+  TREND_CHART_MIN_MONTHS,
+} from "@/lib/price-trend-series";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://workagedleads.com";
 
@@ -133,52 +137,17 @@ export default async function VerticalPriceIndexPage({
   }
   const verifiedLabel = quarterLabel(latestMonth);
 
-  // Observed monthly price trend. We plot a SINGLE consistent aged series
-  // (same bracket + exclusivity + leadType across months) so the line never
-  // mixes denominators. Among aged brackets we pick the best-covered series
-  // for this vertical, then require 3+ real months. Observed data only — never
-  // the model-estimated gap fills, never interpolated.
-  const AGED_BRACKETS = ["31-85-days", "86-180-days"];
-  const trendSeries = new Map<string, Map<string, PriceTrendPoint>>();
-  for (const b of rawBenchmarks) {
-    if (!AGED_BRACKETS.includes(b.leadAgeBracket)) continue;
-    if (typeof b.priceMedian !== "number") continue;
-    const key = `${b.leadAgeBracket}|${b.exclusivity}|${b.leadType}`;
-    if (!trendSeries.has(key)) trendSeries.set(key, new Map());
-    const months = trendSeries.get(key)!;
-    if (!months.has(b.month)) {
-      months.set(b.month, {
-        month: b.month,
-        low: b.priceLow,
-        median: b.priceMedian,
-        high: b.priceHigh,
-      });
-    }
-  }
-  // Best series = most distinct months; tie-break prefers 31–85-day, shared,
-  // internet-form for relevance.
-  const bracketRank = (k: string) => (k.startsWith("31-85-days") ? 0 : 1);
-  const sharedRank = (k: string) => (k.includes("|shared|") ? 0 : 1);
-  const formRank = (k: string) => (k.endsWith("|internet-form") ? 0 : 1);
-  const bestKey = [...trendSeries.entries()]
-    .sort((a, b) => {
-      const d = b[1].size - a[1].size;
-      if (d !== 0) return d;
-      return (
-        bracketRank(a[0]) - bracketRank(b[0]) ||
-        sharedRank(a[0]) - sharedRank(b[0]) ||
-        formRank(a[0]) - formRank(b[0])
-      );
-    })
-    .map(([k]) => k)[0];
-
-  let trendPoints: PriceTrendPoint[] = [];
+  // Observed monthly price trend: a SINGLE consistent aged series (same
+  // bracket + exclusivity + leadType across months) with 3+ trust-passing
+  // months. Observed data only — never the model-estimated gap fills. The
+  // selection rule lives in lib/price-trend-series.ts, shared with
+  // scripts/price-index-gap.ts so the research brief can't drift from the page.
+  const trend = selectTrendSeries(rawBenchmarks);
+  const trendPoints: PriceTrendPoint[] =
+    trend.hasChart && trend.series ? trend.series.points : [];
   let trendSeriesLabel = "";
-  if (bestKey && (trendSeries.get(bestKey)?.size ?? 0) >= 3) {
-    trendPoints = [...trendSeries.get(bestKey)!.values()].sort((a, b) =>
-      a.month.localeCompare(b.month)
-    );
-    const [bracket, excl, leadType] = bestKey.split("|");
+  if (trend.hasChart && trend.series) {
+    const { leadAgeBracket: bracket, exclusivity: excl, leadType } = trend.series;
     const brLabel =
       bracket === "31-85-days"
         ? "31–85-day aged"
@@ -258,7 +227,7 @@ export default async function VerticalPriceIndexPage({
             in fifteen publishes a comparable per-lead price. The panel says so
             and names who does, which is worth more to a reader than a blank.
           */}
-          {trendPoints.length >= 3 ? (
+          {trend.hasChart ? (
             <PriceTrendChart
               points={trendPoints}
               verticalName={vertical.name}
@@ -267,7 +236,8 @@ export default async function VerticalPriceIndexPage({
           ) : (
             <PriceDisclosurePanel
               verticalName={vertical.name}
-              monthsAvailable={trendPoints.length}
+              monthsAvailable={trend.months}
+              monthsRequired={TREND_CHART_MIN_MONTHS}
             />
           )}
 
