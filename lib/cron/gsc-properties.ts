@@ -52,7 +52,11 @@ export const GSC_PROPERTIES: GscPropertyConfig[] = [
     // — roughly 60-90 days after the 2026-08-03 cutover.
     key: "agedleadsales",
     gscSiteUrl: "sc-domain:agedleadsales.com",
-    label: "Aged Lead Sales (retiring)",
+    label: "Aged Lead Sales (retired)",
+    // Retired 2026-11-16 (Bill): the domain is gone and its traffic has drained
+    // into workagedleads.com — the last read was 3 clicks / 181 impressions a
+    // week. History stays in data/gsc-trend.json.
+    retiredAfter: "2026-11-16",
   },
   {
     // Added 2026-10-07, the day the Change of Address was finally filed.
@@ -69,7 +73,10 @@ export const GSC_PROPERTIES: GscPropertyConfig[] = [
     // could.
     key: "howtoworkleads",
     gscSiteUrl: "https://howtoworkleads.com/",
-    label: "How To Work Leads (migrating)",
+    label: "How To Work Leads (retired)",
+    // Retired 2026-11-16 (Bill): the domain no longer exists and the cron had
+    // lost Search Console access to it (daily 403, so every run read "partial").
+    retiredAfter: "2026-11-16",
   },
   {
     key: "workagedleads",
