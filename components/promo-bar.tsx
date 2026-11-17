@@ -51,3 +51,22 @@ export function PromoBar() {
     </div>
   );
 }
+
+/**
+ * One-line code reminder for the intent-matched store doors (lead-type hero
+ * door, provider-profile store alternative). Those are the surfaces where the
+ * reader has already chosen a vertical or a provider, which is where this
+ * property's orders actually come from (see components/header.tsx notes), so
+ * the code sits next to the button they are about to press. Same client-side
+ * window as the bar.
+ */
+export function PromoCodeNote({ className = "" }: { className?: string }) {
+  const show = useSyncExternalStore(noSubscribe, () => finish2026Active(), () => false);
+  if (!show) return null;
+  return (
+    <p className={`text-sm font-medium ${className}`}>
+      Use code <span className="font-mono font-bold tracking-wider">{FINISH2026_CODE}</span> at
+      checkout for {FINISH2026_DISCOUNT} off.
+    </p>
+  );
+}

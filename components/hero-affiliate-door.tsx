@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { agedLeadLabel } from "@/lib/affiliate";
 import { affiliateDestination } from "@/lib/store-front";
+import { PromoCodeNote } from "./promo-bar";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 /**
@@ -199,6 +200,8 @@ export function HeroAffiliateDoor({
           </Link>
         ))}
       </div>
+
+      <PromoCodeNote className={`mt-4 max-w-2xl ${t.disclosure}`} />
 
       {/*
         Tell the reader what is on the other side of the click. The marketing

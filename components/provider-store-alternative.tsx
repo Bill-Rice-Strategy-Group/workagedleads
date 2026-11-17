@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { affiliateUrl, storeCategoryPath } from "@/lib/affiliate";
 import { providerStoreComparison } from "@/lib/provider-store-match";
+import { PromoCodeNote } from "./promo-bar";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 /**
@@ -134,6 +135,8 @@ export function ProviderStoreAlternative({
           ))}
         </ul>
       )}
+
+      {hasOverlap && <PromoCodeNote className="mt-3 text-blue-200" />}
 
       {/* The head-to-head is internal and stays internal. It is the honest
           version of "keep the reader on-site first": a real comparison scored

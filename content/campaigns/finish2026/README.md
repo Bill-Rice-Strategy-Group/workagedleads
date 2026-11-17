@@ -20,8 +20,9 @@ whether commission is paid on the discounted total.
 | Date | Touch | Built by |
 |---|---|---|
 | Wed 11/18, 8am ET | Launch email to the main list | `scripts/finish2026-schedule.ts` |
-| Wed 11/18 to Fri 11/20 | Personal notes to top buyers (below) | Bill, by hand |
-| Once merged | Site-wide promo bar, hides itself after Dec 31 (`FINISH2026_PROMO_UNTIL`) | `components/promo-bar.tsx` |
+| Thu 11/19 to Fri 11/20 | 40 personal notes to top buyers (Gmail drafts, below) | Bill sends |
+| Live | Code beside the lead-type and provider store doors | `PromoCodeNote` |
+| Live | Site-wide promo bar, hides itself after Dec 31 (`FINISH2026_PROMO_UNTIL`) | `components/promo-bar.tsx` |
 | Tue 11/24 | Code mentioned in the newsletter | `data/newsletter-calendar.ts` specialHook |
 | Fri 11/27 (Black Friday) | "The one Black Friday buy that pays you back in January" | `scripts/finish2026-schedule.ts` |
 | Mon 11/30 | "December goes fast. January's leads don't have to wait." | `scripts/finish2026-schedule.ts` |
@@ -108,10 +109,34 @@ https://agedleadstore.com/all-lead-types/?utm_source=workagedleads&utm_medium=em
 
 ---
 
+## Store-door code notes (instead of a howtoworkleads.com bar)
+
+howtoworkleads.com now 301s to workagedleads.com, so there is no separate site to
+put a bar on. The "$9,132 header" figure turned out to be misleading (3 orders,
+one $6,000, from existing store customers using the header as a bookmark; see the
+notes in `components/header.tsx`). The surfaces that actually produce orders are
+the intent-matched doors, so `PromoCodeNote` (in `components/promo-bar.tsx`) puts
+the code right beside them:
+
+- the lead-type hero door (`components/hero-affiliate-door.tsx`), which also
+  renders on the home page and provider "best" pages
+- the provider-profile store alternative (`components/provider-store-alternative.tsx`)
+
+Same window as the promo bar. Link UTMs are unchanged, so the existing reads on
+those doors stay comparable.
+
+## Personal-note drafts (created 2026-11-17)
+
+40 Gmail drafts in Bill's inbox, subject "30% off for your January restock",
+using version A. Recipients were the top 40 store buyers by spend from Oct 1 to
+Nov 9, from the store's order summaries. Excluded: anyone unsubscribed from our
+list, anyone who ordered Nov 10 or later, and rows with no usable first name.
+The recipient list is not committed because it contains customer contact data.
+Send these from Thursday 11/19 on, so they don't land the same morning as the
+11/18 broadcast.
+
 ## Outside this repo
 
-- **howtoworkleads.com header bar.** Its header link earned $9,132 in July, more
-  than any other placement we have. Put the same one-line promo there, tagged
-  `utm_campaign=finish2026&utm_content=htwl-header`.
 - **LinkedIn post (11/18 or 11/19).** "Agents: stock your January pipeline before
-  the year closes. Aged Lead Store is 30% off with FINISH2026." Tag the link `utm_medium=social&utm_content=linkedin`.
+  the year closes. Aged Lead Store is 30% off with FINISH2026." Tag the link
+  `utm_medium=social&utm_content=linkedin`.
