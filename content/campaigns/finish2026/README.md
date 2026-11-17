@@ -147,5 +147,6 @@ Send these from Thursday 11/19 on, so they don't land the same morning as the
 ## Outside this repo
 
 - **LinkedIn post (11/18 or 11/19).** "Agents: stock your January pipeline before
-  the year closes. Aged Lead Store is 30% off with FINISH2026." Tag the link
-  `utm_medium=social&utm_content=linkedin`.
+  the year closes. Aged Lead Store is 30% off with FINISH2026." Put the link in
+  the first comment: `workagedleads.com/finish2026-li` (302s to the store,
+  tagged `utm_content=linkedin`).

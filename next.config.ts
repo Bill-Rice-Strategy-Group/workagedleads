@@ -44,6 +44,13 @@ const nextConfig: NextConfig = {
         destination: affiliateUrl({ campaign: "finish2026", content: "personal-note" }),
         permanent: false,
       },
+      // Same, for Bill's LinkedIn post (first comment), so social clicks read
+      // separately from the personal notes.
+      {
+        source: "/finish2026-li",
+        destination: affiliateUrl({ campaign: "finish2026", content: "linkedin" }),
+        permanent: false,
+      },
 
       // The home-improvement vertical had two lead-type pages: the canonical
       // slug and a legacy one carrying all the content. The content moved to
