@@ -32,7 +32,7 @@ The hard part used to be writing a personal email to a thousand people. Now a $2
 **Title:** Aged Leads Aren't Leads. They're a Customer Database. Here's How to Let AI Work It.
 **Slug:** aged-leads-customer-database-ai-assistant
 
-**Spotlight:** Seven simple steps: put your leads in a Google Sheet, connect Claude or ChatGPT to your Gmail, give it a short job description, and let it write a personal email to each person. You approve every email, and you spend your phone time only on the people who reply. Includes the exact job description to paste in and a 15-minute morning routine.
+**Spotlight:** Seven simple steps: put your leads in a Google Sheet, connect Claude or ChatGPT to your Gmail, give it a short job description, and let it write a personal email to each person. You approve every email, and you spend your phone time only on the people who reply. Add a free booking link so people can pick their own time. Includes the exact job description to paste in and a 15-minute morning routine.
 
 ## Quick Tips From the Trenches
 

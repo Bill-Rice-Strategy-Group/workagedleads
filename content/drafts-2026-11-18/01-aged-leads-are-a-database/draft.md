@@ -74,6 +74,8 @@ A few things make this different from an email blast:
 2. **Claude or ChatGPT, on a paid plan.** Both have a plan for about $20 a month, and both can connect to Gmail and Google Drive. If you're going to work a big list every day, the higher plans cost $100 to $200 a month and give you more use. That's still far less than paying a person to do this job.
 3. **Gmail or Google Workspace.** The AI sends from this account. If you have a business email through Google Workspace, use that.
 
+**One more free thing: a booking link.** Set up a Google Calendar appointment schedule (free with Gmail) or a free Calendly page. It gives you a link people click to pick a time that suits them. People like to control their own schedule and how they're contacted. A call they booked beats phone tag every time. Our [guide to scheduling links](/blog/scheduling-links-book-calls-capture-consent) walks through the setup.
+
 That's it. No new software, no developer.
 
 ## Step 1: Set up your sheet
@@ -100,7 +102,7 @@ The exact menu names change from time to time, but the steps are the same in bot
 
 1. Open Settings.
 2. Find Connectors or Apps.
-3. Turn on **Gmail** and **Google Drive** (in Claude, also turn on **Google Sheets** if you see it listed separately).
+3. Turn on **Gmail** and **Google Drive** (in Claude, also turn on **Google Sheets** if you see it listed separately). Turn on **Google Calendar** too, so the AI can see who booked a call.
 4. Sign in with the same Google account that has your sheet and your email.
 
 Both tools ask you to approve each email before it goes out. Keep that turned on. It's your safety net, and it's what keeps this personal.
@@ -125,6 +127,7 @@ Copy this, fill in the brackets, and paste it in:
 > - Never pretend we've spoken before. Never say "as we discussed" or "following up on our call."
 > - Never invent rates, prices, deadlines, or say someone qualifies or is approved.
 > - Use only facts that are in the sheet.
+> - Offer my booking link, [your booking link], so they can pick a time to talk if they'd rather.
 > - End every email with my mailing address, [address], and the line: "If you'd rather not hear from me, just reply 'stop' and I won't email again."
 > - Never email anyone marked "Yes" in the Unsubscribed column.
 > - Send no more than [25] emails a day.
@@ -163,7 +166,7 @@ A good first email for that group might look like this:
 
 > Hi Linda,
 >
-> You looked into refinancing your Ohio home back in 2023. Rates have moved a fair bit since then. Did you end up refinancing, or is it still on your list?
+> You looked into refinancing your Ohio home back in 2023. Rates have moved a fair bit since then. Did you end up refinancing, or is it still on your list? If it's easier to talk it through, you can pick a time that suits you here: [booking link]
 >
 > Mike Torres, NMLS #000000
 > [mailing address]
@@ -179,11 +182,12 @@ Short, true, one question. When the drafts are right, approve them and let them 
 
 Paste this in each morning:
 
-> Check my Gmail for replies from anyone on the sheet since yesterday. For each one, tell me in one line what they said, and update their Status and Notes. Mark anyone who said "stop" or "not interested" as Unsubscribed. Then give me a list of who I should call today, most interested first, with the reason. After that, draft today's new emails for the next 25 people.
+> Check my Gmail for replies from anyone on the sheet since yesterday. For each one, tell me in one line what they said, and update their Status and Notes. Mark anyone who said "stop" or "not interested" as Unsubscribed. List anyone who booked a call on my calendar, with a short brief on each. Then give me a list of who I should call today, most interested first, with the reason. After that, draft today's new emails for the next 25 people.
 
 Here's how to read what comes back:
 
-- **They replied with a question or "yes, call me."** Call today. They asked for it.
+- **They booked a time.** That's your best lead. They picked the time, so they're expecting you. Read the AI's brief and show up prepared.
+- **They replied with a question or "yes, call me."** Call today. They asked for it. Or reply with your booking link and let them pick the time.
 - **They replied with something like "not right now."** Mark them for a follow-up email in 60 or 90 days. Don't call.
 - **They said stop.** Stop. No more email, no calls. The AI should already have marked them.
 - **No reply.** That's normal. Most people won't answer the first email. They stay on your list for the monthly email in Step 7.
@@ -213,7 +217,7 @@ Most of the people on your list won't be ready this month. Some will be ready in
 In plain terms:
 
 - **Every email needs** an honest subject line, your real name, your physical mailing address, and a clear way to say stop. Honor every stop request. The law gives you 10 business days, but there's no reason to wait. The [FTC's CAN-SPAM guide](https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business) has the full list.
-- **No texting.** Marketing texts need written consent, and the consent on an aged lead went to the company that collected it, not to you. If someone replies "text me," that's different. Save that email.
+- **No texting.** Marketing texts need written consent, and the consent on an aged lead went to the company that collected it, not to you. If someone replies "text me," that's different. Save that email. Your booking page is also a good place to ask for phone and text permission when they book.
 - **Call by hand.** The calls in this system are you, dialing one person at a time, mostly people who wrote back and asked for it. Don't hand the AI your phone and don't use an AI voice to call aged leads.
 - **Scrub before you call.** If you're calling someone who hasn't replied, check the federal and state Do Not Call lists first.
 - **Watch your email account.** If replies dry up or emails start bouncing, slow down. Some agents set up a second email address on a separate domain for this outreach so their main business email is never at risk. That's worth doing once you're sending more than a few dozen a day.
