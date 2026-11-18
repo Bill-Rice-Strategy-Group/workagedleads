@@ -1,6 +1,6 @@
 # Newsletter issue draft — "Stop treating aged leads like leads"
 
-Status: DRAFT. Not archived, not scheduled. Same structure as the weekly issue
+Status: Featured article PUBLISHED to Sanity 2026-11-18 (post-aged-leads-customer-database-ai-assistant). Issue not archived or scheduled; the Sunday cron drafts it from the week-13 plan. Same structure as the weekly issue
 (intro, Shop CTA, Featured, 3 Quick Tips, Industry Insight, From the Blog). The
 Shop CTA, vertical strip and footer come from the template.
 

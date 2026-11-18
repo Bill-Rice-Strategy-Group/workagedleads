@@ -8,7 +8,7 @@ primaryKeyword: how to work aged leads with AI
 ---
 
 <!--
-DRAFT, 2026-11-18. Not in Sanity. Bill's idea, written for a non-technical reader.
+PUBLISHED to Sanity 2026-11-18 via scripts/publish-aged-leads-database-2026-11-18.ts. Source of truth for re-publishing (--replace). Bill's idea, written for a non-technical reader.
 Before publishing, Bill to check:
   1. "About a dollar a name" in the intro and CTA: APPROVED by Bill 2026-11-18. Keep it.
   2. Connector facts (verified 2026-11-18): Claude and ChatGPT can both send from Gmail
