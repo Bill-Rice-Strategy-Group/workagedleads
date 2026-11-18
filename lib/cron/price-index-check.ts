@@ -1,57 +1,47 @@
 /**
- * Freshness verdict for the Lead Price Index study, with a dated snooze.
+ * Freshness verdict for the Lead Price Index study.
  *
- * WHY A SNOOZE (Bill, 2026-09-15)
+ * A REMINDER, NOT A FAILURE (2026-11-18)
  *
- * The study is a quarterly human publishing task. Once it goes overdue, this
- * check fails on every daily health run, and the alert email it produces is the
- * same email a genuine cron failure uses. Through Bill's trip (2026-09-17 to
- * 09-30) that is fourteen identical alerts about something nobody can act on
- * from an iPad — which trains the reader to skim past exactly the email that
- * would carry a real failure.
+ * The study is a quarterly human publishing task. It used to fail the daily
+ * health check once it went overdue, which sent the same "[ALERT] N Work Aged
+ * Leads cron failing" email a genuine cron failure sends. From 2026-10-05 (when
+ * the dated snooze expired) that email went out every day for one reason only:
+ * the study was late. No cron had failed. An alert that fires daily for
+ * something no cron can fix trains the reader to skim past exactly the email
+ * that would carry a real failure.
  *
- * WHY IT MUST EXPIRE
- *
- * A snooze with no end date is a monitor turned off with a comment explaining
- * why it looked like a good idea at the time. The date is a hard stop: from
- * PRICE_INDEX_SNOOZE_UNTIL onward the check reports honestly again, whether or
- * not anyone remembers the snooze existed. That behavior is what the test pins.
+ * So an overdue study is now `ok: true, reminder: true`. The health check does
+ * not count it as failing and never sends an email for it alone; when a real
+ * failure does send the email, the reminder rides along in its own row. The
+ * task itself is tracked where tasks belong: BACKLOG.md ("Publish the quarterly
+ * Lead Price Index study"), which the BRSG portfolio report reads.
  */
 
 /** The study is judged on its own quarterly cadence. */
 export const PRICE_INDEX_MAX_AGE_DAYS = 100;
 
-/**
- * Alerts for an overdue study are held until this UTC date (inclusive of the
- * day before; alerting resumes ON this date). Set for Bill's return.
- */
-export const PRICE_INDEX_SNOOZE_UNTIL = "2026-10-05";
-
 export interface PriceIndexVerdict {
+  /** Always true: a late study is not a cron failure. */
   ok: boolean;
-  snoozed: boolean;
+  /** True when the study is overdue and a human needs to publish it. */
+  reminder: boolean;
   detail: string;
 }
 
-export function evaluatePriceIndexAge(ageDays: number, now: Date): PriceIndexVerdict {
+export function evaluatePriceIndexAge(ageDays: number): PriceIndexVerdict {
   if (ageDays <= PRICE_INDEX_MAX_AGE_DAYS) {
-    return { ok: true, snoozed: false, detail: `Latest benchmark published ${ageDays}d ago` };
+    return { ok: true, reminder: false, detail: `Latest benchmark published ${ageDays}d ago` };
   }
 
-  const overdue =
-    `Benchmarks are ${ageDays}d old — the quarterly Lead Price Index study is due. ` +
-    `This is a human publishing task, not a cron failure; marketwatch only ` +
-    `surfaces pricing signals to verify.`;
-
-  if (now < new Date(`${PRICE_INDEX_SNOOZE_UNTIL}T00:00:00Z`)) {
-    return {
-      ok: true,
-      snoozed: true,
-      detail: `${overdue} Alert snoozed until ${PRICE_INDEX_SNOOZE_UNTIL}.`,
-    };
-  }
-
-  return { ok: false, snoozed: false, detail: overdue };
+  return {
+    ok: true,
+    reminder: true,
+    detail:
+      `Benchmarks are ${ageDays}d old — the quarterly Lead Price Index study is due. ` +
+      `This is a human publishing task, not a cron failure; it is tracked in BACKLOG.md ` +
+      `and does not trigger this alert on its own.`,
+  };
 }
 
 /**

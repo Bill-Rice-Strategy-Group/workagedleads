@@ -353,11 +353,16 @@ publishing task. Verified against production Sanity — **all four checks pass, 
   `{ allowRetiredPath: true }`, and are marked `@deprecated`. Pinned by
   `lib/cron/marketwatch-publish.test.ts` (refuses before touching Sanity). Verified: typecheck, 506/506
   tests, `next build` green.
-- [ ] **P2 [content] — the Lead Price Index is due.** Last study 2026-06-01, covering 2026-03 → 2026-06
-  (106 docs). Q3 has not been published. The new check goes red ~2026-09-09 if it still hasn't. This is
-  the *real* version of the alert that has been firing all along, and it is a writing task, not a code
-  one. Note `components/price-trend-chart` needs 3+ real months per vertical, so the longer this slips
-  the more verticals silently drop their trend chart. Effort: M (human research).
+- [ ] **P1 [content]** — Publish the quarterly Lead Price Index study (benchmarks last refreshed
+  2026-03, the newest month in `data/price-benchmarks.ts`; 262 days old on 2026-11-18). Q3 and Q4 2026
+  have not been published. Since 2026-11-18 the daily health check no longer emails about this on its own
+  (it was the only reason "[ALERT] 1 Work Aged Leads cron failing" went out every day); it shows as an
+  amber reminder row when a real failure sends the email, and this item is where the task lives. Close
+  it when a new month lands in `data/price-benchmarks.ts` (`npm run price-index:gap` →
+  `price-index:worksheet` → `price-index:import`). Note `components/price-trend-chart` needs 3+ real
+  months per vertical, so the longer this slips the more verticals drop their trend chart. Effort: M
+  (human research). (Supersedes the 2026-08 P2 "the Lead Price Index is due", which dated the study by
+  the June Sanity docs rather than the published study.)
 - [x] **P2 [data-integrity] — "9 verticals one month from a trend chart" was a counting error.**
   (2026-11-17) `scripts/price-index-gap.ts` counted distinct months across *any* trust-passing cell,
   real-time included. The page charts one aged series only (`31-85-days`/`86-180-days`, one
