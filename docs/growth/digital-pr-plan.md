@@ -95,7 +95,7 @@ relevance.
 5. **Ongoing:** every `/price-index` monthly update = a fresh data hook to pitch.
 
 **Target:** 5–10 genuine referring domains in 90 days. Track new refdomains in the
-monthly Ahrefs re-audit (same run as the disavow refresh).
+monthly DataForSEO Backlinks API pull (same run as the disavow refresh).
 
 ## What I can do vs. what needs Bill
 

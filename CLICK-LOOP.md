@@ -159,7 +159,7 @@ Score every candidate in the backlog:
 ```
 expected monthly ALS clicks  =  D  ×  P  ×  C
 
-D = monthly search demand for the target cluster   (Ahrefs / GSC)
+D = monthly search demand for the target cluster   (GSC impressions; DataForSEO volume as an estimate)
 P = achievable organic CTR at a realistic position for a new page on this domain
 C = measured page → agedleadstore.com click rate for that page archetype
 ```

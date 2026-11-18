@@ -43,6 +43,16 @@ The flagship carries a specific compliance framing across every asset:
 
 If legal guidance in one file changes, cross-check the other content files and the live TS email modules to keep them consistent.
 
+## SEO data: DataForSEO only. Never Ahrefs.
+
+BRSG has no Ahrefs account and never has. Third-party SEO data for BRSG sites (rankings, keyword volumes, backlinks, competitors, top pages) comes from **DataForSEO**: its API in code (`DATAFORSEO_LOGIN` / `DATAFORSEO_PASSWORD`), or the DataForSEO MCP in Claude sessions.
+
+- Do not call Ahrefs, add an Ahrefs key, or suggest Ahrefs as a fix, fallback or purchase.
+- DataForSEO's domain `rank` is its own 0–1000 scale. Never call it "DR" or "Domain Rating".
+- First-party data (Search Console, GA4) outranks any third-party estimate. Label DataForSEO numbers as estimates.
+
+Older notes in BACKLOG.md and `docs/` cite Ahrefs pulls and "DR" figures from before this rule. They are historical records, not a source to repeat. `scripts/refresh-disavow.ts` and `scripts/build-merged-disavow.ts` still parse old Ahrefs CSV exports; feed them a plain one-domain-per-line list from DataForSEO instead.
+
 ## Daily cron commits to main
 
 A Vercel cron (`gsc-trend`, 12:00 UTC daily) auto-commits `data/gsc-trend.json` to `main` — the disavow / toxic-backlink tripwire. Before pushing your own work to `main`, always `git fetch origin main && git pull --rebase origin main` to avoid non-fast-forward rejects. (The old `daily-performance` cron — which also committed `performance-backlog.json` — was unscheduled 2026-07-03; its report is superseded by the consolidated BRSG Portfolio Performance Report. The route survives for manual runs.)
