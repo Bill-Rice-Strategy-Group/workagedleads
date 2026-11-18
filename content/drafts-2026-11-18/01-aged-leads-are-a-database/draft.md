@@ -10,8 +10,7 @@ primaryKeyword: how to work aged leads with AI
 <!--
 DRAFT, 2026-11-18. Not in Sanity. Bill's idea, written for a non-technical reader.
 Before publishing, Bill to check:
-  1. "About a dollar apiece" in the intro and CTA. Bill's own figure; check it against
-     the Price Index for the verticals named, or soften to "a dollar or two".
+  1. "About a dollar a name" in the intro and CTA: APPROVED by Bill 2026-11-18. Keep it.
   2. Connector facts (verified 2026-11-18): Claude and ChatGPT can both send from Gmail
      on paid plans and ask for approval before each send by default.
      Sources: support.claude.com/en/articles/10166901 ; ChatGPT Gmail send since mid-2026.
