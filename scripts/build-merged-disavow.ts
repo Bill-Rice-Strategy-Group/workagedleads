@@ -13,11 +13,15 @@
  * not accept domain properties, which is why the URL-prefix one exists.
  *
  * Usage:
- *   npm run disavow:merged -- <als.json> <htwl.json>            # dry run
- *   npm run disavow:merged -- <als.json> <htwl.json> --apply    # writes the file
+ *   npm run disavow:merged -- <als-domains.txt> <htwl-domains.txt>            # dry run
+ *   npm run disavow:merged -- <als-domains.txt> <htwl-domains.txt> --apply    # writes the file
  *
- * Each input is an Ahrefs `site-explorer-referring-domains` export — either the
- * raw JSON array of row objects, or a CSV with a `domain` column.
+ * Each input is a plain list, one domain per line (brsg-link-audit's
+ * `disavow-domains.txt`, or the `items[].domain` values of a DataForSEO
+ * `backlinks/referring_domains/live` pull). `domain:` lines, `#` comments and
+ * blank lines are accepted; CSV/JSON exports are rejected (see
+ * lib/backlink-audit/domain-list.ts). DataForSEO data is a third-party
+ * estimate — cross-check against GSC > Links before uploading.
  *
  * What lands in the file:
  *   1. Everything already in data/backlink-audit/disavow.txt. Those 291 were
@@ -32,12 +36,17 @@
  * change just because this file is being built in a hurry.
  */
 import { readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { basename, join } from "node:path";
 import {
   classifyDomains,
   DEFAULT_WHITELIST,
   type Classification,
 } from "../lib/backlink-audit/spam-classifier";
+import {
+  parseDomainList,
+  normalizeDomain,
+  DomainListError,
+} from "../lib/backlink-audit/domain-list";
 
 const SOURCE_PATH = join(process.cwd(), "data", "backlink-audit", "disavow.txt");
 const OUT_PATH = join(
@@ -52,7 +61,8 @@ const OUT_PATH = join(
  * and land in "clean" on name alone, but they are link aggregators that scrape
  * and republish the whole web — the outbound counts are not a typo.
  *
- * Measured via Ahrefs site-explorer-outlinks-stats, 2026-08-03.
+ * Outbound counts measured 2026-08-03 with a third-party tool BRSG no longer
+ * uses. Re-check with DataForSEO before quoting them anywhere new.
  */
 const EVIDENCED_ADDITIONS: { domain: string; reason: string }[] = [
   {
@@ -78,37 +88,19 @@ const MERGED_WHITELIST = [
   "workagedleads.com",
 ];
 
-interface RefRow {
-  domain: string;
-  domain_rating?: number;
-  dofollow_links?: number;
-  traffic_domain?: number;
-}
-
-function parseRefdomains(path: string): RefRow[] {
-  const raw = readFileSync(path, "utf8").trim();
-
-  if (raw.startsWith("[") || raw.startsWith("{")) {
-    const parsed = JSON.parse(raw);
-    const rows = Array.isArray(parsed) ? parsed : (parsed.refdomains ?? []);
-    return (rows as RefRow[]).filter((r) => r?.domain);
+function readDomainsFile(path: string): string[] {
+  try {
+    return parseDomainList(readFileSync(path, "utf8"), path);
+  } catch (e) {
+    if (e instanceof DomainListError) {
+      console.error(e.message);
+      process.exit(1);
+    }
+    throw e;
   }
-
-  // CSV fallback — same shape refresh-disavow.ts accepts.
-  const lines = raw.split("\n").map((l) => l.trim()).filter(Boolean);
-  const header = lines[0].toLowerCase();
-  const cols = header.split(",").map((c) => c.replace(/"/g, "").trim());
-  const idx = cols.indexOf("domain");
-  if (idx < 0) throw new Error(`${path}: no "domain" column`);
-  return lines
-    .slice(1)
-    .map((l) => ({ domain: (l.split(",")[idx] ?? "").replace(/"/g, "").trim() }))
-    .filter((r) => r.domain);
 }
 
-function normalize(d: string): string {
-  return d.trim().toLowerCase().replace(/^www\./, "");
-}
+const normalize = normalizeDomain;
 
 function existingDisavowed(text: string): Set<string> {
   return new Set(
@@ -132,16 +124,19 @@ function main() {
     process.exit(1);
   }
 
-  // Keep the strongest row per domain so the review listing shows the real
-  // dofollow count rather than whichever profile was read last.
-  const profile = new Map<string, RefRow>();
+  // Union of both profiles; remember which file(s) each domain came from so the
+  // review listing says where to look.
+  const profile = new Map<string, Set<string>>();
   for (const file of files) {
-    for (const row of parseRefdomains(file)) {
-      const d = normalize(row.domain);
-      const prev = profile.get(d);
-      if (!prev || (row.dofollow_links ?? 0) > (prev.dofollow_links ?? 0)) {
-        profile.set(d, { ...row, domain: d });
-      }
+    const domains = readDomainsFile(file);
+    if (!domains.length) {
+      console.error(`No domains in ${file}`);
+      process.exit(1);
+    }
+    for (const d of domains) {
+      const seen = profile.get(d) ?? new Set<string>();
+      seen.add(basename(file));
+      profile.set(d, seen);
     }
   }
 
@@ -178,20 +173,14 @@ function main() {
   if (review.length) {
     console.log("NEEDS A HUMAN — not in the file:");
     for (const c of review) {
-      const r = profile.get(c.domain);
-      console.log(
-        `  ${c.domain.padEnd(40)} DR ${String(r?.domain_rating ?? "?").padStart(4)}  ` +
-          `dofollow=${r?.dofollow_links ?? 0}  [${c.reasons.join("; ")}]`,
-      );
+      const from = [...(profile.get(c.domain) ?? [])].join(", ");
+      console.log(`  ${c.domain.padEnd(40)} (${from})  [${c.reasons.join("; ")}]`);
     }
     console.log("");
   }
 
   const today = new Date().toISOString().slice(0, 10);
-  const reviewNote = (c: Classification) => {
-    const r = profile.get(c.domain);
-    return `#   ${c.domain} — DR ${r?.domain_rating ?? "?"}, dofollow ${r?.dofollow_links ?? 0}: ${c.reasons.join("; ")}`;
-  };
+  const reviewNote = (c: Classification) => `#   ${c.domain}: ${c.reasons.join("; ")}`;
 
   const header = [
     "# Disavow file for workagedleads.com",
