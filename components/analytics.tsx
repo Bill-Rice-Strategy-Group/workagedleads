@@ -14,6 +14,18 @@ const IS_NON_PROD_DEPLOY =
   !!process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production';
 
 /**
+ * AUTOMATED BROWSERS ARE NOT VISITORS (2026-11-18).
+ * navigator.webdriver is true in automated browsers (headless Chrome,
+ * Puppeteer, Playwright, Selenium). They run JavaScript, carry no referrer, and
+ * GA4's known-bot list does not catch them, so they land as ~1s "Direct"
+ * sessions (the week to 2026-11-18 showed 235 Direct sessions, 12 engaged).
+ * Both loaders below skip them: standalone GA4 sends no config command, and
+ * the GTM container (which carries the GA4 tag) is not loaded at all. Real
+ * visitors' browsers never set the flag. Same pattern as billricestrategy #33
+ * and proinvestorhub #70.
+ */
+
+/**
  * Standalone GA4 — only loads if GTM is NOT configured.
  * When GTM is active, GA4 fires through GTM (no need to load gtag.js twice).
  */
@@ -34,7 +46,7 @@ export function GoogleAnalyticsTag() {
           __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-if(location.hostname==='${PROD_HOST}'){gtag('config','${GA4_ID}');}`,
+if(location.hostname==='${PROD_HOST}'&&!navigator.webdriver){gtag('config','${GA4_ID}');}`,
         }}
       />
     </>
@@ -55,7 +67,7 @@ export function GoogleTagManager() {
         id="gtm-script"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
-          __html: `if(location.hostname==='${PROD_HOST}'){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          __html: `if(location.hostname==='${PROD_HOST}'&&!navigator.webdriver){(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
