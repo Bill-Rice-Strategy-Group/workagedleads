@@ -235,10 +235,12 @@ export const NEWSLETTER_CALENDAR: NewsletterPlan[] = [
     sendDate: "2026-12-01",
     theme: "The Aged Lead Mindset",
     exclusiveTipTopics: [
-      "December is not dead — who is actually answering the phone this month",
-      "The year-end urgency that is real, and the kind you should not manufacture",
-      "Buying in December for a January start",
+      "Read the first 10 AI-drafted emails yourself: does it sound like you, and is every fact true",
+      "Steady, not big: about what you'd send by hand, 20 to 25 personal emails a day",
+      "Replies are the signal: have the AI rank who replied and who to call first",
     ],
+    specialHook:
+      "FEATURE the article \"Aged Leads Aren't Leads. They're a Customer Database. Here's How to Let AI Work It.\" (slug aged-leads-customer-database-ai-assistant). Bill approved this slot 2026-11-18. Reference copy: content/drafts-2026-11-18/02-newsletter-aged-leads-database/issue.md. Core idea, in Bill's words: aged leads are a customer database you can buy for about a dollar a name, not hot leads; work them like past clients, and let a $20 Claude or ChatGPT assistant connected to a Google Sheet and Gmail write each person a personal email. This is NOT a volume play: a steady pace, about what you'd send by hand; the AI does the boring work and the agent takes the calls. No texting, no autodialing. Do not claim Bill buys leads.",
     status: "planned",
   },
   {

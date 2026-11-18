@@ -15,8 +15,8 @@ Before publishing, Bill to check:
      on paid plans and ask for approval before each send by default.
      Sources: support.claude.com/en/articles/10166901 ; ChatGPT Gmail send since mid-2026.
      Menu names change. The steps below say "Settings, then Connectors" on purpose.
-  3. Gmail limits: about 500 recipients a day on a free Gmail account, 2,000 on Google
-     Workspace (Google's published sending limits). We tell readers to stay far under them.
+  3. Gmail limits (500 free / 2,000 Workspace) from memory, unchecked. Bill 2026-11-18: fine
+     to mention, but the point is a steady manual-like pace, not volume. Copy reflects that.
 -->
 
 I get the same email a few times a month. Someone bought a batch of aged leads, called them for two weeks, and wants to know why they "don't work."
@@ -153,7 +153,7 @@ When the groups look right, say: "Fill in the Segment column with these groups."
 
 ## Step 5: Write and send the first emails
 
-**Pick one group. Ask the AI to write emails for the first 10 people, read every one, and fix anything that sounds off. When the drafts sound like you, approve them. Start with 20 to 25 emails a day and grow slowly.**
+**Pick one group. Ask the AI to write emails for the first 10 people, read every one, and fix anything that sounds off. When the drafts sound like you, approve them. Then keep a steady pace of 20 to 25 a day.**
 
 > Write emails for the first 10 people in the "2023 refinance" group. Show me each one before sending.
 
@@ -171,7 +171,7 @@ A good first email for that group might look like this:
 
 Short, true, one question. When the drafts are right, approve them and let them send. Then tell the AI to mark those people as "Emailed" with today's date.
 
-**Go slow at first.** A brand-new burst of hundreds of emails from your account looks like spam to Google, even if every email is personal. Start around 20 to 25 a day for the first week or two. If replies are coming in and nothing is bouncing, raise it a little each week. Free Gmail accounts have a hard limit of about 500 recipients a day and Workspace accounts about 2,000. Stay far below those.
+**Keep a steady pace.** This system isn't about volume. Send about what you'd send by hand on a good day, 20 to 25 personal emails, every day. The AI does the boring part: reading the sheet, writing each email, keeping track. You do the part that makes money: taking the calls. Steady also keeps your email account healthy. A sudden burst of hundreds of emails looks like spam to Google, even when each one is personal. Gmail does have daily caps (about 500 recipients on a free account, 2,000 on Workspace), but this system never gets near them.
 
 ## Step 6: Your 15-minute daily routine
 

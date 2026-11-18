@@ -4,7 +4,7 @@ Status: DRAFT. Not archived, not scheduled. Same structure as the weekly issue
 (intro, Shop CTA, Featured, 3 Quick Tips, Industry Insight, From the Blog). The
 Shop CTA, vertical strip and footer come from the template.
 
-Suggested slot: **Tuesday 2026-12-01**, whose calendar theme is already
+Slot: **Tuesday 2026-12-01** (approved by Bill 2026-11-18), whose calendar theme is already
 "The Aged Lead Mindset" (`data/newsletter-calendar.ts`, week 13). Not wired in.
 If Bill wants it, either update week 13's plan to point the cron at this
 feature, or send this copy as written.
@@ -40,9 +40,9 @@ The hard part used to be writing a personal email to a thousand people. Now a $2
 
 Before you let an AI send anything, read its first 10 drafts. Check two things: does it sound like you, and is every fact true? AI will sometimes write "as we discussed" or make up a rate. Tell it plainly never to do either, and keep the setting on that asks your approval before each email goes out.
 
-### 2. Start at 25 emails a day
+### 2. Steady, not big
 
-A sudden burst of hundreds of emails from your account looks like spam to Google, even if each one is personal. Send 20 to 25 a day for the first week or two, then raise it a little each week while replies come in and nothing bounces. Free Gmail caps you around 500 recipients a day. Stay far below that.
+This isn't a volume play. Send about what you'd send by hand, 20 to 25 personal emails a day, every day. The AI does the boring part and you take the calls. A sudden burst of hundreds looks like spam to Google, even when each email is personal.
 
 ### 3. Replies are the signal
 
