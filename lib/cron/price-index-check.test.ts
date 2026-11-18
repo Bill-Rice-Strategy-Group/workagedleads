@@ -3,42 +3,30 @@ import assert from "node:assert/strict";
 import {
   evaluatePriceIndexAge,
   PRICE_INDEX_MAX_AGE_DAYS,
-  PRICE_INDEX_SNOOZE_UNTIL,
   latestPublishedMonth,
   studyAgeDays,
 } from "./price-index-check";
 
 describe("evaluatePriceIndexAge", () => {
-  test("a fresh study is ok and not snoozed", () => {
-    const v = evaluatePriceIndexAge(PRICE_INDEX_MAX_AGE_DAYS, new Date("2026-09-15T13:00:00Z"));
+  test("a fresh study is ok with no reminder", () => {
+    const v = evaluatePriceIndexAge(PRICE_INDEX_MAX_AGE_DAYS);
     assert.equal(v.ok, true);
-    assert.equal(v.snoozed, false);
+    assert.equal(v.reminder, false);
   });
 
-  test("an overdue study is held quiet before the snooze date", () => {
-    const v = evaluatePriceIndexAge(106, new Date("2026-09-20T13:00:00Z"));
+  test("an overdue study is a reminder, never a failure", () => {
+    // A late study is a human publishing task. Reporting it as a failing check
+    // sent a daily "[ALERT] 1 Work Aged Leads cron failing" email with no
+    // failing cron behind it (2026-10-05 through 2026-11-18).
+    const v = evaluatePriceIndexAge(262);
     assert.equal(v.ok, true);
-    assert.equal(v.snoozed, true);
-    assert.match(v.detail, new RegExp(`snoozed until ${PRICE_INDEX_SNOOZE_UNTIL}`));
+    assert.equal(v.reminder, true);
+    assert.match(v.detail, /262d old/);
+    assert.match(v.detail, /human publishing task/);
   });
 
-  test("the snooze EXPIRES — an overdue study alerts again on the snooze date", () => {
-    // The whole risk of a snooze is that it quietly becomes permanent. This is
-    // the line that stops that: on the date, the check reports honestly with no
-    // human needing to remember the snooze was ever set.
-    const on = evaluatePriceIndexAge(120, new Date(`${PRICE_INDEX_SNOOZE_UNTIL}T13:00:00Z`));
-    assert.equal(on.ok, false);
-    assert.equal(on.snoozed, false);
-
-    const after = evaluatePriceIndexAge(150, new Date("2026-11-01T13:00:00Z"));
-    assert.equal(after.ok, false);
-  });
-
-  test("the snooze date is close enough to still be a snooze", () => {
-    // A date set a year out would be a disabled monitor with extra steps.
-    const until = new Date(`${PRICE_INDEX_SNOOZE_UNTIL}T00:00:00Z`).getTime();
-    const set = new Date("2026-09-15T00:00:00Z").getTime();
-    assert.ok((until - set) / 86_400_000 <= 30, "snooze longer than 30 days from when it was set");
+  test("the reminder starts the day after the quarterly threshold", () => {
+    assert.equal(evaluatePriceIndexAge(PRICE_INDEX_MAX_AGE_DAYS + 1).reminder, true);
   });
 });
 
@@ -91,7 +79,7 @@ describe("measuring the PUBLISHED study, not the Sanity docs", () => {
   test("a published study that is current reports ok", () => {
     const now = new Date("2026-10-07T00:00:00Z");
     const age = studyAgeDays("2026-10", now);
-    assert.equal(evaluatePriceIndexAge(age, now).ok, true);
+    assert.equal(evaluatePriceIndexAge(age).ok, true);
   });
 
   test("rejects a malformed month instead of silently returning NaN days", () => {

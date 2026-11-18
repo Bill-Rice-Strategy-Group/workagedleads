@@ -4,20 +4,19 @@ import { Resend } from "resend";
 import { recordCronRun, type CronName } from "@/lib/cron/heartbeat";
 import { MONITORED_CRONS, CRON_STALENESS } from "@/lib/cron/monitored";
 import { evaluatePriceIndexAge, latestPublishedMonth, studyAgeDays } from "@/lib/cron/price-index-check";
+import {
+  alertSubject,
+  failingChecks,
+  reminderChecks,
+  shouldSendAlert,
+  type HealthCheck,
+} from "@/lib/cron/health-alert";
 import { PRICE_BENCHMARKS, quarterLabel } from "@/data/price-benchmarks";
 
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
 
 const ALERT_EMAIL = "bill@billricestrategy.com";
-
-type HealthCheck = {
-  name: string;
-  ok: boolean;
-  detail: string;
-  lastSeen?: string;
-  ageDays?: number;
-};
 
 function getSanityClient() {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -56,8 +55,9 @@ function daysBetween(fromIso: string, to: Date): number {
 //
 // So: measure the study on the study's own quarterly cadence, and let the
 // marketwatch heartbeat below be the only thing that speaks for the cron.
-// The age threshold and the dated snooze live in lib/cron/price-index-check.ts,
-// where the snooze's expiry is tested.
+// The age threshold lives in lib/cron/price-index-check.ts. Since 2026-11-18 an
+// overdue study is a *reminder* (ok, reminder: true): it never sends the alert
+// email on its own — see lib/cron/health-alert.ts.
 
 /**
  * MEASURE THE PUBLISHED STUDY, NOT THE SANITY DOCS (fixed 2026-10-07).
@@ -95,12 +95,13 @@ function checkPriceIndexStudy(now: Date): HealthCheck {
   // old as 2026-03-01.
   const publishedAt = `${newest}-01T00:00:00Z`;
   const age = studyAgeDays(newest, now);
-  const { ok, detail } = evaluatePriceIndexAge(age, now);
+  const { ok, reminder, detail } = evaluatePriceIndexAge(age);
 
   const count = PRICE_BENCHMARKS.filter((b) => b.month === newest).length;
   return {
     name: "Lead Price Index study",
     ok,
+    reminder,
     detail: `${detail} Published study: ${quarterLabel(newest)} (${newest}), ${count} benchmarks.`,
     lastSeen: publishedAt,
     ageDays: age,
@@ -149,17 +150,22 @@ async function checkCronHeartbeats(
 }
 
 function buildAlertEmail(checks: HealthCheck[], now: Date): string {
-  const failing = checks.filter((c) => !c.ok);
+  const failing = failingChecks(checks);
+  const reminders = reminderChecks(checks);
   const rows = checks
-    .map(
-      (c) => `
+    .map((c) => {
+      const isReminder = c.ok && c.reminder === true;
+      const dot = !c.ok ? "#dc2626" : isReminder ? "#d97706" : "#10b981";
+      const text = !c.ok ? "#991b1b" : isReminder ? "#92400e" : "#1f2937";
+      const tag = isReminder ? ` <span style="font-weight: 400; color: #92400e;">(reminder)</span>` : "";
+      return `
       <tr>
         <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; font-weight: 600;">
-          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: ${c.ok ? "#10b981" : "#dc2626"}; margin-right: 8px;"></span>${c.name}
+          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: ${dot}; margin-right: 8px;"></span>${c.name}${tag}
         </td>
-        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; color: ${c.ok ? "#1f2937" : "#991b1b"};">${c.detail}</td>
-      </tr>`
-    )
+        <td style="padding: 10px 12px; border-bottom: 1px solid #e5e7eb; color: ${text};">${c.detail}</td>
+      </tr>`;
+    })
     .join("");
 
   const bannerColor = failing.length > 0 ? "#dc2626" : "#166534";
@@ -167,6 +173,10 @@ function buildAlertEmail(checks: HealthCheck[], now: Date): string {
     failing.length > 0
       ? `${failing.length} cron health check${failing.length > 1 ? "s" : ""} failing`
       : "All automations healthy";
+  const reminderNote =
+    reminders.length > 0
+      ? ` Amber rows are human-task reminders, not failures — they never send this email on their own.`
+      : "";
 
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8"></head>
@@ -179,7 +189,7 @@ function buildAlertEmail(checks: HealthCheck[], now: Date): string {
   <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #e5e7eb;">
     ${rows}
   </table>
-  <p style="color: #9ca3af; font-size: 12px; margin-top: 24px;">This alert fires daily at 13:00 UTC. You only receive an email when something is failing.</p>
+  <p style="color: #9ca3af; font-size: 12px; margin-top: 24px;">This alert fires daily at 13:00 UTC. You only receive an email when something is failing.${reminderNote}</p>
 </body></html>`;
 }
 
@@ -199,9 +209,12 @@ export async function GET(request: Request) {
   ]);
 
   const checks = [...contentChecks, ...heartbeatChecks];
-  const failing = checks.filter((c) => !c.ok);
+  const failing = failingChecks(checks);
+  const reminders = reminderChecks(checks);
 
-  if (failing.length > 0) {
+  // Reminders (e.g. an overdue Lead Price Index study) never send this email
+  // on their own; they ride along only when a real failure sends it.
+  if (shouldSendAlert(checks)) {
     const apiKey = process.env.RESEND_API_KEY;
     const fromEmail =
       process.env.RESEND_FROM_EMAIL || "Work Aged Leads <noreply@workagedleads.com>";
@@ -211,7 +224,7 @@ export async function GET(request: Request) {
         await resend.emails.send({
           from: fromEmail,
           to: ALERT_EMAIL,
-          subject: `[ALERT] ${failing.length} Work Aged Leads cron${failing.length > 1 ? "s" : ""} failing`,
+          subject: alertSubject(checks),
           html: buildAlertEmail(checks, now),
         });
       } catch (err) {
@@ -229,6 +242,7 @@ export async function GET(request: Request) {
 
   return NextResponse.json({
     ok: failing.length === 0,
+    reminders: reminders.map((c) => c.name),
     checks,
     timestamp: now.toISOString(),
   });

@@ -40,6 +40,18 @@ export interface ProviderData {
    * from cannibalizing the long-form review for branded review queries.
    */
   reviewArticleSlug?: string;
+  /**
+   * How searchers write the brand when it differs from `name` — e.g.
+   * "agedleadstore" (one word, the domain). Used in the profile's title and H1
+   * so the page matches the brand query it already ranks for.
+   */
+  searchAlias?: string;
+  /**
+   * A short "what is {brand}" answer shown at the top of the profile, built
+   * only from facts already in this record. Optional; most providers don't
+   * need one.
+   */
+  directAnswer?: string;
 }
 
 function computeOverall(p: {
@@ -65,6 +77,12 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
     name: "Aged Lead Store",
     slug: "aged-lead-store",
     reviewArticleSlug: "aged-lead-store-review-2026",
+    // "agedleadstore" (one word) is a brand query this profile ranks for at
+    // ~position 10 (GSC, 7d to 2026-11-18). Every fact in directAnswer is
+    // already on this record; nothing new is claimed.
+    searchAlias: "AgedLeadStore",
+    directAnswer:
+      "AgedLeadStore (agedleadstore.com) is an online store for aged internet leads: consumer inquiries resold 30 to 365 days after they were first captured. It covers mortgage, life insurance, final expense, health and auto insurance, annuity/IUL, solar, home improvement and legal leads. You choose a lead type, filter by state, ZIP code, phone type and lead age, pay the published per-lead price, and download the records instantly. There are no minimums and no contracts, and wrong or disconnected numbers can be returned up to a 20% cap. It sells aged leads only, so there are no real-time leads or live transfers. Work Aged Leads is an affiliate partner of AgedLeadStore and may earn a commission if you buy through our links; it is scored on the same six dimensions as every other provider on this site.",
     shortDescription:
       "The largest on-demand aged internet lead marketplace with fully transparent per-lead pricing across 15+ verticals.",
     website: "https://agedleadstore.com",
