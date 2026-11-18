@@ -6,6 +6,22 @@
 
 ---
 
+## 2026-11-18 — Near-page-one queries: `aged leads` 8.9, `agedleadstore` 10.2, `iul leads` 12.9
+<!-- added 2026-11-18 session — positions from the portfolio report (GSC, last 7d). No GSC query→page access in-session; pages picked from data/gsc-trend.json topPages and a DataForSEO ranked-keywords sample (estimate, SERP dated 2026-09) -->
+
+- [x] **`agedleadstore` → `/providers/aged-lead-store`. RESOLVED 2026-11-18.** The profile (GSC 7d: pos 8.6,
+  372 impr) ranks for the one-word brand query but never wrote it that way. New `searchAlias` /
+  `directAnswer` fields on the provider record: title "AgedLeadStore (Aged Lead Store): Pricing, Ratings &
+  Profile", H1 "Aged Lead Store (AgedLeadStore)", and a "What is AgedLeadStore?" section built only from
+  facts already in the record, with the affiliate relationship stated and one tagged link
+  (`affiliateUrl`, `utm_content=what-is-answer`). Canonical to the review article unchanged.
+- [x] **`aged leads` → `/providers`. RESOLVED 2026-11-18.** The 11-14 pass assumed the homepage; the
+  DataForSEO sample has `/providers` as the site's result. H1 "Lead Provider Directory" → "Aged Lead
+  Providers, Rated"; the hero now opens with the same aged-lead definition the homepage uses. Dropped
+  "Updated monthly" from that paragraph (the price study is quarterly). Re-measure 2026-12-02.
+- [ ] **`iul leads` → `/lead-types/iul-leads`: no change.** Title, meta and hero were rewritten 2026-11-14
+  and the query has moved 14.7 → 12.9 since. Re-measure 2026-12-02 before touching it again.
+
 ## 2026-11-16 — "Affiliate clicks 11 vs 0.9" (portfolio report, 3.0 SD) and in-body link tagging
 <!-- added 2026-11-16 session — asked to find the source of the jump and extend the winning placement -->
 

@@ -97,14 +97,21 @@ export default async function ProvidersPage() {
           <span className="mb-4 inline-block rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-300">
             Lead Marketwatch
           </span>
+          {/* H1 + first sentence aligned to "aged leads" (2026-11-18). A
+              DataForSEO SERP sample (estimate, 2026-09) shows this page, not the
+              homepage, as the site's result for "aged leads"; GSC has the query
+              at position 8.9 over the 7 days to 2026-11-18. The definition is the
+              same one the homepage uses. */}
           <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Lead Provider Directory
+            Aged Lead Providers, Rated
           </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-300">
-            Independent ratings and reviews of lead providers across mortgage,
+          <p className="speakable-answer mt-4 max-w-2xl text-lg leading-relaxed text-zinc-300">
+            Aged leads are real consumer inquiries resold after the first
+            buyers have had their turn, usually 30 to 365 days after the person
+            asked, at a fraction of the price of a real-time lead. These are the
+            companies that sell them, with independent ratings across mortgage,
             insurance, solar, and more. Every provider is scored on 6
-            dimensions with a transparent, published methodology. Updated
-            monthly.
+            dimensions with a transparent, published methodology.
           </p>
           {/* Iteration 4 (2026-09-01). This hub carried 165 views at 0.61% —
               the most-visited page on the site and the worst-converting one.

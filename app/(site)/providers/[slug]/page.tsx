@@ -21,6 +21,7 @@ import { ProviderCompareSelector } from "@/components/provider-compare-selector"
 import { ProviderStoreAlternative } from "@/components/provider-store-alternative";
 import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
 import { providerWebsiteUrl, isAffiliateProvider } from "@/lib/provider-links";
+import { affiliateUrl } from "@/lib/affiliate";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://workagedleads.com";
 
@@ -76,12 +77,19 @@ export async function generateMetadata({
   const reviewSlug = staticProvider?.reviewArticleSlug;
 
   if (reviewSlug) {
+    // A provider with a searchAlias (e.g. "AgedLeadStore") leads with the way
+    // people search for it, so the profile matches the brand query it ranks for.
+    const alias = staticProvider?.searchAlias;
     return {
-      title: `${name}: Pricing, Ratings & Provider Profile`,
+      title: alias
+        ? `${alias} (${name}): Pricing, Ratings & Profile`
+        : `${name}: Pricing, Ratings & Provider Profile`,
       // Kept short enough that even a long provider name stays inside the
       // ~160 characters Google renders — this interpolates the name twice at
       // 177 characters for "Aged Lead Store" alone.
-      description: `${name} provider profile: pricing model, lead types, compliance, and our 6-dimension ratings, with a link to the full review.`,
+      description: alias
+        ? `What ${alias} is, how its aged leads are priced and sold, and how it scores on our six dimensions. Profile of ${staticProvider?.website.replace(/^https?:\/\//, "")}.`
+        : `${name} provider profile: pricing model, lead types, compliance, and our 6-dimension ratings, with a link to the full review.`,
       alternates: { canonical: `${baseUrl}/blog/${reviewSlug}` },
       openGraph: {
         title: `${name} — Provider Profile | Work Aged Leads`,
@@ -285,6 +293,9 @@ export default async function ProviderProfilePage({
             <div>
               <h1 className="text-4xl font-bold text-white">
                 {p.name}
+                {p.searchAlias && (
+                  <span className="text-zinc-400"> ({p.searchAlias})</span>
+                )}
               </h1>
               <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
                 {p.foundedYear && (
@@ -353,6 +364,41 @@ export default async function ProviderProfilePage({
           </div>
         </div>
       </section>
+
+      {/* Direct answer to "what is {brand}" — only for providers that carry
+          one (the affiliate partner, whose one-word brand query this page
+          ranks for). Facts come from the provider record; the link is the
+          standard tagged affiliate URL from lib/affiliate.ts. */}
+      {p.directAnswer && (
+        <section className="bg-white py-10 dark:bg-zinc-950">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl">
+              <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+                What is {p.searchAlias ?? p.name}?
+              </h2>
+              <p className="mt-4 text-zinc-700 dark:text-zinc-300">
+                {p.directAnswer}
+              </p>
+              {isAffiliateProvider(p.slug) && (
+                <p className="mt-4 text-sm">
+                  <TrackedOutboundLink
+                    href={affiliateUrl({
+                      campaign: `provider-${p.slug}`,
+                      content: "what-is-answer",
+                    })}
+                    ctaId={`what-is-${p.slug}`}
+                    ctaLocation="provider-profile-what-is"
+                    isAffiliate
+                    className="font-semibold text-blue-700 underline hover:text-blue-800 dark:text-blue-400"
+                  >
+                    Browse lead types and prices on agedleadstore.com
+                  </TrackedOutboundLink>
+                </p>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Our Take */}
       <section className="border-t border-zinc-200 bg-zinc-50 py-12 dark:border-zinc-800 dark:bg-zinc-900">
