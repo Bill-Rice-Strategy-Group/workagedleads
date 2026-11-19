@@ -16,7 +16,9 @@ import { affiliateUrl } from "@/lib/affiliate";
  * - No per-lead prices. "About a dollar a name" is Bill's approved
  *   generalisation, not a price quote; issue-gate.ts still scans the HTML.
  * - No first-person buying claims. No deadline or scarcity.
- * - Doesn't solicit replies (lib/resend.ts REPLY_TO_EMAIL note).
+ * - Solicits replies via the P.S. ON PURPOSE: Bill asked for it back on
+ *   2026-11-19, overriding the default in lib/resend.ts. Replies route to
+ *   REPLY_TO_EMAIL, which Bill reads.
  * - No texting / autodialing advice: Mode A framing, as in the article.
  */
 
@@ -36,6 +38,7 @@ export const AGED_LEADS_DB_EMAIL = {
     "This isn't a volume play. Send about 25 a day, the pace you'd keep by hand. The AI does the boring part. You take the calls.",
     "I wrote up the whole setup step by step, for people who aren't technical. It includes the job description to paste in and a 15-minute morning routine:",
   ],
+  ps: "P.S. Hit reply and tell me how you're working your aged leads right now. I read every one.",
 } as const;
 
 export function articleUrl(siteUrl: string): string {
@@ -75,7 +78,8 @@ export function buildAgedLeadsDbHtml(siteUrl: string): string {
               ${paragraphs}
               <p style="${P} font-weight: 600;"><a href="${articleUrl(siteUrl)}" style="color: #2563eb; text-decoration: underline;">Read: Aged Leads Aren't Leads. They're a Customer Database.</a></p>
               <p style="${P}">And if your database needs filling, <a href="${storeLinkUrl()}" style="color: #2563eb; text-decoration: underline;">Aged Lead Store</a> sells aged mortgage, insurance and home improvement leads in batches small enough to start with. (We earn a commission if you buy.)</p>
-              <p style="margin: 8px 0 24px 0; color: #111827; font-size: 16px; line-height: 1.7;">Talk soon,<br>Bill</p>
+              <p style="margin: 8px 0 16px 0; color: #111827; font-size: 16px; line-height: 1.7;">Talk soon,<br>Bill</p>
+              <p style="margin: 0 0 24px 0; color: #374151; font-size: 15px; line-height: 1.7;">${e.ps}</p>
             </td>
           </tr>
           <tr>

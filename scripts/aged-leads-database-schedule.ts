@@ -140,6 +140,7 @@ async function main() {
     verified: { status: back.status, scheduled_at: back.scheduled_at, segment: backSegment },
   };
   writeRecord({
+    ...readRecord(),
     campaign: m.AGED_LEADS_DB_CAMPAIGN,
     approvedBy: "Bill",
     approvedAt: "2026-11-19",

@@ -3,9 +3,17 @@
   "approvedBy": "Bill",
   "approvedAt": "2026-11-19",
   "audienceId": "43fe6675-cc8f-44f3-9c1c-70a094b2d47d",
-  "mailableAtSchedule": 6517,
+  "mailableAtSchedule": 6516,
+  "scheduledAtRun": "2026-11-19T18:22:08.630Z",
+  "superseded": [
+    {
+      "broadcastId": "0647eec5-be95-48db-a8e9-b27517858ec2",
+      "deleted": "2026-11-19",
+      "reason": "Bill asked for the P.S. back; rescheduled with new copy"
+    }
+  ],
   "broadcast": {
-    "broadcastId": "0647eec5-be95-48db-a8e9-b27517858ec2",
+    "broadcastId": "25929f3a-73f3-4e81-a10c-e2009689630e",
     "name": "Aged leads database — 2026-12-03",
     "scheduledAt": "2026-12-03T13:00:00Z",
     "verified": {
@@ -13,6 +21,5 @@
       "scheduled_at": "2026-12-03 13:00:00+00",
       "segment": "43fe6675-cc8f-44f3-9c1c-70a094b2d47d"
     }
-  },
-  "scheduledAtRun": "2026-11-19T13:22:37.027Z"
+  }
 }

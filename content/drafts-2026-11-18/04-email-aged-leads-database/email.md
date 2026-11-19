@@ -1,14 +1,14 @@
 # List email: "You didn't buy leads. You bought a database."
 
 Status: SCHEDULED in Resend for Thu 2026-12-03 13:00 UTC (8am ET) to the main
-list, broadcast 0647eec5-be95-48db-a8e9-b27517858ec2. Live copy is
+list, broadcast 25929f3a-73f3-4e81-a10c-e2009689630e. Live copy is
 lib/newsletter/aged-leads-database-email.ts, sent by
 scripts/aged-leads-database-schedule.ts; record in
 data/campaigns/aged-leads-database.json. Cancel by deleting the broadcast in
 the Resend dashboard.
 
-Changes from this draft in the live copy: no P.S. asking for replies (list
-copy doesn't solicit replies, per lib/resend.ts), and no first-name greeting.
+Live copy has no first-name greeting. The P.S. asking for replies was removed,
+then put back at Bill's request on 2026-11-19 (replies go to Bill's inbox).
 
 ---
 
@@ -43,3 +43,4 @@ And if your database needs filling, [Aged Lead Store](https://agedleadstore.com/
 Talk soon,
 Bill
 
+P.S. Hit reply and tell me how you're working your aged leads right now. I read every one.
