@@ -1,0 +1,18 @@
+{
+  "campaign": "aged-leads-database",
+  "approvedBy": "Bill",
+  "approvedAt": "2026-11-19",
+  "audienceId": "43fe6675-cc8f-44f3-9c1c-70a094b2d47d",
+  "mailableAtSchedule": 6517,
+  "broadcast": {
+    "broadcastId": "0647eec5-be95-48db-a8e9-b27517858ec2",
+    "name": "Aged leads database — 2026-12-03",
+    "scheduledAt": "2026-12-03T13:00:00Z",
+    "verified": {
+      "status": "scheduled",
+      "scheduled_at": "2026-12-03 13:00:00+00",
+      "segment": "43fe6675-cc8f-44f3-9c1c-70a094b2d47d"
+    }
+  },
+  "scheduledAtRun": "2026-11-19T13:22:37.027Z"
+}

@@ -1,17 +1,14 @@
 # List email: "You didn't buy leads. You bought a database."
 
-Status: DRAFT. Standalone email to the newsletter list, separate from the Dec 1
-issue. Not archived, not scheduled. Sending it means archiving it under a
-non-Monday date and mailing it with `scripts/send-newsletter.ts` (seed send
-first), the same path the offer emails use.
+Status: SCHEDULED in Resend for Thu 2026-12-03 13:00 UTC (8am ET) to the main
+list, broadcast 0647eec5-be95-48db-a8e9-b27517858ec2. Live copy is
+lib/newsletter/aged-leads-database-email.ts, sent by
+scripts/aged-leads-database-schedule.ts; record in
+data/campaigns/aged-leads-database.json. Cancel by deleting the broadcast in
+the Resend dashboard.
 
-Price gate (`lib/newsletter/price-guard.ts`): no blocking hits. "$20" shows up as
-a warning only. "About a dollar a name" isn't flagged; Bill approved that wording
-on 2026-11-18.
-
-Timing: avoid the FINISH2026 send days and Thanksgiving week (Nov 26). The
-Dec 1 issue features the same article, so either send this one a few days
-after Dec 1 as the follow-up, or skip it.
+Changes from this draft in the live copy: no P.S. asking for replies (list
+copy doesn't solicit replies, per lib/resend.ts), and no first-name greeting.
 
 ---
 
@@ -24,8 +21,6 @@ after Dec 1 as the follow-up, or skip it.
 **Preview text:** How to work aged leads like past clients, with a little help from AI.
 
 ---
-
-Hi {{firstName|there}},
 
 I get the same email a few times a month: "I bought aged leads, called them for two weeks, and they don't work."
 
@@ -48,4 +43,3 @@ And if your database needs filling, [Aged Lead Store](https://agedleadstore.com/
 Talk soon,
 Bill
 
-P.S. Hit reply and tell me how you're working your aged leads right now. I read every one.
