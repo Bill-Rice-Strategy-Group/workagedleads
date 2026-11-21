@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-20T12:00:05.652Z",
+  "lastUpdated": "2026-11-21T12:00:05.980Z",
   "snapshots": [
     {
       "date": "2026-07-10",
@@ -34856,6 +34856,172 @@
             "impressions": 439,
             "ctr": 0.0023,
             "position": 33
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "property": "workagedleads",
+      "status": "ok",
+      "rolling7d": {
+        "clicks": 51,
+        "impressions": 8156,
+        "ctr": 0.0063,
+        "position": 20.82
+      },
+      "topPages": [
+        {
+          "page": "https://workagedleads.com/blog/voicemail-scripts-insurance-leads",
+          "clicks": 3,
+          "impressions": 117,
+          "ctr": 0.0256,
+          "position": 4.51
+        },
+        {
+          "page": "https://workagedleads.com/lead-types/home-improvement-leads",
+          "clicks": 3,
+          "impressions": 242,
+          "ctr": 0.0124,
+          "position": 22.02
+        },
+        {
+          "page": "https://workagedleads.com/providers/aged-lead-store",
+          "clicks": 3,
+          "impressions": 383,
+          "ctr": 0.0078,
+          "position": 8.05
+        },
+        {
+          "page": "https://workagedleads.com/blog/aged-home-improvement-leads-playbook",
+          "clicks": 2,
+          "impressions": 22,
+          "ctr": 0.0909,
+          "position": 13.09
+        },
+        {
+          "page": "https://workagedleads.com/blog/aged-lead-pricing-guide",
+          "clicks": 2,
+          "impressions": 109,
+          "ctr": 0.0183,
+          "position": 11.19
+        },
+        {
+          "page": "https://workagedleads.com/blog/how-to-work-medicare-leads",
+          "clicks": 2,
+          "impressions": 44,
+          "ctr": 0.0455,
+          "position": 19.84
+        },
+        {
+          "page": "https://workagedleads.com/blog/insurance-agent-lead-budget",
+          "clicks": 2,
+          "impressions": 105,
+          "ctr": 0.019,
+          "position": 14.09
+        },
+        {
+          "page": "https://workagedleads.com/blog/sms-templates-insurance-leads",
+          "clicks": 2,
+          "impressions": 266,
+          "ctr": 0.0075,
+          "position": 21.76
+        },
+        {
+          "page": "https://workagedleads.com/blog/tcpa-litigator-scrub",
+          "clicks": 2,
+          "impressions": 11,
+          "ctr": 0.1818,
+          "position": 5.36
+        },
+        {
+          "page": "https://workagedleads.com/lead-types/insurance-leads",
+          "clicks": 2,
+          "impressions": 416,
+          "ctr": 0.0048,
+          "position": 34.27
+        }
+      ],
+      "topQueries": [
+        {
+          "query": "aged direct mail final expense leads",
+          "clicks": 1,
+          "impressions": 6,
+          "ctr": 0.1667,
+          "position": 9.83
+        },
+        {
+          "query": "aged insurance leads",
+          "clicks": 1,
+          "impressions": 80,
+          "ctr": 0.0125,
+          "position": 18.38
+        },
+        {
+          "query": "aged internet leads",
+          "clicks": 1,
+          "impressions": 9,
+          "ctr": 0.1111,
+          "position": 14.56
+        },
+        {
+          "query": "aged lead store",
+          "clicks": 1,
+          "impressions": 86,
+          "ctr": 0.0116,
+          "position": 4.8
+        },
+        {
+          "query": "aged lead store reviews",
+          "clicks": 1,
+          "impressions": 17,
+          "ctr": 0.0588,
+          "position": 3.06
+        },
+        {
+          "query": "aged life insurance leads",
+          "clicks": 1,
+          "impressions": 70,
+          "ctr": 0.0143,
+          "position": 17.49
+        },
+        {
+          "query": "agedleadstore",
+          "clicks": 1,
+          "impressions": 60,
+          "ctr": 0.0167,
+          "position": 10.8
+        },
+        {
+          "query": "medicare aep marketing",
+          "clicks": 1,
+          "impressions": 12,
+          "ctr": 0.0833,
+          "position": 4.58
+        },
+        {
+          "query": "mortgage leads list",
+          "clicks": 1,
+          "impressions": 4,
+          "ctr": 0.25,
+          "position": 20.75
+        },
+        {
+          "query": "persistency rate",
+          "clicks": 1,
+          "impressions": 7,
+          "ctr": 0.1429,
+          "position": 1.86
+        }
+      ],
+      "watchedPages": [
+        {
+          "page": "https://workagedleads.com/lead-types/life-insurance-leads",
+          "row": {
+            "clicks": 1,
+            "impressions": 478,
+            "ctr": 0.0021,
+            "position": 32.89
           }
         }
       ]
