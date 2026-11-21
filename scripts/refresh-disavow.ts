@@ -2,17 +2,20 @@
  * Refresh data/backlink-audit/disavow.txt from a current referring-domains list.
  *
  * Why this exists: between the 2026-07-03 and 2026-07-21 audits, 41 new spam
- * domains accrued because every refresh was a manual Ahrefs pull followed by
- * human eyeballing, and nothing ran in between. This turns the judgement part
+ * domains accrued because every refresh was a manual referring-domain export
+ * followed by human eyeballing, and nothing ran in between. This turns the judgement part
  * into code so a refresh is a two-minute job instead of an afternoon.
  *
  * Usage:
  *   npm run disavow:refresh -- <domains-file>            # dry run, prints a plan
  *   npm run disavow:refresh -- <domains-file> --apply    # writes disavow.txt
  *
- * <domains-file> is one domain per line, or an Ahrefs referring-domains CSV
- * export (the `domain` column is picked out automatically). Blank lines and
- * lines starting with # are ignored.
+ * <domains-file> is a plain list, one domain per line: brsg-link-audit's
+ * `disavow-domains.txt`, or the `items[].domain` values of a DataForSEO
+ * `backlinks/referring_domains/live` pull for workagedleads.com. `domain:` lines,
+ * `#` comments and blank lines are accepted; CSV/JSON exports are rejected
+ * (see lib/backlink-audit/domain-list.ts). DataForSEO data is a third-party
+ * estimate — cross-check against GSC > Links before uploading.
  *
  * Domains classified "review" are never auto-added — they are printed for a
  * human to judge. Disavowing a genuine editorial link is the expensive
@@ -25,6 +28,10 @@ import {
   DEFAULT_WHITELIST,
   type Classification,
 } from "../lib/backlink-audit/spam-classifier";
+import {
+  parseDomainList,
+  DomainListError,
+} from "../lib/backlink-audit/domain-list";
 
 const DISAVOW_PATH = join(
   process.cwd(),
@@ -34,26 +41,15 @@ const DISAVOW_PATH = join(
 );
 
 function parseDomainsFile(path: string): string[] {
-  const raw = readFileSync(path, "utf8");
-  const lines = raw
-    .split("\n")
-    .map((l) => l.trim())
-    .filter((l) => l && !l.startsWith("#"));
-
-  if (!lines.length) return [];
-
-  // CSV export? Find the domain column by header name.
-  const header = lines[0].toLowerCase();
-  if (header.includes(",") && /(^|,)\s*"?domain"?\s*(,|$)/.test(header)) {
-    const cols = header.split(",").map((c) => c.replace(/"/g, "").trim());
-    const idx = cols.indexOf("domain");
-    return lines
-      .slice(1)
-      .map((l) => (l.split(",")[idx] ?? "").replace(/"/g, "").trim())
-      .filter(Boolean);
+  try {
+    return parseDomainList(readFileSync(path, "utf8"), path);
+  } catch (e) {
+    if (e instanceof DomainListError) {
+      console.error(e.message);
+      process.exit(1);
+    }
+    throw e;
   }
-
-  return lines.map((l) => l.split(",")[0].replace(/"/g, "").trim());
 }
 
 function existingDisavowed(text: string): Set<string> {

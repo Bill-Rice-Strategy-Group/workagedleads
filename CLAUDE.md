@@ -51,7 +51,7 @@ BRSG has no Ahrefs account and never has. Third-party SEO data for BRSG sites (r
 - DataForSEO's domain `rank` is its own 0–1000 scale. Never call it "DR" or "Domain Rating".
 - First-party data (Search Console, GA4) outranks any third-party estimate. Label DataForSEO numbers as estimates.
 
-Older notes in BACKLOG.md and `docs/` cite Ahrefs pulls and "DR" figures from before this rule. They are historical records, not a source to repeat. `scripts/refresh-disavow.ts` and `scripts/build-merged-disavow.ts` still parse old Ahrefs CSV exports; feed them a plain one-domain-per-line list from DataForSEO instead.
+Older notes in BACKLOG.md and `docs/` cite Ahrefs pulls and "DR" figures from before this rule. They are historical records, not a source to repeat. `scripts/refresh-disavow.ts` and `scripts/build-merged-disavow.ts` read a plain one-domain-per-line list (`lib/backlink-audit/domain-list.ts`): brsg-link-audit's `disavow-domains.txt`, or the `items[].domain` values of a DataForSEO `backlinks/referring_domains/live` pull. `domain:` lines and `#` comments are fine; CSV/JSON exports are rejected on purpose.
 
 ## Daily cron commits to main
 
