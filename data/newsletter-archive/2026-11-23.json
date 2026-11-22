@@ -1,0 +1,30 @@
+{
+  "runDate": "2026-11-22T14:01:03.338Z",
+  "weekOf": "2026-11-23",
+  "sendDate": "2026-11-24",
+  "theme": "Seasonal Strategy",
+  "focusVertical": "topic-themed",
+  "calendarStatus": "Calendar: \"Seasonal Strategy\" for 2026-11-24. 6 issue(s) remain, through 2027-01-05.",
+  "calendarMatched": true,
+  "calendarRemaining": 6,
+  "subject": "Thanksgiving week: fewer dials, better ones",
+  "previewText": "Where to spend your dials this week, and how to set up December before you log off.",
+  "html": "2026-11-23.html",
+  "sent": false,
+  "priceGuard": {
+    "blocking": [],
+    "warnings": []
+  },
+  "featuredArticle": {
+    "title": "Aged Leads Aren't Leads. They're a Customer Database. Here's How to Let AI Work It.",
+    "slug": "aged-leads-customer-database-ai-assistant",
+    "spotlight": "Aged leads stop disappointing you once you stop expecting them to behave like fresh ones. Treat them as a database of past inquiries, let an AI assistant tied to a Google Sheet and your Gmail write each person a personal email, and call only the people who write back. It's a workable system for a holiday week, because the emails go out while you're away from your desk."
+  },
+  "quickTips": [
+    "Cap your dials and spend them on people who already moved",
+    "Test the days either side of the holiday",
+    "Set up December before you take time off"
+  ],
+  "industryInsight": "Holiday travel and the 8am-to-9pm rule",
+  "errors": []
+}
