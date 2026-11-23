@@ -1041,7 +1041,7 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
       "Aged SSDI leads connect disability attorneys and advocates with individuals who previously sought help with Social Security Disability Insurance claims.",
     metaTitle: "Aged SSDI Leads – Social Security Disability Leads",
     metaDescription:
-      "Buy aged SSDI leads from people seeking disability claim help. Intake criteria, qualification screens, and the cadence that signs cases.",
+      "How aged SSDI leads work: who they are, intake criteria and qualification screens, the cadence that signs cases, and which providers sell them.",
     primaryKeyword: "aged SSDI leads",
     secondaryKeywords: [
       "SSDI disability leads",
@@ -1169,7 +1169,7 @@ export const LEAD_TYPES: Record<string, LeadTypeData> = {
       "Aged MVA leads connect personal injury attorneys with individuals who were involved in motor vehicle accidents and sought legal representation.",
     metaTitle: "Aged MVA Leads for Attorneys \u2013 Accident Case Intake",
     metaDescription:
-      "Buy aged MVA leads from individuals involved in auto accidents seeking legal representation. Affordable leads for personal injury attorneys and law firms.",
+      "How aged MVA leads work for personal injury firms: who these accident leads are, how to qualify and work them, and which providers sell them.",
     primaryKeyword: "aged MVA leads",
     secondaryKeywords: [
       "motor vehicle accident leads",
