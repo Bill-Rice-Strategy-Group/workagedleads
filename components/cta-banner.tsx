@@ -113,7 +113,7 @@ export function CtaBanner({
       ? segment
         ? // Expectation-setting, not a price claim: the storefront is a buying
           // screen, and saying so is what makes the click worth making.
-          `Filter ${verticalLabel} by state and see current pricing before you buy — no minimums, no contract.`
+          `Filter ${verticalLabel} by state and see current pricing before you buy — low minimum, no contract.`
         : "Browse aged leads across mortgage, insurance, home services, and more — with data verification and hygiene, suppression support, and fair-market pricing."
       : "Compare providers, check fair market pricing, and calculate your ROI — all with our free tools.");
   const finalButtonText =
