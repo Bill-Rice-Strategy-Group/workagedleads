@@ -7,6 +7,8 @@
 # the URL-PREFIX property https://workagedleads.com/ (the tool does not
 # accept domain properties) BEFORE the redirects go live.
 #
+# Last refreshed 2026-11-18: 454 domains (+30, DataForSEO pull; see the section at the end).
+#
 # 424 domains: 291 carried from the agedleadsales file,
 # 401 classified spam across the merged profile, 2 added on measured evidence.
 #
@@ -468,3 +470,47 @@ domain:verified-digital-firm-seoexpress.store
 domain:verified-seoexpress-search-directory.store
 domain:webrankinsights.shop
 domain:webrankresults.shop
+
+# --- 2026-11-18 refresh (DataForSEO backlinks/referring_domains/live + bulk_spam_score/live) ---
+# DataForSEO listed 70 referring domains for workagedleads.com; none were in this file.
+# Spam scores are DataForSEO estimates (0-100). Cross-check against GSC > Links before uploading.
+# 30 added: DataForSEO spam score >= 61 (its "high" band, higher of link and domain
+# score), or a spam-classifier link-farm name (rank-seo-now.shop, seonix.agency, bestseoquill.site).
+# 36 held for human review and NOT added (mostly link spam exactly 60, top of the
+# medium band). Three score high but look like ordinary sites; check them in GSC first:
+#   kernelpanicpodcast.com (link spam 70, domain spam 11)
+#   merrigoldfinance.com (link spam 70, domain spam 52)
+#   russellcommission.org (link spam 70, domain spam 56)
+# Kept as likely genuine (NOT disavowed):
+#   contractorleadquotes.com, growthpros.marketing, prospectingdata.com, sandjbusinessbuilders.com
+# Full list with scores: data/backlink-audit/dataforseo-refdomains-workagedleads-2026-11-18.tsv
+domain:888ph.online
+domain:bestenglishonlinecasino.online
+domain:bestnz-poker-casinoslot.com
+domain:bestonlinecasinogamescanada.online
+domain:bestseoquill.site
+domain:betwinnermirror.com
+domain:bureatag.com
+domain:cartermanageus.com
+domain:casinogamingsites.online
+domain:clifflisting.com
+domain:clonidine01mg.store
+domain:colonrejuvenatorsite.com
+domain:connectedcannabis.shop
+domain:dapoxetine.cyou
+domain:fashionclothingnews.com
+domain:gameeffect.xyz
+domain:growyoursitetraffic.shop
+domain:gumushaneescorton.shop
+domain:homesforsaleoldgreenwichct.com
+domain:ku3933net22.click
+domain:onlinecasinogamesforrealmoneyusa.online
+domain:onlinegamblingbonus.online
+domain:pecah77gacor.site
+domain:rank-seo-now.shop
+domain:seonix.agency
+domain:sidarma88gacor.shop
+domain:slots-online-machine.online
+domain:stromectol-europe.site
+domain:sylexsoftware.xyz
+domain:ta88vn.one
