@@ -22,6 +22,7 @@ import { ProviderStoreAlternative } from "@/components/provider-store-alternativ
 import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
 import { providerWebsiteUrl, isAffiliateProvider } from "@/lib/provider-links";
 import { affiliateUrl } from "@/lib/affiliate";
+import { PromoCodeNote } from "@/components/promo-bar";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://workagedleads.com";
 
@@ -349,6 +350,12 @@ export default async function ProviderProfilePage({
                   carrying utm_campaign=provider-{slug}), on pages that offered
                   the reader no comparison until six screens down. Renders
                   nothing on the partner's own profile. See the component. */}
+              {/* FINISH2026: the partner's own profile had the code only in the
+                  promo bar, while competitor profiles got it beside the store
+                  door via ProviderStoreAlternative. Same note, same window. */}
+              {isAffiliateProvider(p.slug) && (
+                <PromoCodeNote className="mt-3 text-blue-200" />
+              )}
               <ProviderStoreAlternative
                 providerSlug={p.slug}
                 providerName={p.name}
@@ -394,6 +401,9 @@ export default async function ProviderProfilePage({
                     Browse lead types and prices on agedleadstore.com
                   </TrackedOutboundLink>
                 </p>
+              )}
+              {isAffiliateProvider(p.slug) && (
+                <PromoCodeNote className="mt-2 text-zinc-700 dark:text-zinc-300" />
               )}
             </div>
           </div>

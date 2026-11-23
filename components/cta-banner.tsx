@@ -2,6 +2,7 @@ import Link from "next/link";
 import { agedLeadLabel } from "@/lib/affiliate";
 import { affiliateDestination } from "@/lib/store-front";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
+import { PromoCodeNote } from "./promo-bar";
 
 /**
  * The sitewide bottom CTA, plus a `compact` in-body variant.
@@ -166,6 +167,9 @@ export function CtaBanner({
           )}
         </div>
         {useAffiliate && (
+          <PromoCodeNote className="mt-3 text-zinc-700 dark:text-zinc-300" />
+        )}
+        {useAffiliate && (
           <p className="mt-3 text-xs text-zinc-500">
             Affiliate link — we may earn a commission at no cost to you, and it
             never affects our ratings.{" "}
@@ -215,6 +219,9 @@ export function CtaBanner({
             {finalSecondaryText}
           </Link>
         </div>
+        {/* FINISH2026 code beside the bottom door, which every blog post and
+            the partner review end on. Client-side window, same as the bar. */}
+        {useAffiliate && <PromoCodeNote className="mt-6 text-white" />}
         {useAffiliate && (
           <p className="mx-auto mt-6 max-w-2xl text-xs text-blue-100/80">
             Affiliate link — we may earn a commission at no cost to you, and it
