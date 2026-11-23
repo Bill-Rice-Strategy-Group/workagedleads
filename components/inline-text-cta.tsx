@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { agedLeadLabel } from "@/lib/affiliate";
+import { agedLeadLabel, partnerSells, providerCompareHref } from "@/lib/affiliate";
 import { affiliateDestination } from "@/lib/store-front";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
@@ -52,19 +52,23 @@ export function InlineTextCta({
 }: InlineTextCtaProps) {
   const verticalLabel = agedLeadLabel(leadType);
 
-  if (!affiliate) {
+  // Not sold by the partner (legal/MVA/SSDI since 2026-11-23): no store link.
+  const stocked = partnerSells(leadType);
+  if (!affiliate || !stocked) {
     return (
       <p className="mb-8 rounded-lg border-l-4 border-blue-500 bg-blue-50 px-4 py-3 text-sm leading-relaxed text-zinc-700 dark:bg-blue-950/30 dark:text-zinc-300">
         <strong className="text-zinc-900 dark:text-white">
           Looking for {verticalLabel}?
         </strong>{" "}
         <Link
-          href="/providers"
+          href={stocked ? "/providers" : providerCompareHref(leadType)}
           className="font-medium text-blue-600 underline decoration-blue-600/30 hover:text-blue-700 hover:decoration-blue-700/50 dark:text-blue-400"
         >
-          Compare top providers in our directory
-        </Link>{" "}
-        — thousands of exclusive and shared leads at a fraction of real-time cost.
+          {stocked ? "Compare top providers in our directory" : "Compare the providers that sell them"}
+        </Link>
+        {stocked
+          ? " — thousands of exclusive and shared leads at a fraction of real-time cost."
+          : " — independently rated, with pricing and minimums side by side."}
       </p>
     );
   }

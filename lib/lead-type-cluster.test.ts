@@ -8,7 +8,7 @@ import {
 } from "../data/lead-type-vertical-map";
 import { LEAD_TYPES } from "../data/lead-types";
 import { VERTICALS } from "../data/verticals";
-import { storeCategoryPath } from "./affiliate";
+import { storeCategoryPath, partnerSells, providerCompareHref } from "./affiliate";
 
 /**
  * The internal-linking cluster is lead-type guide ↔ price index ↔ best
@@ -76,16 +76,19 @@ describe("legal vertical", () => {
     assert.equal(verticalForLeadType("ssdi-leads"), "legal");
   });
 
-  test("legal lead types deep-link to the partner's legal buy page", () => {
-    // Verified against the partner's own link catalogue on 2026-08-12:
-    // /legal-leads/ is the ONLY legal buy page they run, and all three of these
-    // route to it. Without the "legal-leads" entry the umbrella guide's CTA
-    // falls back to /all-lead-types/, which is what the bankruptcy, family law
-    // and workers' comp posts were doing before this cluster existed.
-    assert.equal(storeCategoryPath("Legal Leads"), "/legal-leads/");
-    assert.equal(storeCategoryPath("legal-leads"), "/legal-leads/");
-    assert.equal(storeCategoryPath("MVA Leads"), "/legal-leads/");
-    assert.equal(storeCategoryPath("SSDI Leads"), "/legal-leads/");
+  test("legal lead types are not sold by the partner and route to the comparison", () => {
+    // Until 2026-11-23 these deep-linked to the partner's /legal-leads/ page.
+    // Bill confirmed that day the partner does not currently sell legal leads,
+    // so there is no buy page and every CTA goes to the legal comparison.
+    for (const t of ["Legal Leads", "legal-leads", "MVA Leads", "SSDI Leads", "ssdi-leads"]) {
+      assert.equal(storeCategoryPath(t), undefined, t);
+      assert.equal(partnerSells(t), false, t);
+      assert.equal(providerCompareHref(t), "/providers/best/legal", t);
+    }
+    // Stocked lead types are unaffected.
+    assert.equal(partnerSells("Mortgage Leads"), true);
+    assert.equal(partnerSells("final-expense-leads"), true);
+    assert.equal(partnerSells(undefined), true);
   });
 
   test("the umbrella guide compares providers for the legal vertical", () => {

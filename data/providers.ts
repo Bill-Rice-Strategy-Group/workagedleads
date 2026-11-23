@@ -86,7 +86,7 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
     // year, HQ state, minimum order, DNC scrubbing, CRM integration, lead age
     // range and email delivery wrong. Re-scored and signed off by Bill the same day.
     directAnswer:
-      "AgedLeadStore (agedleadstore.com) is an online store for aged internet leads: consumer inquiries resold 3 to 365 days after they were first captured. It sells mortgage, life insurance and final expense, health, auto and homeowners insurance, IUL, mortgage protection, solar and home improvement leads, and markets legal (MVA and SSDI) leads. You choose a lead type, filter by state, ZIP code, phone type and lead age, pay the published per-lead price, and download the records as a CSV, or have them posted into supported CRMs such as GoHighLevel, Ringy and VanillaSoft. There is a $100 minimum order and no contract, and wrong or disconnected numbers can be replaced up to a 20% cap. Scrubbing against Do Not Call lists is the buyer's job, and it does not sell into several states, including Connecticut, New Jersey, Maryland and Washington. It sells aged leads only, so there are no real-time leads or live transfers. Work Aged Leads is an affiliate partner of AgedLeadStore and may earn a commission if you buy through our links; it is scored on the same six dimensions as every other provider on this site.",
+      "AgedLeadStore (agedleadstore.com) is an online store for aged internet leads: consumer inquiries resold 3 to 365 days after they were first captured. It sells mortgage, life insurance and final expense, health, auto and homeowners insurance, IUL, mortgage protection, solar and home improvement leads. It does not currently sell legal (MVA or SSDI) leads. You choose a lead type, filter by state, ZIP code, phone type and lead age, pay the published per-lead price, and download the records as a CSV, or have them posted into supported CRMs such as GoHighLevel, Ringy and VanillaSoft. The minimum order varies and is currently $100, there is no contract, and wrong or disconnected numbers can be replaced up to a 20% cap. Scrubbing against Do Not Call lists is the buyer's job, and it does not sell into several states, including Connecticut, New Jersey, Maryland and Washington. It sells aged leads only, so there are no real-time leads or live transfers. Work Aged Leads is an affiliate partner of AgedLeadStore and may earn a commission if you buy through our links; it is scored on the same six dimensions as every other provider on this site.",
     shortDescription:
       "The largest on-demand aged internet lead marketplace with fully transparent per-lead pricing across 15+ verticals.",
     website: "https://agedleadstore.com",
@@ -115,7 +115,7 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
     ratingPlatform: 8,
     ratingReputation: 9,
     ratingNotes:
-      "Market leader in aged leads. Fully self-service e-commerce with published per-lead pricing. 25+ years in business (Next Wave, est. 2001), A+ BBB (not accredited). $100 minimum order, no contracts. Replacements for wrong/disconnected numbers up to a 20% cap. Filtering by state, ZIP, phone type and lead age. Aged only: no real-time, live transfer or developer API. CRM posting to GoHighLevel, Ringy, VanillaSoft, Ricochet360 and others. DNC scrubbing is left to the buyer. Re-scored 2026-11-23 (Bill): Compliance 7 to 6 (DNC scrubbing is not provided, though leads usually carry TrustedForm/Jornaya IDs); Flexibility 9 to 8 ($100 minimum and unserved states); Platform held at 8 (CRM posting, but no developer API).",
+      "Market leader in aged leads. Fully self-service e-commerce with published per-lead pricing. 25+ years in business (Next Wave, est. 2001), A+ BBB (not accredited). Minimum order varies (currently $100), no contracts. Replacements for wrong/disconnected numbers up to a 20% cap. Filtering by state, ZIP, phone type and lead age. Aged only: no real-time, live transfer or developer API. CRM posting to GoHighLevel, Ringy, VanillaSoft, Ricochet360 and others. DNC scrubbing is left to the buyer. Re-scored 2026-11-23 (Bill): Compliance 7 to 6 (DNC scrubbing is not provided, though leads usually carry TrustedForm/Jornaya IDs); Flexibility 9 to 8 ($100 minimum and unserved states); Platform held at 8 (CRM posting, but no developer API).",
     lastVerified: "2026-11-23",
     verticals: [
       "mortgage",
@@ -125,14 +125,14 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
       "health-insurance",
       "home-improvement",
       "solar",
-      "legal",
       "annuity-iul",
       "homeowners-insurance",
     ],
     leadTypes: ["aged"],
     pricingModel: "transparent",
     hasMinimums: true,
-    minimumDescription: "$100 minimum order (per the FAQ; the storefront states $200)",
+    // Bill, 2026-11-23: the minimum varies from time to time; currently $100.
+    minimumDescription: "Varies; currently $100",
     contractRequired: false,
     returnPolicy:
       "Replacement or partial refund for wrong/disconnected numbers, capped at 20% of the order (per the FAQ; the Terms say all sales are final)",
@@ -140,7 +140,7 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
     complianceFeatures: ["tcpa-docs"],
     isFeatured: true,
     editorialReview:
-      "Aged Lead Store is the clear market leader in aged internet leads. With 25+ years in the business and an A+ BBB rating, they've served over 40,000 agents. Their biggest strength is complete transparency: every lead type has a published per-lead price, the minimum order is a low $100, and there are no contracts or commitments. The self-service platform offers advanced filtering by geography, phone type and lead age, and can post leads straight into CRMs such as GoHighLevel, Ringy and VanillaSoft. Wrong or disconnected numbers can be replaced up to 20% of an order. Know the limits before you buy: they sell aged leads only (no real-time leads, live transfers or trigger data), scrubbing against Do Not Call lists is your responsibility, and they do not sell into several states, including Connecticut, New Jersey, Maryland and Washington. For aged lead buying, this is the benchmark.",
+      "Aged Lead Store is the clear market leader in aged internet leads. With 25+ years in the business and an A+ BBB rating, they've served over 40,000 agents. Their biggest strength is complete transparency: every lead type has a published per-lead price, the minimum order is low (currently $100), and there are no contracts or commitments. The self-service platform offers advanced filtering by geography, phone type and lead age, and can post leads straight into CRMs such as GoHighLevel, Ringy and VanillaSoft. Wrong or disconnected numbers can be replaced up to 20% of an order. Know the limits before you buy: they sell aged leads only (no real-time leads, live transfers or trigger data), scrubbing against Do Not Call lists is your responsibility, and they do not sell into several states, including Connecticut, New Jersey, Maryland and Washington. For aged lead buying, this is the benchmark.",
   },
   {
     name: "The Leads Warehouse",

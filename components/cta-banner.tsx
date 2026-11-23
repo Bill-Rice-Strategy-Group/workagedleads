@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { agedLeadLabel } from "@/lib/affiliate";
+import { agedLeadLabel, partnerSells, providerCompareHref } from "@/lib/affiliate";
 import { affiliateDestination } from "@/lib/store-front";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 import { PromoCodeNote } from "./promo-bar";
@@ -71,7 +71,10 @@ export function CtaBanner({
   affiliatePath,
   leadType,
 }: CtaBannerProps) {
-  const useAffiliate = affiliate && !buttonHref;
+  // Not sold by the partner (legal/MVA/SSDI since 2026-11-23): fall back to the
+  // non-affiliate "compare providers" banner, pointed at that vertical.
+  const stocked = partnerSells(leadType);
+  const useAffiliate = affiliate && !buttonHref && stocked;
 
   /*
     Destination precedence: storefront segment -> marketing buy page -> full
@@ -134,7 +137,9 @@ export function CtaBanner({
     ? secondaryHref ?? "/providers"
     : secondaryHref ?? "/price-index";
 
-  const primaryUrl = useAffiliate ? destination.href : buttonHref ?? "/providers";
+  const primaryUrl = useAffiliate
+    ? destination.href
+    : buttonHref ?? (stocked ? "/providers" : providerCompareHref(leadType));
 
   if (variant === "compact") {
     return (

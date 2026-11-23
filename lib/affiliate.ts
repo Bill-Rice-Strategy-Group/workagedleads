@@ -1,4 +1,6 @@
 import { AFFILIATE_UTM_SOURCE } from "./utm";
+// Relative, not "@/": next.config.ts imports this file and its loader has no path aliases.
+import { verticalForLeadType } from "../data/lead-type-vertical-map";
 
 const AFFILIATE_BASE_URL = "https://agedleadstore.com";
 const UTM_SOURCE = AFFILIATE_UTM_SOURCE;
@@ -105,13 +107,9 @@ const STORE_CATEGORY_PATHS: Record<string, string> = {
   // Per the partner's menu — final expense IS life insurance to them.
   "final-expense-leads": "/life-insurance-leads/",
   "iul-leads": "/indexed-universal-life-insurance-leads/",
-  // MVA (motor-vehicle accident) and SSDI are both attorney-intake products.
-  "mva-leads": "/legal-leads/",
-  "ssdi-leads": "/legal-leads/",
-  // The category itself. Same destination as its two sub-verticals — the
-  // partner sells all legal intake from one page, verified in their nav and
-  // by page title ("Legal Leads: Everything You Need to Know") on 2026-08-12.
-  "legal-leads": "/legal-leads/",
+  // Legal / MVA / SSDI were mapped to /legal-leads/ until 2026-11-23, when
+  // Bill confirmed the partner does not currently sell them. See
+  // PARTNER_NOT_STOCKED below: those pages no longer send buyers to the store.
   "home-improvement-leads": "/buy-home-improvement-leads-lp/",
   // Legacy slug: the lead-type route 301s to home-improvement-leads, but older
   // content still carries this label.
@@ -139,6 +137,37 @@ export function storeCategoryPath(leadType?: string | null): string | undefined 
   if (!leadType) return undefined;
   const key = leadType.trim().toLowerCase().replace(/[\s_]+/g, "-");
   return STORE_CATEGORY_PATHS[key] ?? STORE_CATEGORY_PATHS[`${key}-leads`];
+}
+
+/**
+ * Lead types the partner does NOT currently sell, as normalised slugs.
+ *
+ * Bill, 2026-11-23: Aged Lead Store does not currently offer legal leads. Its
+ * /legal-leads/, MVA and SSDI marketing pages are still live, but their buy
+ * buttons go to a catalogue with no legal product, so sending a reader there
+ * is a dead end dressed as a recommendation. Pages for these lead types point
+ * at the provider comparison instead. Remove an entry only once the partner
+ * confirms it sells that product again.
+ */
+export const PARTNER_NOT_STOCKED: ReadonlySet<string> = new Set([
+  "legal-leads",
+  "mva-leads",
+  "ssdi-leads",
+]);
+
+/** The provider comparison for a lead type's vertical, e.g. "/providers/best/legal". */
+export function providerCompareHref(leadType?: string | null): string {
+  if (!leadType) return "/providers";
+  const key = leadType.trim().toLowerCase().replace(/[\s_]+/g, "-");
+  const slug = key.endsWith("-leads") ? key : `${key}-leads`;
+  return `/providers/best/${verticalForLeadType(slug)}`;
+}
+
+/** False when the partner does not currently sell this lead type. */
+export function partnerSells(leadType?: string | null): boolean {
+  if (!leadType) return true;
+  const key = leadType.trim().toLowerCase().replace(/[\s_]+/g, "-");
+  return !PARTNER_NOT_STOCKED.has(key) && !PARTNER_NOT_STOCKED.has(`${key}-leads`);
 }
 
 /**

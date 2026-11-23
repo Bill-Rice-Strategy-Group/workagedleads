@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { agedLeadLabel } from "@/lib/affiliate";
+import { agedLeadLabel, partnerSells, providerCompareHref } from "@/lib/affiliate";
 import { affiliateDestination } from "@/lib/store-front";
 import { PromoCodeNote } from "./promo-bar";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
@@ -124,6 +124,38 @@ export function HeroAffiliateDoor({
   tone = "dark",
 }: HeroAffiliateDoorProps) {
   const t = TONE[tone];
+
+  /*
+    The partner does not currently sell this lead type (legal/MVA/SSDI, Bill
+    2026-11-23). A store door here would land the reader on a catalogue with
+    nothing for them, so the comparison takes the primary slot instead and the
+    code note is dropped. Secondary links keep their order.
+  */
+  if (!partnerSells(leadType)) {
+    const compareHref = providerCompareHref(leadType);
+    const rest = secondary.filter((link) => link.href !== compareHref);
+    return (
+      <div className="mt-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+          <Link
+            href={compareHref}
+            className={`inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 text-center font-semibold transition-colors ${t.primary}`}
+          >
+            Compare {agedLeadLabel(leadType)} providers
+          </Link>
+          {rest.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`rounded-lg px-8 py-3 text-center font-semibold transition-colors ${t.secondary}`}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   /*
     Destination precedence: storefront segment -> marketing buy page -> full

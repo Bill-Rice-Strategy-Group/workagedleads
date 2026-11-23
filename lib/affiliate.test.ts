@@ -72,8 +72,9 @@ describe("storeCategoryPath", () => {
   });
 
   test("attorney-intake products share the legal category", () => {
-    assert.equal(storeCategoryPath("MVA Leads"), "/legal-leads/");
-    assert.equal(storeCategoryPath("SSDI Leads"), "/legal-leads/");
+    // Not sold by the partner since 2026-11-23 (Bill): no buy page at all.
+    assert.equal(storeCategoryPath("MVA Leads"), undefined);
+    assert.equal(storeCategoryPath("SSDI Leads"), undefined);
   });
 
   test("verticals the partner does not sell fall back to the catalogue", () => {
