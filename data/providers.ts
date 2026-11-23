@@ -84,7 +84,7 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
     // Facts re-checked against agedleadstore.com (FAQ, About, Terms, contact,
     // storefront) and BBB on 2026-11-23. The May 2026 profile had the founding
     // year, HQ state, minimum order, DNC scrubbing, CRM integration, lead age
-    // range and email delivery wrong. Scores were left for Bill to re-set.
+    // range and email delivery wrong. Re-scored and signed off by Bill the same day.
     directAnswer:
       "AgedLeadStore (agedleadstore.com) is an online store for aged internet leads: consumer inquiries resold 3 to 365 days after they were first captured. It sells mortgage, life insurance and final expense, health, auto and homeowners insurance, IUL, mortgage protection, solar and home improvement leads, and markets legal (MVA and SSDI) leads. You choose a lead type, filter by state, ZIP code, phone type and lead age, pay the published per-lead price, and download the records as a CSV, or have them posted into supported CRMs such as GoHighLevel, Ringy and VanillaSoft. There is a $100 minimum order and no contract, and wrong or disconnected numbers can be replaced up to a 20% cap. Scrubbing against Do Not Call lists is the buyer's job, and it does not sell into several states, including Connecticut, New Jersey, Maryland and Washington. It sells aged leads only, so there are no real-time leads or live transfers. Work Aged Leads is an affiliate partner of AgedLeadStore and may earn a commission if you buy through our links; it is scored on the same six dimensions as every other provider on this site.",
     shortDescription:
@@ -110,13 +110,13 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
     ],
     ratingTransparency: 10,
     ratingValue: 8,
-    ratingCompliance: 7,
-    ratingFlexibility: 9,
+    ratingCompliance: 6,
+    ratingFlexibility: 8,
     ratingPlatform: 8,
     ratingReputation: 9,
     ratingNotes:
-      "Market leader in aged leads. Fully self-service e-commerce with published per-lead pricing. 25+ years in business (Next Wave, est. 2001), A+ BBB (not accredited). $100 minimum order, no contracts. Replacements for wrong/disconnected numbers up to a 20% cap. Filtering by state, ZIP, phone type and lead age. Aged only: no real-time, live transfer or developer API. CRM posting to GoHighLevel, Ringy, VanillaSoft, Ricochet360 and others. DNC scrubbing is left to the buyer. Scores carried over from the May 2026 review pending an editorial re-score; facts corrected 2026-11-23.",
-    lastVerified: "2026-05-20",
+      "Market leader in aged leads. Fully self-service e-commerce with published per-lead pricing. 25+ years in business (Next Wave, est. 2001), A+ BBB (not accredited). $100 minimum order, no contracts. Replacements for wrong/disconnected numbers up to a 20% cap. Filtering by state, ZIP, phone type and lead age. Aged only: no real-time, live transfer or developer API. CRM posting to GoHighLevel, Ringy, VanillaSoft, Ricochet360 and others. DNC scrubbing is left to the buyer. Re-scored 2026-11-23 (Bill): Compliance 7 to 6 (DNC scrubbing is not provided, though leads usually carry TrustedForm/Jornaya IDs); Flexibility 9 to 8 ($100 minimum and unserved states); Platform held at 8 (CRM posting, but no developer API).",
+    lastVerified: "2026-11-23",
     verticals: [
       "mortgage",
       "auto-insurance",
