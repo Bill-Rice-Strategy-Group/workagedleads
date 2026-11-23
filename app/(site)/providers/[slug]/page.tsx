@@ -4,7 +4,6 @@ import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   providerBySlugQuery,
-  allProviderSlugsQuery,
 } from "@/sanity/lib/queries";
 import { ProviderRatingBadge } from "@/components/provider-rating-badge";
 import { ProviderRatingBar } from "@/components/provider-rating-bar";
@@ -54,11 +53,12 @@ const COMPLIANCE_LABELS: Record<string, string> = {
   "dnc-scrubbing": "DNC Scrubbing",
 };
 
+// The static file is the source of truth for which profiles exist: it carries
+// the editorial review the page renders. Sanity only overrides dates. Building
+// from Sanity's slug list let a provider retired from data/providers.ts but
+// still published in Sanity (LeadsData, 2026-11-23) crash the production build
+// on the non-null assertion below. Sanity can no longer add a page.
 export async function generateStaticParams() {
-  const sanityResult = await sanityFetch(allProviderSlugsQuery);
-  if (sanityResult && sanityResult.length > 0) {
-    return sanityResult.map((p: { slug: string }) => ({ slug: p.slug }));
-  }
   return PROVIDERS.map((p) => ({ slug: p.slug }));
 }
 
@@ -145,15 +145,15 @@ export default async function ProviderProfilePage({
     | null;
   const staticProvider = getProvider(slug);
 
-  if (!sanityProvider && !staticProvider) return notFound();
+  if (!staticProvider) return notFound();
 
   // Static data carries the editorial review. Sanity's lastVerified is now a
   // HUMAN field too — the marketwatch cron stamps lastScanned instead, as of
   // 2026-10-07 — so preferring it is safe: it means an editor updated the
   // profile in Studio more recently than the static file was touched.
   const p = {
-    ...staticProvider!,
-    lastVerified: sanityProvider?.lastVerified || staticProvider!.lastVerified,
+    ...staticProvider,
+    lastVerified: sanityProvider?.lastVerified || staticProvider.lastVerified,
     lastScanned: sanityProvider?.lastScanned,
   };
 
