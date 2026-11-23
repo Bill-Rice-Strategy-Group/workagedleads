@@ -6,6 +6,82 @@
 
 ---
 
+## 2026-11-19 — Retire agedleadsales.com and howtoworkleads.com: keep registered, 301 → 410 on 2027-03-01
+<!-- added 2026-11-23 session. Link counts and spam scores are DataForSEO estimates pulled 2026-11-19; GSC numbers from data/gsc-trend.json. GSC > Links outranks DataForSEO wherever they disagree. -->
+
+**Decision (Bill, 2026-11-19):** shut the two old domains down for good so dormant domains stop feeding links into
+workagedleads.com. "Shut down" means **stay registered on auto-renew and serve `410 Gone`**, not let them expire:
+expired domains with backlinks are drop-caught within days, often by the same spam networks, and keep the brand and
+our old links attached to them. This **supersedes** "Keep both old domain registrations and their 301s
+indefinitely" in `data/migration/MIGRATION-PLAN.md` (Phase 5): registrations stay indefinitely, the 301s do not.
+
+**Why now is safe to plan (evidence, 2026-11-19):**
+
+| | 7d clicks | 7d impressions | referring domains (DataForSEO est.) | domain spam score (est.) |
+|---|---:|---:|---:|---:|
+| `agedleadsales.com` (retiring) | 4 | 213 | 41, ~6 look genuine | 42 |
+| `howtoworkleads.com` (retiring) | — | — | 50, ~17 look genuine | 35 |
+| **`workagedleads.com`** (live) | **57** | **7,662** | 73 | 19 |
+
+The consolidation has landed: the old domains are down to a trickle of search traffic, and what still flows through
+their 301s is mostly the same spam network that already links to workagedleads.com directly. **Retiring them does not
+end the spam problem** — the workagedleads.com disavow (PR #89, monthly refresh) is still needed.
+Change of Address was filed 2026-09-01; Google honours it for ~180 days, hence the 2027-03-01 date. The conservative
+alternative is 2027-08-03 (one year after cutover, Google's site-move guidance). The cost of either: links from
+genuine sites that have not been updated by then stop counting.
+
+### Phase 0 — now (Dec 2026)
+- [ ] **Merge #89 and upload `disavow-workagedleads.txt`** on `https://workagedleads.com/`. Covers the gap until the 410.
+- [ ] **Bill: turn on auto-renew at GoDaddy** for `agedleadsales.com` and `howtoworkleads.com` (registrations are
+      external to Vercel; renewal dates are not visible from here).
+- [ ] **Dependency check before anything changes:** MX / email forwarding and any Resend sending domain on the old
+      hosts; old newsletters and lead-magnet PDFs that link to them; the agedleadstore.com "Batch 3" swap of 1,312 link
+      instances (MIGRATION-PLAN Phase 6). DataForSEO no longer lists agedleadstore.com as linking to either old domain,
+      which suggests Batch 3 is done — confirm with a crawl, not that estimate.
+- [ ] **Export GSC > Links (top linking sites) for both old properties.** First-party list for the Phase 1 outreach.
+
+### Phase 1 — Dec 2026 → Feb 2027: ask genuine linkers to point at workagedleads.com
+- [ ] **Ours / friendly first:** callbackcrm.com, kaleidico.com, hiremav.com + mav.link.
+- [ ] **Others (DataForSEO, confirm against GSC):** sales-label.com (35 links), growthpros.marketing (both domains),
+      legalclarity.org, elevarus.com, leadadvisors.com, callmyleads.app, oppalerts.com, mcgrawnow.com, resultcalls.com,
+      ethanolle.com, cubecreative.design, bookeverycall.com, prospeo.io, chatzybot.com, attorneyassistant.com.
+
+### Phase 2 — on or after 2027-03-01: switch the old hosts from 301 to 410 (reminder scheduled for 2027-03-01)
+- [ ] Remove `agedleadsales.com` and `www.agedleadsales.com` from the `agedlead-sales` Vercel project, and the
+      howtoworkleads.com hosts from whichever project serves them (they are not on `agedlead-sales`).
+- [ ] Attach them to a small separate "retired domains" project that returns `410 Gone` for every path, with a short
+      human page ("moved to workagedleads.com", `rel="nofollow"` link). `robots.txt` must allow crawling so Google
+      actually sees the 410s.
+- [ ] Keep both GSC properties verified (DNS TXT) to watch them drain. Leave the Change of Address in place.
+
+### Phase 3 — 30–60 days after the switch
+- [ ] Confirm in GSC: old properties at zero indexed pages; workagedleads.com impressions/position holding.
+- [ ] From then on, the monthly DataForSEO pull + disavow refresh covers workagedleads.com only.
+
+### Phase 4 — the rest of the portfolio (same treatment: keep registered, outreach, then 410)
+Redirect-only domains found 2026-11-19 (DataForSEO estimates):
+
+| domain | redirects to | ref. domains | spam score |
+|---|---|---:|---:|
+| williampenwell.com | williamjeffriesbooks.com | 37 | 64 |
+| leadbuyerplaybook.com | leadbuyersplaybook.com | 45 | 62 |
+| billricelinktree.com | billrice.com | 55 | 58 |
+| b2bbattlecards.com | battlecardgenerator.com | 52 | 57 |
+| getdropprivacy.com | dropprivacy.com | 6 | 52 |
+| getagedleads.com | agedleadstore.com (Troy) | 2 | 47 |
+| demoleadgen.com | already 404 | 41 | 63 |
+
+- [ ] demoleadgen.com: 404 → 410, keep registered.
+- [ ] getagedleads.com: sends people to Troy's site — decide with Troy.
+- [ ] billricelinktree.com, williampenwell.com: personal / Books scope — Bill's call.
+- [ ] flyaviationllc.com → flyaviationmi.com: ownership unclear; confirm before touching.
+- [ ] 11 domains answered with Vercel's bot challenge (429) and could not be checked from a session; re-check by hand.
+
+### Phase 5 — standing rule
+- [ ] A retired domain 301s for 180 days after Change of Address (or 12 months), then serves 410. It always stays
+      registered on auto-renew and is listed in one register with its retirement date (candidate home:
+      `brsg-link-audit` `config.ts`).
+
 ## 2026-11-18 — Near-page-one queries: `aged leads` 8.9, `agedleadstore` 10.2, `iul leads` 12.9
 <!-- added 2026-11-18 session — positions from the portfolio report (GSC, last 7d). No GSC query→page access in-session; pages picked from data/gsc-trend.json topPages and a DataForSEO ranked-keywords sample (estimate, SERP dated 2026-09) -->
 
