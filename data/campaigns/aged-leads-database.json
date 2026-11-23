@@ -3,22 +3,27 @@
   "approvedBy": "Bill",
   "approvedAt": "2026-11-19",
   "audienceId": "43fe6675-cc8f-44f3-9c1c-70a094b2d47d",
-  "mailableAtSchedule": 6516,
-  "scheduledAtRun": "2026-11-19T18:22:08.630Z",
+  "mailableAtSchedule": 6540,
+  "scheduledAtRun": "2026-11-23T16:21:19.551Z",
   "superseded": [
     {
       "broadcastId": "0647eec5-be95-48db-a8e9-b27517858ec2",
       "deleted": "2026-11-19",
       "reason": "Bill asked for the P.S. back; rescheduled with new copy"
+    },
+    {
+      "broadcastId": "25929f3a-73f3-4e81-a10c-e2009689630e",
+      "deleted": "2026-11-23",
+      "reason": "Bill moved the send from 12-03 to 12-10 so it is not the fifth list email in ten days"
     }
   ],
   "broadcast": {
-    "broadcastId": "25929f3a-73f3-4e81-a10c-e2009689630e",
-    "name": "Aged leads database — 2026-12-03",
-    "scheduledAt": "2026-12-03T13:00:00Z",
+    "broadcastId": "4404e473-2d84-4d23-a334-df6720ee8de4",
+    "name": "Aged leads database — 2026-12-10",
+    "scheduledAt": "2026-12-10T13:00:00Z",
     "verified": {
       "status": "scheduled",
-      "scheduled_at": "2026-12-03 13:00:00+00",
+      "scheduled_at": "2026-12-10 13:00:00+00",
       "segment": "43fe6675-cc8f-44f3-9c1c-70a094b2d47d"
     }
   }

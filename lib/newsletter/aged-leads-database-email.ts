@@ -9,7 +9,8 @@ import { affiliateUrl } from "@/lib/affiliate";
  *
  * Follow-up to the 2026-12-01 newsletter, which features the same article
  * (/blog/aged-leads-customer-database-ai-assistant). Bill reviewed the copy in
- * a Claude Doc and chose Thu 2026-12-03 for the send.
+ * a Claude Doc and chose Thu 2026-12-03 for the send. Moved to Thu 2026-12-10
+ * (Bill, 2026-11-23) so it is not the fifth list email in ten days.
  *
  * Plain, personal letter, not the newsletter template: one article link, one
  * store link. Copy rules, same as every other send:
@@ -26,7 +27,7 @@ export const AGED_LEADS_DB_CAMPAIGN = "aged-leads-database";
 export const AGED_LEADS_DB_SLUG = "aged-leads-customer-database-ai-assistant";
 
 export const AGED_LEADS_DB_EMAIL = {
-  label: "2026-12-03",
+  label: "2026-12-10",
   subject: "You didn't buy leads. You bought a database.",
   previewText: "How to work aged leads like past clients, with a little help from AI.",
   body: [

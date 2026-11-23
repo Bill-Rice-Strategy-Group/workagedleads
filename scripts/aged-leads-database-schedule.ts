@@ -1,6 +1,6 @@
 /**
  * Test, then schedule, the one-off "You didn't buy leads. You bought a database."
- * list email for Thu 2026-12-03, 8am Eastern.
+ * list email for Thu 2026-12-10, 8am Eastern (moved from 12-03).
  *
  *   npx tsx scripts/aged-leads-database-schedule.ts           dry run — renders, gates, counts
  *   npx tsx scripts/aged-leads-database-schedule.ts --test    sends to bill@billricestrategy.com only
