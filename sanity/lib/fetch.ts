@@ -1,4 +1,5 @@
 import { client } from "../client";
+import { withRetry } from "./retry";
 
 /**
  * Every Sanity-backed route in this app is prerendered at build time. Without a
@@ -38,11 +39,16 @@ export async function sanityFetch<T = any>(
   params?: Record<string, any>,
   options?: SanityFetchOptions
 ): Promise<T | null> {
-  if (!client) return null;
-  return client.fetch<T>(query, params ?? {}, {
-    next: {
-      tags: [SANITY_CACHE_TAG, ...(options?.tags ?? [])],
-      revalidate: options?.revalidate ?? SANITY_REVALIDATE_SECONDS,
-    },
-  });
+  const sanity = client;
+  if (!sanity) return null;
+  // Timeout and retry on transient network errors; see ./retry.ts for why.
+  return withRetry((signal) =>
+    sanity.fetch<T>(query, params ?? {}, {
+      signal,
+      next: {
+        tags: [SANITY_CACHE_TAG, ...(options?.tags ?? [])],
+        revalidate: options?.revalidate ?? SANITY_REVALIDATE_SECONDS,
+      },
+    })
+  );
 }
