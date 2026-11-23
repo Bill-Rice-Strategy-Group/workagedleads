@@ -606,7 +606,7 @@ Order matters.
     carries the footer notice.
 11. Update the UTM source in `lib/affiliate.ts` to the single new value.
 
-**Keep both old domain registrations and their 301s indefinitely.** Every other
+**Keep both old domain registrations and their 301s indefinitely.** *(Superseded 2026-11-19: registrations stay indefinitely, but the 301s switch to `410 Gone` on or after 2027-03-01 — see BACKLOG.md "Retire agedleadsales.com and howtoworkleads.com".)* Every other
 referring domain still points at the old URLs.
 
 **Expect an impressions collapse, and do not read it as a regression.** The 16
