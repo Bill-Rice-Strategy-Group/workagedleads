@@ -274,8 +274,8 @@ export default async function HomePage() {
               Aged Leads for Every Industry
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
-              We carry aged leads across the most popular verticals. Click any
-              lead type to learn strategies, see playbooks, and start buying.
+              Buying guides for the most popular aged lead verticals. Click any
+              lead type to learn strategies, see playbooks, and find who sells it.
             </p>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
