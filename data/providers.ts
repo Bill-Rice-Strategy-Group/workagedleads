@@ -465,62 +465,6 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
       "DataToLeads (also operating as AvocaData) is a two-sided marketplace where data providers list and sell aged leads and consumer data. With 335M+ individual consumer records, the scale is impressive and the per-lead costs can be extremely low — fractions of a penny for bulk data. However, quality is highly variable. This is raw data at scale, not curated lead quality. Compliance documentation is less rigorous than dedicated lead providers, which is a concern for TCPA-sensitive operations. Best for high-volume operators who have their own scrubbing and compliance processes. Not recommended for agents who need turnkey, compliance-ready leads.",
   },
   {
-    name: "LeadsData",
-    slug: "leadsdata",
-    // NOT A LEAD SOURCE as of 2026-10-05. The entry is left in place because
-    // removing a published rating is an editorial call, not a build-time one —
-    // see the editorial review and ratingNotes below. The structured fields
-    // (verticals, leadTypes, deliveryMethods, complianceFeatures, the six
-    // ratings) still describe the lead marketplace this used to be; they are
-    // rendered as badge lists under fixed section headings, so emptying them
-    // produces orphan headings rather than a visible flag. They stay until the
-    // keep-or-retire decision is made.
-    shortDescription:
-      "No longer sells leads. Re-verified 2026-10-05: leadsdata.com is now a website behavior-analytics and visitor identity-resolution SaaS.",
-    website: "https://leadsdata.com",
-    foundedYear: 2019,
-    bbbRating: "NR",
-    headquartersState: "TX",
-    bestFor: [
-      "Nobody buying leads — kept listed pending review",
-      "Session-level website behavior analytics",
-      "Testing visitor identity resolution",
-    ],
-    notIdealFor: [
-      "Aged lead buyers",
-      "Real-time lead feeds",
-      "Buying consumer data of any kind",
-    ],
-    ratingTransparency: 8,
-    ratingValue: 7,
-    ratingCompliance: 7,
-    ratingFlexibility: 7,
-    ratingPlatform: 7,
-    ratingReputation: 4,
-    ratingNotes:
-      "The scores below are stranded. They were assigned on 2026-04-28 to a self-serve aged-data marketplace, and leadsdata.com no longer sells leads or data of any kind (re-verified 2026-10-05). They are deliberately left unchanged rather than re-scored: the open question is whether this provider belongs in an aged-lead directory at all, not what it should score. data/price-disclosure.ts flagged the same repositioning on 2026-09-02.",
-    lastVerified: "2026-10-05",
-    verticals: [
-      "auto-insurance",
-      "life-insurance",
-      "final-expense",
-      "health-insurance",
-      "medicare",
-      "solar",
-      "debt-settlement",
-    ],
-    leadTypes: ["aged", "real-time"],
-    pricingModel: "transparent",
-    hasMinimums: false,
-    contractRequired: false,
-    returnPolicy: "Not applicable — no lead or data product is sold",
-    deliveryMethods: ["instant-download", "email", "real-time-post"],
-    complianceFeatures: ["tcpa-docs", "dnc-scrubbing"],
-    isFeatured: false,
-    editorialReview:
-      "LeadsData is no longer a lead source, and this entry is out of date rather than merely stale. Re-verified against leadsdata.com on 2026-10-05: the site now sells a single JavaScript tag with two SaaS modules. Signals is session-level website behavior analytics — journeys, funnels, field-level form abandonment, rage and dead clicks — at $49/mo per 10,000 sessions. Identity is visitor identity resolution, tiered by how well each match is corroborated and billed at $0.18 per activatable resolution, with only the two strongest tiers consuming a credit. Both carry a 14-day trial. There is no aged-data marketplace, no real-time lead feed, and no per-lead price anywhere on the site, and the tag explicitly never reads the value of an input field. Our earlier profile described a self-serve marketplace for aged data and real-time feeds. We cannot tell from the public site alone whether the company pivoted, the domain changed hands, or the original entry was wrong — so that is not asserted either way here. What is certain is that an aged lead buyer arriving on this page today has nothing to buy at the other end of the link. Treat the ratings above as a historical artifact, not a current assessment.",
-  },
-  {
     name: "Lead Heroes",
     slug: "lead-heroes",
     shortDescription:
@@ -791,6 +735,11 @@ const rawProviders: Omit<ProviderData, "overallRating">[] = [
   },
 ];
 
+// RETIRED 2026-11-23 (Bill): LeadsData. Re-verified 2026-10-05 as a website
+// behaviour-analytics / identity-resolution SaaS that no longer sells leads,
+// yet it still ranked #2 on /providers. Its profile and every compare page
+// that paired it 308 elsewhere (next.config.ts). partner-hosts.ts keeps the
+// host so historical outbound clicks still classify.
 export const PROVIDERS: ProviderData[] = rawProviders.map((p) => ({
   ...p,
   overallRating: computeOverall(p),

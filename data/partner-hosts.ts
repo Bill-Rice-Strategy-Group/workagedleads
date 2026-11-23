@@ -24,6 +24,7 @@ export const PARTNER_HOSTS: PartnerHost[] = [
   { slug: "badass-insurance-leads", name: "Badass Insurance Leads", hostname: "badassinsuranceleads.com" },
   { slug: "brokers-data", name: "Brokers Data", hostname: "brokersdata.com" },
   { slug: "datatoleads", name: "DataToLeads", hostname: "datatoleads.com" },
+  // Retired from PROVIDERS 2026-11-23; kept so old outbound clicks classify.
   { slug: "leadsdata", name: "LeadsData", hostname: "leadsdata.com" },
   { slug: "lead-heroes", name: "Lead Heroes", hostname: "leadheroes.com" },
   { slug: "synergy-direct-solution", name: "Synergy Direct Solution", hostname: "synergydirectsolution.com" },

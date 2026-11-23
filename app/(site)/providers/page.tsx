@@ -13,9 +13,9 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://workagedleads.com";
 
 export const metadata: Metadata = {
   // "aged" is the money term this page ranks for and the old title omitted it.
-  title: "Aged Lead Providers: 15+ Rated & Compared",
+  title: `Aged Lead Providers: ${PROVIDERS.length} Rated & Compared`,
   description:
-    "Independent ratings of 15+ aged lead providers across mortgage, insurance, solar and more. Real pricing, 6-dimension scores, transparent methodology.",
+    `Independent ratings of ${PROVIDERS.length} aged lead providers across mortgage, insurance, solar and more. Real pricing, 6-dimension scores, transparent methodology.`,
   alternates: { canonical: `${baseUrl}/providers` },
   openGraph: {
     title: "Lead Provider Directory | Work Aged Leads",

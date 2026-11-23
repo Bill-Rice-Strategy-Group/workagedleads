@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PROVIDERS } from "@/data/providers";
 import Link from "next/link";
 import { CtaBanner } from "@/components/cta-banner";
 import { NextStepRouter } from "@/components/next-step-router";
@@ -209,7 +210,7 @@ export default function CalculatorsPage() {
             href: "/providers",
             label: "Provider comparison",
             description:
-              "Which sellers publish what they charge and which make you ask, scored alongside verticals covered, data age and replacement terms. Only one of the fifteen we have reviewed posts a comparable per-lead price.",
+              `Which sellers publish what they charge and which make you ask, scored alongside verticals covered, data age and replacement terms. Only one of the ${PROVIDERS.length} we have reviewed posts a comparable per-lead price.`,
             icon: "providers",
           },
         ]}

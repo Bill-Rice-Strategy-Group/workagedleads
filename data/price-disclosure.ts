@@ -178,14 +178,6 @@ export const PRICE_DISCLOSURE: PriceDisclosure[] = [
     sourceUrl: "https://quotewizard.com",
     verified: "2026-09-02",
   },
-  {
-    slug: "leadsdata",
-    level: "not-applicable",
-    note:
-      "Public site presents as a behaviour-analytics and identity-resolution platform ($49/mo for 10k sessions; $0.18 per activatable resolution) rather than a lead marketplace. Its pricing is published, but it is not per-lead pricing. Flagged for editorial review — see data/loop/price-index-q3-disclosure-survey.md.",
-    sourceUrl: "https://leadsdata.com",
-    verified: "2026-09-02",
-  },
 ];
 
 const BY_SLUG = new Map(PRICE_DISCLOSURE.map((d) => [d.slug, d]));

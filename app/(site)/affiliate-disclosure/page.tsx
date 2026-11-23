@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PROVIDERS } from "@/data/providers";
 import Link from "next/link";
 import { JsonLd, breadcrumbJsonLd } from "@/components/json-ld";
 
@@ -56,7 +57,7 @@ export default function AffiliateDisclosurePage() {
               Full disclosure: Bill Rice, the founder of this site, serves as
               the marketing director for{" "}
               <strong>AgedLeadStore.com</strong>. Aged Lead Store is one of the
-              15+ providers reviewed in our{" "}
+              {PROVIDERS.length} providers reviewed in our{" "}
               <Link href="/providers">provider directory</Link>. This
               relationship is always disclosed on relevant pages.
             </p>

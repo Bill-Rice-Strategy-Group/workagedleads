@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PROVIDERS } from "@/data/providers";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { homepageDataQuery } from "@/sanity/lib/queries";
 import { LeadTypeCard } from "@/components/lead-type-card";
@@ -172,7 +173,7 @@ export default async function HomePage() {
             {[
               { value: "10-50x", label: "Lower Cost Per Lead" },
               { value: "15+", label: "Verticals Covered" },
-              { value: "15+", label: "Providers Reviewed" },
+              { value: String(PROVIDERS.length), label: "Providers Reviewed" },
               { value: "Free", label: "Tools & Calculators" },
             ].map((stat) => (
               <div key={stat.label}>

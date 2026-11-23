@@ -52,6 +52,26 @@ const nextConfig: NextConfig = {
         permanent: false,
       },
 
+      // LeadsData retired 2026-11-23 (no longer sells leads). Its profile goes
+      // to the directory; each compare page that paired it goes to the other
+      // provider's profile, the closest surviving answer to that query. Pair
+      // slugs are alphabetical, so leadsdata can sit on either side.
+      {
+        source: "/providers/leadsdata",
+        destination: "/providers",
+        permanent: true,
+      },
+      {
+        source: "/compare/leadsdata-vs-:other",
+        destination: "/providers/:other",
+        permanent: true,
+      },
+      {
+        source: "/compare/:other-vs-leadsdata",
+        destination: "/providers/:other",
+        permanent: true,
+      },
+
       // The home-improvement vertical had two lead-type pages: the canonical
       // slug and a legacy one carrying all the content. The content moved to
       // the canonical slug, so the legacy page has to stop resolving or the
