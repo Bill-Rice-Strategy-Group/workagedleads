@@ -10,7 +10,7 @@
   "subject": "Thanksgiving week: fewer dials, better ones",
   "previewText": "Where to spend your dials this week, and how to set up December before you log off.",
   "html": "2026-11-23.html",
-  "sent": false,
+  "sent": true,
   "priceGuard": {
     "blocking": [],
     "warnings": []
@@ -26,5 +26,8 @@
     "Set up December before you take time off"
   ],
   "industryInsight": "Holiday travel and the 8am-to-9pm rule",
-  "errors": []
+  "errors": [],
+  "sentAt": "2026-11-24T13:00:22.320Z",
+  "broadcastId": "3f3b0986-8d21-448e-b01a-140f64890eeb",
+  "sentBy": "cron"
 }
