@@ -69,11 +69,26 @@ export interface RetryOptions {
   sleep?: (ms: number) => Promise<void>;
 }
 
+/**
+ * 4 attempts, waits of 0.5s / 1s / 2s between them: rides out a Sanity CDN blip
+ * of ~3.5s. Tuned 2026-11-25 after #92's 3 attempts at 0.25s / 0.5s still let
+ * 13 failures through in a day, all brief resets and timeouts on
+ * p7rbtajg.apicdn.sanity.io across four regions. The per-attempt deadline came
+ * down from 6s to 4s so the worst case when Sanity is fully down stays about
+ * where it was (19.5s against 18.75s); a test pins that budget.
+ */
 export const SANITY_RETRY: RetryOptions = {
-  attempts: 3,
-  timeoutMs: 6_000,
-  baseDelayMs: 250,
+  attempts: 4,
+  timeoutMs: 4_000,
+  baseDelayMs: 500,
 };
+
+/** Longest a single read can take when every attempt times out. */
+export function worstCaseMs(o: RetryOptions): number {
+  let waits = 0;
+  for (let n = 1; n < o.attempts; n++) waits += o.baseDelayMs * 2 ** (n - 1);
+  return o.attempts * o.timeoutMs + waits;
+}
 
 const defaultSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 

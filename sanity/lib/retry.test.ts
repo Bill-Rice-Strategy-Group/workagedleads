@@ -1,6 +1,6 @@
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
-import { isTransientError, withRetry, type RetryOptions } from "./retry";
+import { isTransientError, withRetry, worstCaseMs, SANITY_RETRY, type RetryOptions } from "./retry";
 
 const fast: RetryOptions = { attempts: 3, timeoutMs: 1_000, baseDelayMs: 1, sleep: async () => {} };
 
@@ -91,5 +91,23 @@ describe("withRetry", () => {
     assert.equal(signals.length, 2);
     assert.notEqual(signals[0], signals[1]);
     assert.ok(signals.every((s) => s.aborted));
+  });
+});
+
+describe("SANITY_RETRY budget", () => {
+  test("rides out a blip of at least 3.5s between first and last attempt", () => {
+    // Sum of the waits between attempts.
+    assert.ok(worstCaseMs({ ...SANITY_RETRY, timeoutMs: 0 }) >= 3_500);
+  });
+
+  test("worst case when Sanity is down stays under 20s per read", () => {
+    // Page renders can chain several reads; this keeps one dead read from
+    // costing much more than it did before 2026-11-25 (18.75s).
+    assert.equal(worstCaseMs(SANITY_RETRY), 19_500);
+    assert.ok(worstCaseMs(SANITY_RETRY) < 20_000);
+  });
+
+  test("worstCaseMs adds every timeout and every wait", () => {
+    assert.equal(worstCaseMs({ attempts: 3, timeoutMs: 6_000, baseDelayMs: 250 }), 18_750);
   });
 });
