@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-25T12:00:06.238Z",
+  "lastUpdated": "2026-11-26T12:00:05.789Z",
   "snapshots": [
     {
       "date": "2026-07-10",
@@ -35686,6 +35686,172 @@
             "impressions": 477,
             "ctr": 0.0042,
             "position": 24.15
+          }
+        }
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "property": "workagedleads",
+      "status": "ok",
+      "rolling7d": {
+        "clicks": 55,
+        "impressions": 7726,
+        "ctr": 0.0071,
+        "position": 19.12
+      },
+      "topPages": [
+        {
+          "page": "https://workagedleads.com/blog/voicemail-scripts-insurance-leads",
+          "clicks": 4,
+          "impressions": 155,
+          "ctr": 0.0258,
+          "position": 4.19
+        },
+        {
+          "page": "https://workagedleads.com/blog/aged-lead-pricing-guide",
+          "clicks": 3,
+          "impressions": 97,
+          "ctr": 0.0309,
+          "position": 5.88
+        },
+        {
+          "page": "https://workagedleads.com/blog/insurance-agent-lead-budget",
+          "clicks": 3,
+          "impressions": 134,
+          "ctr": 0.0224,
+          "position": 11.1
+        },
+        {
+          "page": "https://workagedleads.com/providers/best/mortgage",
+          "clicks": 3,
+          "impressions": 146,
+          "ctr": 0.0205,
+          "position": 28.36
+        },
+        {
+          "page": "https://workagedleads.com/providers/the-leads-warehouse",
+          "clicks": 3,
+          "impressions": 68,
+          "ctr": 0.0441,
+          "position": 5.32
+        },
+        {
+          "page": "https://workagedleads.com/blog/aged-lead-store-review-2026",
+          "clicks": 2,
+          "impressions": 163,
+          "ctr": 0.0123,
+          "position": 5.53
+        },
+        {
+          "page": "https://workagedleads.com/blog/final-expense-door-knocking-playbook",
+          "clicks": 2,
+          "impressions": 14,
+          "ctr": 0.1429,
+          "position": 4.21
+        },
+        {
+          "page": "https://workagedleads.com/blog/sms-templates-insurance-leads",
+          "clicks": 2,
+          "impressions": 198,
+          "ctr": 0.0101,
+          "position": 15.41
+        },
+        {
+          "page": "https://workagedleads.com/blog/sms-templates-mortgage-leads",
+          "clicks": 2,
+          "impressions": 122,
+          "ctr": 0.0164,
+          "position": 14.12
+        },
+        {
+          "page": "https://workagedleads.com/blog/voicemail-scripts-mortgage-leads",
+          "clicks": 2,
+          "impressions": 118,
+          "ctr": 0.0169,
+          "position": 16.51
+        }
+      ],
+      "topQueries": [
+        {
+          "query": "advance commission",
+          "clicks": 1,
+          "impressions": 5,
+          "ctr": 0.2,
+          "position": 2
+        },
+        {
+          "query": "aged direct mail final expense leads",
+          "clicks": 1,
+          "impressions": 3,
+          "ctr": 0.3333,
+          "position": 6.67
+        },
+        {
+          "query": "aged lead store reviews",
+          "clicks": 1,
+          "impressions": 8,
+          "ctr": 0.125,
+          "position": 2.5
+        },
+        {
+          "query": "aged life insurance leads",
+          "clicks": 1,
+          "impressions": 69,
+          "ctr": 0.0145,
+          "position": 13.77
+        },
+        {
+          "query": "leads warehouse",
+          "clicks": 1,
+          "impressions": 8,
+          "ctr": 0.125,
+          "position": 5.5
+        },
+        {
+          "query": "mortgage lead list",
+          "clicks": 1,
+          "impressions": 1,
+          "ctr": 1,
+          "position": 19
+        },
+        {
+          "query": "mortgage leads list",
+          "clicks": 1,
+          "impressions": 2,
+          "ctr": 0.5,
+          "position": 17.5
+        },
+        {
+          "query": "mva leads",
+          "clicks": 1,
+          "impressions": 37,
+          "ctr": 0.027,
+          "position": 15.24
+        },
+        {
+          "query": "quotewizard",
+          "clicks": 1,
+          "impressions": 6,
+          "ctr": 0.1667,
+          "position": 22.33
+        },
+        {
+          "query": "$29 final expense leads",
+          "clicks": 0,
+          "impressions": 2,
+          "ctr": 0,
+          "position": 52
+        }
+      ],
+      "watchedPages": [
+        {
+          "page": "https://workagedleads.com/lead-types/life-insurance-leads",
+          "row": {
+            "clicks": 2,
+            "impressions": 468,
+            "ctr": 0.0043,
+            "position": 23.43
           }
         }
       ]
