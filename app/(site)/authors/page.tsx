@@ -81,7 +81,11 @@ export default async function AuthorsPage() {
                   buyers. Owned and operated Velocity Lending (DTC mortgage
                   lender, 2016-2018). Has personally worked millions of leads
                   across insurance, mortgage, solar, and home improvement.
-                  Author of The Lead Buyer&apos;s Playbook (2025).
+                  Author of The Lead Buyer&apos;s Playbook (2025) and{" "}
+                  <Link href="/book" className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400">
+                    Sales Team of One
+                  </Link>{" "}
+                  (2026).
                 </p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
