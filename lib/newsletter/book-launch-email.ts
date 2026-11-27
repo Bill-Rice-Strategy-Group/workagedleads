@@ -13,11 +13,12 @@ import { BOOK } from "@/lib/book";
  * gets one dedicated send plus an occasional P.S., never the main CTA of a
  * store email.
  *
- * DRAFT — NOT APPROVED. `BOOK_LAUNCH_APPROVED_AT` is null until Bill signs off
- * on the copy and the date; scripts/book-launch-schedule.ts --apply refuses
- * while it is null.
+ * APPROVED by Bill 2026-11-27 (copy, date, no store link) and scheduled in
+ * Resend — see data/campaigns/book-launch.json. Cancel by deleting the
+ * broadcast in the Resend dashboard. scripts/book-launch-schedule.ts --apply
+ * refuses while `BOOK_LAUNCH_APPROVED_AT` is null.
  *
- * DATE: proposed Thu 2026-12-17, 8am Eastern. It clears FINISH2026 (ended
+ * DATE: Thu 2026-12-17, 8am Eastern. It clears FINISH2026 (ended
  * 11-30), the Tuesday newsletters (12-01, 12-08, 12-15) and the aged-leads
  * database email (Thu 12-10), and lands before the holidays and the January
  * restock push.
@@ -40,7 +41,7 @@ import { BOOK } from "@/lib/book";
 
 export const BOOK_LAUNCH_CAMPAIGN = "book-sales-team-of-one";
 /** Set to the ISO date Bill approves the copy and send date. */
-export const BOOK_LAUNCH_APPROVED_AT: string | null = null;
+export const BOOK_LAUNCH_APPROVED_AT: string | null = "2026-11-27";
 
 export const BOOK_LAUNCH_EMAIL = {
   label: "2026-12-17",
