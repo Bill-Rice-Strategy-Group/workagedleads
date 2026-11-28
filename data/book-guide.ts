@@ -59,10 +59,11 @@ export const BOOK_SECTIONS: BookSection[] = [
     title: "Start here",
     appendixStep: "What You Need",
     chapter: "Chapter 4",
-    status: "coming",
+    status: "ready",
+    lastChecked: "2026-11",
     needsLegalReview: false,
     adds:
-      "Which assistants we recommend on a business plan and what each costs, how to keep your conversations out of training in each one, and what never to paste in.",
+      "Which assistants to consider on a business plan and what each costs, how training works in each one, and what never to paste in.",
   },
   {
     id: "never-list",
@@ -230,6 +231,11 @@ export interface BookChange {
 export const BOOK_CHANGES: BookChange[] = [
   {
     date: "2026-11-28",
+    section: "start-here",
+    text: "Added: four business-plan assistants with prices, how training works in each, and what never to paste in.",
+  },
+  {
+    date: "2026-11-28",
     text: "Guide opened: the never list, the list template, house rules, the Today page, the call brief and after-call note, and the long list.",
   },
 ];
@@ -358,4 +364,118 @@ export const LONG_LIST_TOPICS: { month: string; topic: string; kind: string }[] 
   { month: "October", topic: "Why a family needs several certified copies of a death certificate, and where they come from.", kind: "When someone passes" },
   { month: "November", topic: "A thank-you note at Thanksgiving. No ask.", kind: "Seasonal hello" },
   { month: "December", topic: "Before the holidays: put the folder where the family will be, and tell them where it is.", kind: "Seasonal hello" },
+];
+
+/**
+ * Start here: the business plans (book: "pay for the business version").
+ *
+ * Every price and quote below was read on the vendor's own page on
+ * `checkedOn`. Rules for editing:
+ * - Standing prices only. Promotions (Microsoft's add-on discount to
+ *   2026-12-31, Google's first-three-months offer) are left out: they would be
+ *   wrong in weeks.
+ * - Seat minimums are stated, because readers are one-person businesses.
+ * - No HIPAA claims. Whether an agent's notes are covered by HIPAA is a legal
+ *   question for Henson Legal, not something this page answers.
+ * - No affiliate links. If one is ever added, disclose it next to the link.
+ * - Listed alphabetically. The page doesn't rank them; it says how to pick.
+ */
+export interface AssistantPlan {
+  assistant: string;
+  /** Who is speaking in the training quote. */
+  company: string;
+  plan: string;
+  /** Plain-English price line, as the vendor states it. */
+  price: string;
+  /** Seat minimum or who can buy it. */
+  seats: string;
+  /** Vendor's own words on training, quoted. */
+  trainingQuote: string;
+  trainingSourceUrl: string;
+  /** Anything the reader must do for the protections to apply. */
+  mustDo?: string;
+  bestFit: string;
+  pricingUrl: string;
+  checkedOn: string;
+}
+
+export const ASSISTANT_PLANS: AssistantPlan[] = [
+  {
+    assistant: "ChatGPT",
+    company: "OpenAI",
+    plan: "ChatGPT Business",
+    price: "$25 per user a month billed monthly, or $20 a month billed yearly",
+    seats:
+      "OpenAI's pricing pages say Business starts at 2 users; its help center says you can start with one seat. Check at checkout.",
+    trainingQuote: "OpenAI won't train on your workspace's data.",
+    trainingSourceUrl: "https://help.openai.com/en/articles/8792828-chatgpt-business-overview",
+    bestFit: "You don't already pay for Google or Microsoft business email, or you already use ChatGPT.",
+    pricingUrl: "https://openai.com/business/chatgpt-pricing/",
+    checkedOn: "2026-11-28",
+  },
+  {
+    assistant: "Claude",
+    company: "Anthropic",
+    plan: "Claude Team",
+    price: "$25 per seat a month billed monthly, or $20 a month billed yearly",
+    seats:
+      "Minimum two seats, so at least $50 a month billed monthly ($40 billed yearly).",
+    trainingQuote:
+      "By default, we will not use your inputs or outputs from our commercial products (e.g. Claude for Work…) to train our models.",
+    trainingSourceUrl: "https://privacy.claude.com/en/articles/7996868",
+    mustDo:
+      "One exception Anthropic names: a chat you send as thumbs-up or thumbs-down feedback can be used. Don't rate chats that hold client details.",
+    bestFit: "Two of you share the office, like Hank and Jess.",
+    pricingUrl: "https://claude.com/pricing",
+    checkedOn: "2026-11-28",
+  },
+  {
+    assistant: "Google Gemini",
+    company: "Google",
+    plan: "Google Workspace Business Starter (includes the Gemini app)",
+    price: "From $7 per user a month (Google's pricing page; billing options vary)",
+    seats: "One user or more, so you can buy it on your own.",
+    trainingQuote:
+      "Your chats and uploaded files won't be reviewed by human reviewers or otherwise used to train generative AI models outside of your domain without your permission.",
+    trainingSourceUrl:
+      "https://knowledge.workspace.google.com/admin/generative-ai/generative-ai-in-google-workspace-privacy-hub",
+    mustDo:
+      "The protections apply when you're signed in with your work Google account, not a personal Gmail address.",
+    bestFit: "Your business email already runs on Google Workspace.",
+    pricingUrl: "https://workspace.google.com/pricing",
+    checkedOn: "2026-11-28",
+  },
+  {
+    assistant: "Microsoft Copilot",
+    company: "Microsoft",
+    plan: "Microsoft 365 Business Basic (includes Copilot Chat)",
+    price: "$7 per user a month, paid yearly",
+    seats: "Sold per user, up to 300. Microsoft's page states no minimum.",
+    trainingQuote: "Prompts and responses aren't used to train the underlying foundation models.",
+    trainingSourceUrl: "https://learn.microsoft.com/en-us/copilot/plan/privacy-and-protections",
+    mustDo:
+      "Sign in with your work Microsoft account. Microsoft shows a green shield when the protection is on; no shield, no protection.",
+    bestFit: "Your business email already runs on Microsoft 365 (Outlook).",
+    pricingUrl:
+      "https://www.microsoft.com/en-us/microsoft-365/business/compare-all-microsoft-365-business-products",
+    checkedOn: "2026-11-28",
+  },
+];
+
+/** For readers on a personal plan: where the training setting is. */
+export const PERSONAL_PLAN_TRAINING_SETTINGS: {
+  assistant: string;
+  path: string;
+  sourceUrl: string;
+}[] = [
+  {
+    assistant: "ChatGPT (Plus and other personal plans)",
+    path: "Profile menu → Settings → Data controls → turn off \"Improve the model for everyone.\" It's on by default.",
+    sourceUrl: "https://help.openai.com/en/articles/7730893-data-controls-faq",
+  },
+  {
+    assistant: "Claude (Pro and other personal plans)",
+    path: "Settings → Privacy → turn off \"Help Improve our AI models.\"",
+    sourceUrl: "https://privacy.claude.com/en/articles/12109829",
+  },
 ];

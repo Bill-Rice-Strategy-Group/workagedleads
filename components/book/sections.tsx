@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { CopyBlock } from "@/components/book/copy-block";
 import {
   ASSISTANT_INSTRUCTION_LOCATIONS,
+  ASSISTANT_PLANS,
+  PERSONAL_PLAN_TRAINING_SETTINGS,
   LONG_LIST_TOPICS,
   NEVER_LIST,
   NEVER_LIST_STATUS_TABLE_REVIEWED,
@@ -413,7 +415,130 @@ function LongList() {
   );
 }
 
+const checkedLabel = (d: string) =>
+  new Date(d + "T12:00:00Z").toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+
+function StartHere() {
+  return (
+    <>
+      <P>
+        This is the <strong>$20 back office</strong> from Chapter 4. Three things, plus two you
+        probably already have:
+      </P>
+      <ol className="mb-6 list-decimal space-y-1 pl-6 text-zinc-700 dark:text-zinc-300">
+        <li>
+          <strong>A list.</strong> One spreadsheet with every lead you own.{" "}
+          <A href="#build-the-list">Get the template</A>.
+        </li>
+        <li>
+          <strong>An email account in your name.</strong> Replies come to you, and you answer them
+          yourself.
+        </li>
+        <li>
+          <strong>An AI assistant that drafts and waits.</strong> It writes; you read and send.
+        </li>
+        <li>
+          <strong>A calendar,</strong> for the promises.
+        </li>
+        <li>
+          <strong>A real postal address,</strong> because every marketing email has to carry one.
+        </li>
+      </ol>
+
+      <H3>Pay for the business version</H3>
+      <P>
+        Your notes will hold private things about people: their health, their money, who handles
+        their affairs. The free version of most assistants is not where that belongs. Use a paid
+        business plan. It may cost more than the cheapest plan. It&apos;s still the cheapest
+        employee you&apos;ll ever have.
+      </P>
+      <P>
+        <strong>The simplest way to pick:</strong> if your business email already runs on Google
+        or Microsoft, use the assistant that comes with it. You&apos;re already paying for most of
+        it, and it&apos;s one less account to keep. If not, pick either of the other two. All four
+        draft, summarize and sort, which is what the book asks of an assistant.
+      </P>
+
+      <div className="my-6 space-y-4">
+        {ASSISTANT_PLANS.map((a) => (
+          <div key={a.assistant} className="rounded-xl border border-zinc-200 p-5 dark:border-zinc-800">
+            <p className="text-lg font-semibold text-zinc-900 dark:text-white">{a.assistant}</p>
+            <p className="text-sm text-zinc-500">{a.plan}</p>
+            <dl className="mt-3 grid gap-x-4 gap-y-2 text-sm sm:grid-cols-[8rem_1fr]">
+              <dt className="font-medium text-zinc-900 dark:text-white">Good fit if</dt>
+              <dd className="text-zinc-700 dark:text-zinc-300">{a.bestFit}</dd>
+              <dt className="font-medium text-zinc-900 dark:text-white">Cost</dt>
+              <dd className="text-zinc-700 dark:text-zinc-300">{a.price}</dd>
+              <dt className="font-medium text-zinc-900 dark:text-white">Who can buy it</dt>
+              <dd className="text-zinc-700 dark:text-zinc-300">{a.seats}</dd>
+              <dt className="font-medium text-zinc-900 dark:text-white">Training</dt>
+              <dd className="text-zinc-700 dark:text-zinc-300">
+                In {a.company}&apos;s words: <em>&ldquo;{a.trainingQuote}&rdquo;</em>{" "}
+                <a href={a.trainingSourceUrl} className="text-xs underline" rel="noopener" target="_blank">
+                  source
+                </a>
+              </dd>
+              {a.mustDo && (
+                <>
+                  <dt className="font-medium text-zinc-900 dark:text-white">Watch for</dt>
+                  <dd className="text-zinc-700 dark:text-zinc-300">{a.mustDo}</dd>
+                </>
+              )}
+            </dl>
+            <p className="mt-3 text-xs text-zinc-500">
+              Prices checked {checkedLabel(a.checkedOn)} on the{" "}
+              <a href={a.pricingUrl} className="underline" rel="noopener" target="_blank">
+                {a.assistant} pricing page
+              </a>
+              . Prices change; that page is the final word. Not an affiliate link.
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <H3>The training setting</H3>
+      <P>
+        The book says: if your plan has a setting that keeps your conversations out of its
+        training, turn it on. On the four business plans above, the companies say your
+        conversations aren&apos;t used for training to begin with, as quoted. If you&apos;re on a
+        personal plan for now, the setting is here:
+      </P>
+      <ul className="mb-4 space-y-2 text-zinc-700 dark:text-zinc-300">
+        {PERSONAL_PLAN_TRAINING_SETTINGS.map((t) => (
+          <li key={t.assistant} className="rounded-lg border border-zinc-200 p-3 text-sm dark:border-zinc-800">
+            <strong>{t.assistant}:</strong> {t.path}{" "}
+            <a href={t.sourceUrl} className="text-xs underline" rel="noopener" target="_blank">
+              source
+            </a>
+          </li>
+        ))}
+      </ul>
+      <P>A personal plan is a stopgap. Move to a business plan before client notes go in.</P>
+
+      <H3>What never goes in</H3>
+      <div className="my-5 rounded-xl border-2 border-red-600 p-5 dark:border-red-500">
+        <p className="leading-relaxed text-zinc-900 dark:text-white">
+          <strong>Never put these in any assistant, ever:</strong> Social Security numbers, bank
+          account or card numbers, policy numbers, or anything your carriers&apos; rules say to keep
+          out. If you wouldn&apos;t leave it on the counter at the diner, don&apos;t leave it in a
+          tool.
+        </p>
+      </div>
+      <P>
+        Lead files sometimes carry more than you need. Before you hand one to the assistant, delete
+        any column that holds those things. The twelve columns in{" "}
+        <A href="#build-the-list">the template</A> are all the assistant ever needs.
+      </P>
+    </>
+  );
+}
+
 export const SECTION_CONTENT: Record<string, () => ReactNode> = {
+  "start-here": StartHere,
   "never-list": NeverList,
   "build-the-list": BuildTheList,
   "house-rules": HouseRules,
