@@ -1,179 +1,114 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd, breadcrumbJsonLd } from "@/components/json-ld";
-import { BookUpdatesSignup } from "@/components/book/book-updates-signup";
-import { SECTION_CONTENT } from "@/components/book/sections";
-import {
-  BOOK_CHANGES,
-  BOOK_SECTIONS,
-  formatMonthYear,
-  isPublishable,
-  isStale,
-  type BookSection,
-} from "@/data/book-guide";
+import { TrackedOutboundLink } from "@/components/tracked-outbound-link";
+import { GuideAnchorForward } from "@/components/book/guide-anchor-forward";
+import { BOOK_SECTIONS } from "@/data/book-guide";
+import { BOOK } from "@/lib/book";
 import { SITE_URL } from "@/lib/site-url";
 
 /*
- * workagedleads.com/book — PRINTED IN THE BOOK AND IN A QR CODE.
+ * /book — the hub for Bill's books (Bill, 2026-11-28).
  *
- * This route must always resolve. Never delete or rename it; if the guide
- * moves, add a redirect from /book to the new home in next.config.ts. Section
- * anchors (#house-rules, ...) are permanent too. See data/book-guide.ts.
+ * TWO THINGS DEPEND ON THIS URL, SO IT MUST ALWAYS RESOLVE:
+ * 1. Nobody Answers prints workagedleads.com/book, and a QR code to it, as the
+ *    home of its back-office guide. Readers holding the book land here.
+ * 2. The Sales Team of One launch email (scheduled 2026-12-17) links /book
+ *    with campaign UTMs.
  *
- * No email gate, ever: the reader bought the book and this is the appendix it
- * promises. The only form is the optional change-notice signup.
+ * Each book has its own page under it. Never delete or repurpose /book; if
+ * the books' pages move, keep this hub pointing at them.
  */
 
 const url = `${SITE_URL}/book`;
 
 export const metadata: Metadata = {
-  title: "Nobody Answers: The Back-Office Guide",
+  title: "Books by Bill Rice: Nobody Answers and Sales Team of One",
   description:
-    "The step-by-step companion to the appendix of Nobody Answers: house rules, the Today page, call briefs, the long list and a free lead-list template. Every section dated.",
+    "Bill Rice's books. Reading Nobody Answers? The free back-office guide it points to is here. Plus Sales Team of One, on staying irreplaceable when AI comes for the sales team.",
   alternates: { canonical: url },
 };
 
-// Re-render daily so "May be out of date" appears on time without a deploy.
-export const revalidate = 86400;
-
-function Stamp({ s }: { s: BookSection }) {
-  if (isPublishable(s)) {
-    const stale = isStale(s.lastChecked!);
-    return (
-      <p className="text-sm text-zinc-500">
-        Last checked: {formatMonthYear(s.lastChecked!)}
-        {stale && (
-          <span className="ml-2 rounded bg-amber-100 px-2 py-0.5 font-medium text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">
-            May be out of date
-          </span>
-        )}
-      </p>
-    );
-  }
+export default function BooksHubPage() {
   return (
-    <p className="text-sm text-zinc-500">
-      {s.status === "legal-review" ? "In legal review" : "Being written"}
-    </p>
-  );
-}
-
-function Pending({ s }: { s: BookSection }) {
-  return (
-    <div className="rounded-xl border border-dashed border-zinc-300 p-5 text-zinc-700 dark:border-zinc-700 dark:text-zinc-300">
-      {s.status === "legal-review" ? (
-        <p className="leading-relaxed">
-          This section covers rules that can hurt you if they&apos;re out of date, so it goes up
-          only after our lawyers have reviewed it. Until then, follow{" "}
-          <strong>{s.appendixStep}</strong> in the book&apos;s appendix, and when you have a real
-          question, ask a lawyer who does this for a living.
-        </p>
-      ) : (
-        <p className="leading-relaxed">
-          Not written yet. <strong>{s.appendixStep}</strong> in the book&apos;s appendix has
-          everything you need to do this job without it.
-        </p>
-      )}
-      <p className="mt-2 text-sm text-zinc-500">Coming here: {s.adds}</p>
-    </div>
-  );
-}
-
-export default function BookGuidePage() {
-  const latest = BOOK_CHANGES[0];
-
-  return (
-    <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16">
+      <GuideAnchorForward ids={BOOK_SECTIONS.map((s) => s.id)} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "Home", url: SITE_URL },
-          { name: "Nobody Answers: The Back-Office Guide", url },
+          { name: "Books", url },
         ])}
       />
-      <Breadcrumbs items={[{ label: "The Back-Office Guide" }]} />
+      <Breadcrumbs items={[{ label: "Books" }]} />
 
-      <header className="mb-10">
-        <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-blue-700 dark:text-blue-400">
-          For readers of <em>Nobody Answers</em>
-        </p>
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">
-          Setting up your back office, step by step
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-          The book&apos;s appendix covers what doesn&apos;t change: the jobs, what to ask for, what
-          to check, and the rules. This page covers what does: which tools, where the settings
-          are, and the exact steps. It&apos;s free, there&apos;s nothing to sign up for, and every
-          section says when it was last checked.
-        </p>
-        <p className="mt-3 text-sm text-zinc-500">
-          Last change: {new Date(latest.date + "T12:00:00Z").toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-            timeZone: "UTC",
-          })}{" "}
-          · <Link href="/book/changes" className="underline">What changed</Link>
-        </p>
-      </header>
+      <h1 className="mb-3 text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">
+        Books by Bill Rice
+      </h1>
+      <p className="mb-10 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
+        Two books, both about doing the human part of selling well while the machines do the
+        rest.
+      </p>
 
-      <nav aria-label="Sections" className="mb-12 rounded-xl border border-zinc-200 p-5 print:hidden dark:border-zinc-800">
-        <p className="mb-3 text-sm font-semibold text-zinc-900 dark:text-white">
-          Find the step you&apos;re on
-        </p>
-        <ol className="space-y-1.5 text-sm">
-          {BOOK_SECTIONS.map((s) => (
-            <li key={s.id} className="flex flex-wrap items-baseline gap-x-2">
-              <span className="w-40 shrink-0 text-zinc-500">{s.appendixStep}</span>
-              <a href={`#${s.id}`} className="font-medium text-blue-700 underline dark:text-blue-400">
-                {s.title}
-              </a>
-              {!isPublishable(s) && (
-                <span className="text-xs text-zinc-500">
-                  ({s.status === "legal-review" ? "in legal review" : "coming"})
-                </span>
-              )}
-            </li>
-          ))}
-          <li className="flex flex-wrap items-baseline gap-x-2">
-            <span className="w-40 shrink-0 text-zinc-500">&nbsp;</span>
-            <Link href="/book/changes" className="font-medium text-blue-700 underline dark:text-blue-400">
-              What changed
-            </Link>
-          </li>
-        </ol>
-      </nav>
+      <div className="grid gap-6 md:grid-cols-2">
+        <section className="flex flex-col rounded-2xl border-2 border-blue-600 p-6 dark:border-blue-500">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-blue-700 dark:text-blue-400">
+            Reading this one? Start here
+          </p>
+          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+            <em>Nobody Answers</em>
+          </h2>
+          <p className="mt-3 flex-1 leading-relaxed text-zinc-700 dark:text-zinc-300">
+            The book&apos;s appendix sends you here for the back-office setup, step by step: house
+            rules, the <em>Today</em> page, the call brief, the long list and a free list template.
+            Free, nothing to sign up for, and every section dated.
+          </p>
+          <Link
+            href="/book/nobody-answers"
+            className="mt-6 inline-block self-start rounded-lg bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+          >
+            Open the back-office guide
+          </Link>
+        </section>
 
-      {BOOK_SECTIONS.map((s) => {
-        const Content = SECTION_CONTENT[s.id];
-        return (
-          <section key={s.id} id={s.id} className="mb-16 scroll-mt-24">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-              Appendix: {s.appendixStep}
-              {s.chapter ? ` · ${s.chapter}` : ""}
-            </p>
-            <h2 className="mb-1 text-3xl font-bold text-zinc-900 dark:text-white">{s.title}</h2>
-            <div className="mb-6">
-              <Stamp s={s} />
+        <section className="flex flex-col rounded-2xl border border-zinc-200 p-6 dark:border-zinc-800">
+          <div className="flex gap-4">
+            <Image
+              src={BOOK.coverPath}
+              alt={BOOK.coverAlt}
+              width={96}
+              height={153}
+              className="h-auto w-24 shrink-0 rounded shadow"
+            />
+            <div>
+              <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">
+                <em>{BOOK.title}</em>
+              </h2>
+              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{BOOK.subtitle}</p>
             </div>
-            {isPublishable(s) && Content ? <Content /> : <Pending s={s} />}
-          </section>
-        );
-      })}
-
-      <section className="mb-10 border-t border-zinc-200 pt-8 dark:border-zinc-800">
-        <h2 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white">Keeping current</h2>
-        <p className="mb-4 leading-relaxed text-zinc-700 dark:text-zinc-300">
-          Every tool section is checked against the current product each quarter, and the
-          compliance sections are reviewed by our lawyers whenever the law moves. Each change is
-          listed on <Link href="/book/changes" className="underline">What changed</Link>. No tool
-          on this page is an affiliate link.
-        </p>
-        <p className="mb-6 leading-relaxed text-zinc-700 dark:text-zinc-300">
-          What won&apos;t change is the split. Let the machine do the paperwork. You keep the
-          kitchen table.
-        </p>
-        {process.env.RESEND_BOOK_AUDIENCE_ID ? <BookUpdatesSignup /> : null}
-      </section>
+          </div>
+          <p className="mt-4 flex-1 leading-relaxed text-zinc-700 dark:text-zinc-300">
+            {BOOK.tagline}
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <Link
+              href="/book/sales-team-of-one"
+              className="rounded-lg border border-zinc-300 px-5 py-3 font-semibold text-zinc-900 hover:bg-zinc-50 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900"
+            >
+              About the book
+            </Link>
+            <TrackedOutboundLink
+              href={BOOK.amazonUrl}
+              ctaId="book-amazon-hub"
+              ctaLocation="book-hub"
+              className="font-semibold text-blue-700 underline dark:text-blue-400"
+            >
+              Get it on Amazon Kindle
+            </TrackedOutboundLink>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

@@ -60,7 +60,7 @@ export default function CallBriefCardPage() {
         body:has([data-print-cards]) .min-h-screen > :not(main) { display: none !important; }
       }`}</style>
       <div className="mb-6 print:hidden">
-        <Link href="/book#call-brief" className="text-sm underline">
+        <Link href="/book/nobody-answers#call-brief" className="text-sm underline">
           ← Back to the guide
         </Link>
         <h1 className="mt-2 text-3xl font-bold text-zinc-900 dark:text-white">The call-brief card</h1>

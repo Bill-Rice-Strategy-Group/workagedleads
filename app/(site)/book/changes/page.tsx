@@ -14,10 +14,10 @@ export default function BookChangesPage() {
   const titles = new Map(BOOK_SECTIONS.map((s) => [s.id, s.title]));
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <Breadcrumbs items={[{ label: "The Back-Office Guide", href: "/book" }, { label: "What changed" }]} />
+      <Breadcrumbs items={[{ label: "The Back-Office Guide", href: "/book/nobody-answers" }, { label: "What changed" }]} />
       <h1 className="mb-3 text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">What changed</h1>
       <p className="mb-8 leading-relaxed text-zinc-700 dark:text-zinc-300">
-        Every change to <Link href="/book" className="underline">the guide</Link>, newest first.
+        Every change to <Link href="/book/nobody-answers" className="underline">the guide</Link>, newest first.
       </p>
       <ol className="space-y-3">
         {BOOK_CHANGES.map((c, i) => (
@@ -32,7 +32,7 @@ export default function BookChangesPage() {
             </time>
             <span className="text-zinc-800 dark:text-zinc-200">
               {c.section && (
-                <Link href={`/book#${c.section}`} className="font-medium underline">
+                <Link href={`/book/nobody-answers#${c.section}`} className="font-medium underline">
                   {titles.get(c.section)}
                 </Link>
               )}

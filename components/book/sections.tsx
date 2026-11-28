@@ -10,7 +10,7 @@ import {
 } from "@/data/book-guide";
 
 /*
- * Content for each `ready` section of /book, keyed by section id.
+ * Content for each `ready` section of /book/nobody-answers, keyed by section id.
  *
  * Text in a CopyBlock that the appendix also prints is copied from it word for
  * word (chapters/14-appendix-back-office-setup.md in the aged-lead-book repo).
