@@ -175,7 +175,7 @@ export default function BookGuidePage() {
           What won&apos;t change is the split. Let the machine do the paperwork. You keep the
           kitchen table.
         </p>
-        {process.env.RESEND_BOOK_AUDIENCE_ID ? <BookUpdatesSignup /> : null}
+        <BookUpdatesSignup />
       </section>
     </div>
   );

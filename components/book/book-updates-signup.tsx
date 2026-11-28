@@ -2,8 +2,18 @@
 
 import { useState, type FormEvent } from "react";
 import { HoneypotInput } from "@/components/honeypot-input";
+import { trackNewsletterSignup } from "@/components/analytics";
 
-/** Optional. The guide is never behind this form. */
+/**
+ * Optional signup at the foot of the Nobody Answers guide. The guide is never
+ * behind it.
+ *
+ * ONE LIST (Bill, 2026-11-28): this posts to the site's normal newsletter
+ * signup, /api/newsletter, which adds the reader to the main Work Aged Leads
+ * Resend audience and sends the usual welcome email. Guide changes are
+ * announced to that list. The copy says plainly that this is the newsletter,
+ * because that's what the reader is joining.
+ */
 export function BookUpdatesSignup() {
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
@@ -14,13 +24,14 @@ export function BookUpdatesSignup() {
     e.preventDefault();
     setStatus("loading");
     try {
-      const res = await fetch("/api/book/updates", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, website }),
       });
       if (res.ok) {
         setStatus("done");
+        trackNewsletterSignup("book-guide", email);
         return;
       }
       const data = await res.json().catch(() => ({}));
@@ -34,14 +45,14 @@ export function BookUpdatesSignup() {
 
   return (
     <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-5 print:hidden dark:border-zinc-800 dark:bg-zinc-900">
-      <p className="font-semibold text-zinc-900 dark:text-white">Email me when this guide changes</p>
+      <p className="font-semibold text-zinc-900 dark:text-white">Hear when this guide changes</p>
       <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-        Optional. One short email when a section changes, nothing else. This isn&apos;t the
-        newsletter.
+        Optional. Join the Work Aged Leads newsletter and you&apos;ll hear there when a section of
+        this guide changes, along with the weekly scripts and ideas. Unsubscribe anytime.
       </p>
       {status === "done" ? (
         <p className="mt-3 text-sm font-medium text-green-700 dark:text-green-400">
-          Done. You&apos;ll hear from us when something here changes.
+          You&apos;re in. Check your email for a welcome message.
         </p>
       ) : (
         <form onSubmit={submit} className="relative mt-3 flex flex-col gap-2 sm:flex-row">
@@ -64,7 +75,7 @@ export function BookUpdatesSignup() {
             disabled={status === "loading"}
             className="rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800 disabled:opacity-50"
           >
-            {status === "loading" ? "…" : "Email me"}
+            {status === "loading" ? "…" : "Sign me up"}
           </button>
         </form>
       )}
