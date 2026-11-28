@@ -174,7 +174,14 @@ export default function BillRicePage() {
               >
                 The Lead Buyer&apos;s Playbook
               </a>
-              {" "}(2025).
+              {" "}(2025) and{" "}
+              <Link
+                href="/book/sales-team-of-one"
+                className="text-blue-600 underline hover:text-blue-700 dark:text-blue-400"
+              >
+                Sales Team of One
+              </Link>
+              {" "}(2026).
             </p>
             <p>
               At Work Aged Leads, Bill writes the guides, playbooks, and
